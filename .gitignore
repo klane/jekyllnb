@@ -1,2 +1,5 @@
 # Local virtual environment
 .venv/
+
+# Python byte code
+*.pyc
