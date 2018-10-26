@@ -226,8 +226,8 @@ python-versions = "*"
 version = "0.5.1"
 
 [metadata]
-content-hash = "5502ed2825080d3fa4bd625a4f3b0c3c4391ae34712a3001fc9d77442c8549a3"
-python-versions = "*"
+content-hash = "15a8fab36d4e9dfb5cff20d595d85b550a8a29af840c2735f51cd61dc2d12fac"
+python-versions = "~2.7 || ^3.4"
 
 [metadata.hashes]
 bleach = ["48d39675b80a75f6d1c3bdbffec791cf0bbbab665cf01e20da701c77de278718", "73d26f018af5d5adcdabf5c1c974add4361a9c76af215fe32fdec8a6fc5fb9b9"]
