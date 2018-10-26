@@ -2,9 +2,9 @@
 
 {% block header %}
 ---
-layout: page
-title: "{{resources['metadata']['title']}}"
-permalink: {{resources['metadata']['permalink']}}
+layout: {{ resources['metadata']['layout'] }}
+title: {{ resources['metadata']['title'] }}
+permalink: {{ resources['metadata']['permalink'] }}
 ---
 {% endblock header %}
 
@@ -14,17 +14,9 @@ permalink: {{resources['metadata']['permalink']}}
 {{ '{% endhighlight %}' }}
 {% endblock input %}
 
-{% block data_svg %}
-![svg]({{ output | base64image }})
-{% endblock data_svg %}
-
 {% block data_png %}
-![png]({{ output | base64image }})
+![png]({{ output.metadata.filenames['image/png'] | jekyllpath }}){: .center-image }
 {% endblock data_png %}
-
-{% block data_jpg %}
-![jpeg]({{ output | base64image }})
-{% endblock data_jpg %}
 
 {% block markdowncell scoped %}
 {{ cell.source | wrap_text(80) }}
