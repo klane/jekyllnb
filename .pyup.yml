@@ -5,6 +5,6 @@ update: all
 pin: True
 schedule: every day
 assignees: klane
-label_prs: update
+label_prs: dependencies
 requirements:
   - poetry.lock
