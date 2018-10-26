@@ -34,3 +34,7 @@ def base64image(image):
 def jekyllpath(path):
     # convert default image path to one compatible with Jekyll
     return path.replace("./", "{{site.url}}{{site.baseurl}}/")
+
+
+if __name__ == "__main__":
+    cli()
