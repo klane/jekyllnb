@@ -9,9 +9,9 @@ permalink: {{ resources['metadata']['permalink'] }}
 {% endblock header %}
 
 {% block input %}
-{{ '{% highlight python %}' }}
-{{ cell.source  | wrap_text(80) }}
-{{ '{% endhighlight %}' }}
+{{ '```python' }}
+{{ cell.source }}
+{{ '```' }}
 {% endblock input %}
 
 {% block data_png %}
@@ -19,5 +19,5 @@ permalink: {{ resources['metadata']['permalink'] }}
 {% endblock data_png %}
 
 {% block markdowncell scoped %}
-{{ cell.source | wrap_text(80) }}
+{{ cell.source }}
 {% endblock markdowncell %}
