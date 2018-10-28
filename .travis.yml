@@ -1,0 +1,13 @@
+language: python
+before_install:
+- pip install poetry
+install:
+- poetry install
+before_deploy:
+- poetry build
+deploy:
+  provider: script
+  script: poetry publish
+  skip_cleanup: true
+  on:
+    tags: true
