@@ -7,4 +7,5 @@ schedule: every day
 assignees: klane
 label_prs: dependencies
 requirements:
+  - pyproject.toml
   - poetry.lock
