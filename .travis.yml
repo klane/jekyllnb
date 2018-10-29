@@ -9,6 +9,8 @@ before_install:
   - pip install poetry
 install:
   - poetry install
+script:
+  - pytest
 before_deploy:
   - poetry build
 deploy:
