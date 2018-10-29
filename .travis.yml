@@ -14,9 +14,10 @@ before_install:
 install:
   - poetry install
 script:
-  - pytest --cov=jekyllnb
+  - pytest --cov=jekyllnb --cov-report xml
 after_success:
   - codecov
+  - python-codacy-coverage -r coverage.xml
 before_deploy:
   - poetry build
 deploy:
