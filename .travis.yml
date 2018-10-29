@@ -1,10 +1,10 @@
 language: python
 before_install:
-- pip install poetry
+  - pip install poetry
 install:
-- poetry install
+  - poetry install
 before_deploy:
-- poetry build
+  - poetry build
 deploy:
   provider: script
   script: poetry publish
