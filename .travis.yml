@@ -10,7 +10,9 @@ before_install:
 install:
   - poetry install
 script:
-  - pytest
+  - pytest --cov
+after_success:
+  - codecov
 before_deploy:
   - poetry build
 deploy:
