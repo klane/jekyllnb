@@ -14,7 +14,7 @@ before_install:
 install:
   - poetry install
 script:
-  - pytest --cov
+  - pytest --cov=jekyllnb
 after_success:
   - codecov
 before_deploy:
