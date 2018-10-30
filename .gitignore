@@ -1,5 +1,8 @@
 # Local virtual environment
 .venv/
 
+# Directory from local package installation
+*.egg-info/
+
 # Python byte code
 *.pyc
