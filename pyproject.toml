@@ -18,6 +18,9 @@ pytest-cov = "^2.6"
 codecov = "^2.0"
 codacy-coverage = "^1.3"
 
+[tool.poetry.plugins."nbconvert.exporters"]
+"jekyll" = "jekyllnb:JekyllExporter"
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
