@@ -1,6 +1,6 @@
 {% extends 'markdown.tpl' %}
 
-{% block header %}
+{%- block header -%}
 ---
 layout: {{ resources['metadata']['layout'] }}
 title: {{ resources['metadata']['title'] }}
@@ -14,10 +14,10 @@ permalink: {{ resources['metadata']['permalink'] }}
 {{ '```' }}
 {% endblock input %}
 
-{% block data_png %}
+{%- block data_png -%}
 ![png]({{ output.metadata.filenames['image/png'] | jekyllpath }}){: .center-image }
-{% endblock data_png %}
+{%- endblock data_png -%}
 
 {% block markdowncell scoped %}
 {{ cell.source }}
-{% endblock markdowncell %}
+{%- endblock markdowncell -%}
