@@ -1,5 +1,6 @@
 import os
 from nbconvert.exporters import MarkdownExporter
+from nbconvert.filters.strings import path2url
 from nbconvert.preprocessors import Preprocessor
 from traitlets import default
 from traitlets.config import Config
@@ -26,7 +27,7 @@ class JekyllExporter(MarkdownExporter):
 
     def jekyllpath(self, path):
         # convert default image path to one compatible with Jekyll
-        return "{{ site.baseurl }}/" + path.replace("\\", "/")
+        return "{{ site.baseurl }}/" + path2url(path)
 
     def default_filters(self):
         for pair in super(JekyllExporter, self).default_filters():
