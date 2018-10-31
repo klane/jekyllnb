@@ -37,9 +37,10 @@ class JekyllExporter(MarkdownExporter):
 
 class JekyllPreprocessor(Preprocessor):
     def preprocess(self, nb, resources):
-        resources['metadata']['layout'] = nb.metadata.get('layout', 'page')
-        resources['metadata']['title'] = nb.metadata.get('title', None)
-        resources['metadata']['permalink'] = nb.metadata.get('permalink', None)
+        metadata = nb.metadata.get('jekyll', {})
+        resources['metadata']['layout'] = metadata.get('layout', 'page')
+        resources['metadata']['title'] = metadata.get('title', None)
+        resources['metadata']['permalink'] = metadata.get('permalink', None)
 
         return super(JekyllPreprocessor, self).preprocess(nb, resources)
 
