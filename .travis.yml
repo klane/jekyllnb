@@ -17,6 +17,7 @@ script:
   - pytest --cov=jekyllnb --cov-report=xml
 after_success:
   - codecov
+  - coveralls
   - python-codacy-coverage -r coverage.xml
 before_deploy:
   - poetry build
