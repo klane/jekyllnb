@@ -17,6 +17,7 @@ pytest = "^3.9"
 pytest-cov = "^2.6"
 codecov = "^2.0"
 codacy-coverage = "^1.3"
+coveralls = "^1.5"
 
 [tool.poetry.plugins."nbconvert.exporters"]
 "jekyll" = "jekyllnb:JekyllExporter"
