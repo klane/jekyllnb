@@ -31,7 +31,7 @@ def test_jekyllnb(test_file):
     target_file = os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.md')
 
     try:
-        assert filecmp.cmp(test_file, target_file, shallow=False)
+        assert filecmp.cmp(test_file.strpath, target_file, shallow=False)
     except AssertionError:
         with open(target_file) as target:
             differ = Differ()
