@@ -16,10 +16,10 @@ def test_file(tmpdir):
     NbConvertApp.launch_instance(['--to', 'jekyll', '--output-dir', test_file_name.dirname,
         os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.ipynb')])
 
-    contents = test_file_name.read()
+    #contents = test_file_name.read()
 
-    with open(test_file_name.strpath, 'w', newline='\n') as f:
-        f.write(contents)
+    #with open(test_file_name.strpath, 'w', newline='\n') as f:
+    #    f.write(contents)
 
     return test_file_name
 
