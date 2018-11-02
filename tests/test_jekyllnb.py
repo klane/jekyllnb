@@ -18,7 +18,7 @@ def test_file(tmpdir):
 
     contents = test_file_name.read()
 
-    with open(test_file_name, 'w', newline='\n') as f:
+    with open(test_file_name.strpath, 'w', newline='\n') as f:
         f.write(contents)
 
     return test_file_name
