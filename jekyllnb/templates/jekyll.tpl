@@ -14,6 +14,10 @@ permalink: {{ resources['metadata']['permalink'] }}
 {{ '```' }}
 {% endblock input %}
 
+{% block stream %}
+{{ output.text | get_lines(end=-1) | indent }}
+{% endblock stream %}
+
 {%- block data_png -%}
 ![png]({{ output.metadata.filenames['image/png'] | jekyllpath }}){: .center-image }
 {%- endblock data_png -%}
