@@ -24,7 +24,7 @@ def test_file_exists(test_file):
 
     assert test_file.check()
     assert os.path.isdir(img_dir)
-    assert os.path.isfile(os.path.join(img_dir, FILE_NAME + '_3_0.png'))
+    assert os.path.isfile(os.path.join(img_dir, FILE_NAME + '_4_0.png'))
 
 def test_jekyllnb(test_file):
     test_lines = test_file.readlines()
