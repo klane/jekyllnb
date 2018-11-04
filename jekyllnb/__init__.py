@@ -13,7 +13,8 @@ class JekyllExporter(MarkdownExporter):
 
     @property
     def template_path(self):
-        return super(JekyllExporter, self).template_path+[os.path.join(os.path.dirname(__file__), "templates")]
+        return super(JekyllExporter, self).template_path + \
+            [os.path.join(os.path.dirname(__file__), "templates")]
 
     @property
     def preprocessors(self):
