@@ -8,7 +8,7 @@ permalink: {{ resources['metadata']['permalink'] }}
 ---
 {% endblock header %}
 
-{% block input %}
+{%- block input -%}
 {{ '```python' }}
 {{ cell.source }}
 {{ '```' }}
@@ -24,4 +24,4 @@ permalink: {{ resources['metadata']['permalink'] }}
 
 {% block markdowncell scoped %}
 {{ cell.source }}
-{%- endblock markdowncell -%}
+{% endblock markdowncell %}
