@@ -4,14 +4,14 @@ title: Hello World!
 permalink: /hello/world/
 ---
 
+# Hello World!
+
 ```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from IPython.display import display, HTML
 ```
-
-Hello World!
 
 ```python
 print('Hello World!')
@@ -49,3 +49,5 @@ series.plot.hist(edgecolor='black');
 ```
 
 ![png]({{ site.baseurl }}/assets/images/hello-world/hello-world_4_0.png){: .center-image }
+
+# Goodbye World!
