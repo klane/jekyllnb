@@ -2,10 +2,12 @@ import click
 import os
 import re
 import shutil
+import sys
 from nbconvert import MarkdownExporter
 from nbconvert.writers import FilesWriter
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases
 from traitlets import Unicode
+from traitlets.config import catch_config_error
 
 
 jekyllnb_aliases = {}
@@ -21,11 +23,22 @@ class JekyllNB(NbConvertApp):
     export_format = Unicode('jekyll')
     site_dir = Unicode('').tag(config=True)
 
-    def start(self):
-        if self.site_dir:
-            build_dir = os.path.join(self.site_dir, self.writer.build_directory)
-            self.writer.build_directory = build_dir
+    @catch_config_error
+    def initialize(self, argv=None):
+        argv = sys.argv[1:] if argv is None else argv
 
+        try:
+            index_site = ['site-dir' in arg for arg in argv].index(True)
+            index_output = ['output-dir' in arg for arg in argv].index(True)
+
+            build_dir = os.path.join(argv[index_site+1], argv[index_output+1])
+            argv[index_output+1] = build_dir
+        except ValueError:
+            pass
+
+        super(JekyllNB, self).initialize(argv)
+
+    def start(self):
         super(JekyllNB, self).start()
 
         if self.site_dir:
