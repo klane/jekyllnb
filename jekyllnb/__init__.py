@@ -1,4 +1,5 @@
 import os
+from .jekyllnb import JekyllNB
 from nbconvert.exporters import MarkdownExporter
 from nbconvert.filters.strings import path2url
 from nbconvert.preprocessors import Preprocessor
