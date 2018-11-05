@@ -26,14 +26,11 @@ class JekyllExporter(MarkdownExporter):
         c.merge(super(JekyllExporter, self).default_config)
         return c
 
-    def jekyllpath(self, path):
-        # convert default image path to one compatible with Jekyll
-        return "{{ site.baseurl }}/" + path2url(path)
-
     def default_filters(self):
         for pair in super(JekyllExporter, self).default_filters():
             yield pair
-        yield ('jekyllpath', self.jekyllpath)
+        # convert image path to one compatible with Jekyll
+        yield ('jekyllpath', lambda path: "{{ site.baseurl }}/" + path2url(path))
 
 
 class JekyllPreprocessor(Preprocessor):
