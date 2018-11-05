@@ -2,7 +2,6 @@ import os
 import pytest
 from difflib import Differ
 from jekyllnb.jekyllnb import jekyllpath, JekyllNB
-from nbconvert.nbconvertapp import NbConvertApp
 from pprint import pprint
 
 
