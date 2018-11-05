@@ -33,8 +33,8 @@ def test_file_exists(test_file):
     assert test_file.check()
 
 def test_image_exists(test_file, img_dir):
-    assert os.path.isdir(img_dir)
-    assert os.path.isfile(os.path.join(img_dir, FILE_NAME + '_4_0.png'))
+    assert os.path.isdir(img_dir.strpath)
+    assert os.path.isfile(img_dir.join(FILE_NAME + '_4_0.png').strpath)
 
 def test_file_contents(test_file):
     test_lines = test_file.readlines()
