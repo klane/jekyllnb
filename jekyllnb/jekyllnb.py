@@ -13,7 +13,7 @@ from traitlets.config import catch_config_error
 jekyllnb_aliases = {}
 jekyllnb_aliases.update(nbconvert_aliases)
 jekyllnb_aliases.update({
-    'img-dir': 'NbConvertApp.output_files_dir',
+    'image-dir': 'NbConvertApp.output_files_dir',
     'site-dir': 'JekyllNB.site_dir',
 })
 
@@ -42,9 +42,9 @@ class JekyllNB(NbConvertApp):
         super(JekyllNB, self).start()
 
         if self.site_dir:
-            img_dir = os.path.join(self.writer.build_directory,
-                                   self.output_files_dir.split(os.path.sep)[0])
-            shutil.move(img_dir, self.site_dir)
+            image_dir = os.path.join(self.writer.build_directory,
+                                     self.output_files_dir.split(os.path.sep)[0])
+            shutil.move(image_dir, self.site_dir)
 
 
 # setup command line arguments and options

@@ -8,22 +8,22 @@ from pprint import pprint
 FILE_NAME = 'hello-world'
 SITE_DIR = 'docs'
 OUTPUT_DIR = '_pages'
-IMG_DIR = os.path.join('assets', 'images', FILE_NAME)
+IMAGE_DIR = os.path.join('assets', 'images', FILE_NAME)
 
 @pytest.fixture
 def site_dir(tmpdir):
     return tmpdir.join(SITE_DIR)
 
 @pytest.fixture
-def img_dir(site_dir):
-    return site_dir.join(IMG_DIR)
+def image_dir(site_dir):
+    return site_dir.join(IMAGE_DIR)
 
 @pytest.fixture
 def test_file(site_dir):
     JekyllNB.launch_instance([
         '--site-dir', site_dir.strpath,
         '--output-dir', OUTPUT_DIR,
-        '--img-dir', IMG_DIR,
+        '--image-dir', IMAGE_DIR,
         os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.ipynb')
     ])
 
@@ -32,9 +32,9 @@ def test_file(site_dir):
 def test_file_exists(test_file):
     assert test_file.check()
 
-def test_image_exists(test_file, img_dir):
-    assert os.path.isdir(img_dir.strpath)
-    assert os.path.isfile(img_dir.join(FILE_NAME + '_4_0.png').strpath)
+def test_image_exists(test_file, image_dir):
+    assert os.path.isdir(image_dir.strpath)
+    assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
 
 def test_file_contents(test_file):
     test_lines = test_file.readlines()
