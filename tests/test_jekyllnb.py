@@ -1,15 +1,7 @@
-import os
-import pytest
-from difflib import Differ
 from jekyllnb import JekyllNB
 from jekyllnb.jekyllnb import jekyllpath
-from pprint import pprint
+from tests import *
 
-
-FILE_NAME = 'hello-world'
-SITE_DIR = 'docs'
-OUTPUT_DIR = '_pages'
-IMAGE_DIR = os.path.join('assets', 'images', FILE_NAME)
 
 @pytest.fixture
 def site_dir(tmpdir):
