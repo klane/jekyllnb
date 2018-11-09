@@ -1,7 +1,8 @@
 import os
 import pytest
 from difflib import Differ
-from jekyllnb.jekyllnb import jekyllpath, JekyllNB
+from jekyllnb import JekyllNB
+from jekyllnb.jekyllnb import jekyllpath
 from pprint import pprint
 
 
