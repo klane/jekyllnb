@@ -19,7 +19,7 @@ def image_dir(site_dir):
     return site_dir.join(IMAGE_DIR)
 
 @pytest.fixture
-def test_file(site_dir):
+def jekyllnb_file(site_dir):
     JekyllNB.launch_instance([
         '--site-dir', site_dir.strpath,
         '--output-dir', OUTPUT_DIR,
@@ -29,15 +29,15 @@ def test_file(site_dir):
 
     return site_dir.join(OUTPUT_DIR, FILE_NAME + '.md')
 
-def test_file_exists(test_file):
-    assert test_file.check()
+def test_jekyllnb_file_exists(jekyllnb_file):
+    assert jekyllnb_file.check()
 
-def test_image_exists(test_file, image_dir):
+def test_jekyllnb_image_exists(jekyllnb_file, image_dir):
     assert os.path.isdir(image_dir.strpath)
     assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
 
-def test_file_contents(test_file):
-    test_lines = test_file.readlines()
+def test_jekyllnb_file_contents(jekyllnb_file):
+    test_lines = jekyllnb_file.readlines()
     target_file = os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.md')
 
     with open(target_file) as target:
