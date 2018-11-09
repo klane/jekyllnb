@@ -6,7 +6,7 @@ import sys
 from nbconvert import MarkdownExporter
 from nbconvert.writers import FilesWriter
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases
-from traitlets import Unicode
+from traitlets import Unicode, default
 from traitlets.config import catch_config_error
 
 
@@ -20,8 +20,11 @@ jekyllnb_aliases.update({
 
 class JekyllNB(NbConvertApp):
     aliases = jekyllnb_aliases
-    export_format = Unicode('jekyll')
     site_dir = Unicode('').tag(config=True)
+
+    @default('export_format')
+    def _export_format_default(self):
+        return 'jekyll'
 
     @catch_config_error
     def initialize(self, argv=None):
