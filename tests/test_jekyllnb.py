@@ -28,7 +28,8 @@ def jekyllnb_file(site_dir):
         os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.ipynb')
     ])
 
-    return site_dir.join(OUTPUT_DIR, FILE_NAME + '.md')
+    yield site_dir.join(OUTPUT_DIR, FILE_NAME + '.md')
+    JekyllNB.clear_instance()
 
 def test_jekyllnb_file_exists(jekyllnb_file):
     assert jekyllnb_file.check()
