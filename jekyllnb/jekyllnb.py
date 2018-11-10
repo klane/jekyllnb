@@ -6,7 +6,7 @@ import sys
 from nbconvert import MarkdownExporter
 from nbconvert.writers import FilesWriter
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases
-from traitlets import Unicode, default
+from traitlets import Unicode, default, observe
 from traitlets.config import catch_config_error
 
 
@@ -25,6 +25,14 @@ class JekyllNB(NbConvertApp):
     @default('export_format')
     def _export_format_default(self):
         return 'jekyll'
+
+    @observe('export_format')
+    def _export_format_changed(self, change):
+        default = self._export_format_default()
+
+        if change['new'] != default:
+            raise ValueError('Invalid export format {}, value must be {}'
+                            .format(change['new'], default))
 
     @catch_config_error
     def initialize(self, argv=None):
