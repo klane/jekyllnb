@@ -1,3 +1,4 @@
+from conditional import conditional
 from jekyllnb.jekyllnb import jekyllpath
 from tests import *
 
@@ -13,25 +14,33 @@ def image_dir(site_dir):
 @pytest.fixture
 def jekyllnb_file(site_dir):
     from jekyllnb import JekyllNB
-    JekyllNB.launch_instance([
-        '--site-dir', site_dir.strpath,
-        '--output-dir', OUTPUT_DIR,
-        '--image-dir', IMAGE_DIR,
-        os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.ipynb')
-    ])
 
-    yield site_dir.join(OUTPUT_DIR, FILE_NAME + '.md')
+    def _jekyllnb_file(argv=[]):
+        JekyllNB.launch_instance(argv + [
+            '--site-dir', site_dir.strpath,
+            '--output-dir', OUTPUT_DIR,
+            '--image-dir', IMAGE_DIR,
+            os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.ipynb')
+        ])
+
+        return site_dir.join(OUTPUT_DIR, FILE_NAME + '.md')
+
+    yield _jekyllnb_file
     JekyllNB.clear_instance()
 
-def test_jekyllnb_file_exists(jekyllnb_file):
-    assert jekyllnb_file.check()
+@pytest.mark.parametrize('argv', [[], ['--to', 'jekyll'], ['--to', 'markdown']])
+def test_jekyllnb_file_exists(jekyllnb_file, argv):
+    fail_check = 'jekyll' not in argv and len(argv) > 0
+    with conditional(fail_check, pytest.raises(ValueError)) as e_info:
+        assert jekyllnb_file(argv).check()
 
 def test_jekyllnb_image_exists(jekyllnb_file, image_dir):
+    jekyllnb_file()
     assert os.path.isdir(image_dir.strpath)
     assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
 
 def test_jekyllnb_file_contents(jekyllnb_file):
-    test_lines = jekyllnb_file.readlines()
+    test_lines = jekyllnb_file().readlines()
     target_file = os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.md')
 
     with open(target_file) as target:
