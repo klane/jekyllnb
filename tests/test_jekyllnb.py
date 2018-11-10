@@ -30,8 +30,8 @@ def jekyllnb_file(site_dir):
 
 @pytest.mark.parametrize('argv', [[], ['--to', 'jekyll'], ['--to', 'markdown']])
 def test_jekyllnb_file_exists(jekyllnb_file, argv):
-    fail_check = 'jekyll' not in argv and len(argv) > 0
-    with conditional(fail_check, pytest.raises(ValueError)) as e_info:
+    raise_exception = 'jekyll' not in argv and len(argv) > 0
+    with conditional(raise_exception, pytest.raises(ValueError)) as e_info:
         assert jekyllnb_file(argv).check()
 
 def test_jekyllnb_image_exists(jekyllnb_file, image_dir):
