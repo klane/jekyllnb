@@ -30,7 +30,7 @@ class JekyllNB(NbConvertApp):
     def _export_format_changed(self, change):
         default = self._export_format_default()
 
-        if change['new'] != default:
+        if change['new'].lower() != default:
             raise ValueError('Invalid export format {}, value must be {}'
                             .format(change['new'], default))
 

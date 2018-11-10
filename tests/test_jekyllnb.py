@@ -28,9 +28,14 @@ def jekyllnb_file(site_dir):
     yield _jekyllnb_file
     JekyllNB.clear_instance()
 
-@pytest.mark.parametrize('argv', [[], ['--to', 'jekyll'], ['--to', 'markdown']])
+@pytest.mark.parametrize('argv', [
+    [],
+    ['--to', 'jekyll'],
+    ['--to', 'Jekyll'],
+    ['--to', 'markdown']
+])
 def test_jekyllnb_file_exists(jekyllnb_file, argv):
-    raise_exception = 'jekyll' not in argv and len(argv) > 0
+    raise_exception = 'jekyll' not in [arg.lower() for arg in argv] and len(argv) > 0
     with conditional(raise_exception, pytest.raises(ValueError)) as e_info:
         assert jekyllnb_file(argv).check()
 
