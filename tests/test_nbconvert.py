@@ -1,4 +1,3 @@
-from nbconvert.nbconvertapp import NbConvertApp
 from tests import *
 
 
@@ -12,6 +11,7 @@ def image_dir(site_dir):
 
 @pytest.fixture
 def nbconvert_file(site_dir):
+    from nbconvert.nbconvertapp import NbConvertApp
     NbConvertApp.launch_instance([
         '--to', 'jekyll',
         '--output-dir', site_dir.strpath,

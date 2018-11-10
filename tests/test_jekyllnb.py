@@ -1,4 +1,3 @@
-from jekyllnb import JekyllNB
 from jekyllnb.jekyllnb import jekyllpath
 from tests import *
 
@@ -13,6 +12,7 @@ def image_dir(site_dir):
 
 @pytest.fixture
 def jekyllnb_file(site_dir):
+    from jekyllnb import JekyllNB
     JekyllNB.launch_instance([
         '--site-dir', site_dir.strpath,
         '--output-dir', OUTPUT_DIR,
