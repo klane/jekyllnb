@@ -63,7 +63,7 @@ def jekyllnb_execute2(jekyllnb_args, request):
 def test_jekyllnb_file_exists(jekyllnb_execute, jekyllnb_file):
     assert jekyllnb_file.check()
 
-def test_jekyllnb_image_exists(jekyllnb_execute, jekyllnb_file, image_dir):
+def test_jekyllnb_image_exists(jekyllnb_execute, image_dir):
     assert os.path.isdir(image_dir.strpath)
     assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
 
@@ -96,7 +96,7 @@ class TestJekyllNB(object):
         jekyllnb_execute2(argv)
         jekyllnb_file.check()
 
-    def test_jekyllnb_image_exists2(self, jekyllnb_execute2, jekyllnb_file, image_dir, argv):
+    def test_jekyllnb_image_exists2(self, jekyllnb_execute2, image_dir, argv):
         jekyllnb_execute2(argv)
         assert os.path.isdir(image_dir.strpath)
         assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
