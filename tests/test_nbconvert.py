@@ -31,25 +31,12 @@ def nbconvert_execute(site_dir, request):
     lambda params: NbConvertApp.launch_instance(params),
     lambda params: call(['jupyter', 'nbconvert'] + params)
 ], indirect=True)
-class TestNbConvert(object):
+class TestNbConvert(Config):
     def test_nbconvert_file_exists(self, nbconvert_execute, nbconvert_file):
         assert nbconvert_file.check()
 
     def test_nbconvert_image_exists(self, nbconvert_execute, image_dir):
-        assert os.path.isdir(image_dir.strpath)
-        assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
+        self.image_exists(image_dir)
 
     def test_nbconvert_file_contents(self, nbconvert_execute, nbconvert_file):
-        test_lines = nbconvert_file.readlines()
-        target_file = os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.md')
-
-        with open(target_file) as target:
-            target_lines = target.readlines()
-
-        try:
-            assert all(a == b for a, b in zip(test_lines, target_lines))
-        except AssertionError:
-            differ = Differ()
-            diff = differ.compare(test_lines, target_lines)
-            pprint(list(diff))
-            raise
+        self.file_contents_match(nbconvert_file)

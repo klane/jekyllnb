@@ -44,45 +44,32 @@ def jekyllnb_execute(jekyllnb_args, request):
     lambda params: JekyllNB.launch_instance(params),
     lambda params: check_output(['jupyter', 'jekyllnb'] + params)
 ], indirect=True)
-class Config(object): pass
+class JekyllConfig(Config): pass
 
 @pytest.mark.parametrize('argv', [
     [],
     ['--to', 'jekyll'],
     ['--to', 'Jekyll']
 ])
-class TestJekyllNB(Config):
+class TestJekyllNB(JekyllConfig):
     def test_jekyllnb_file_exists(self, jekyllnb_execute, jekyllnb_file, argv):
         jekyllnb_execute(argv)
         jekyllnb_file.check()
 
     def test_jekyllnb_image_exists(self, jekyllnb_execute, image_dir, argv):
         jekyllnb_execute(argv)
-        assert os.path.isdir(image_dir.strpath)
-        assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
+        self.image_exists(image_dir)
 
     def test_jekyllnb_file_contents(self, jekyllnb_execute, jekyllnb_file, argv):
         jekyllnb_execute(argv)
-        test_lines = jekyllnb_file.readlines()
-        target_file = os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.md')
-
-        with open(target_file) as target:
-            target_lines = target.readlines()
-
-        try:
-            assert all(a == b for a, b in zip(test_lines, target_lines))
-        except AssertionError:
-            differ = Differ()
-            diff = differ.compare(test_lines, target_lines)
-            pprint(list(diff))
-            raise
+        self.file_contents_match(jekyllnb_file)
 
 @pytest.mark.parametrize('argv', [
     [],
     ['--to', 'markdown'],
     ['--to', 'jekyll']
 ])
-class TestException(Config):
+class TestException(JekyllConfig):
     def test_jekyllnb_format_exception(self, jekyllnb_execute, argv):
         raise_exception = 'jekyll' not in [arg.lower() for arg in argv] and len(argv) > 0
         exceptions = (ValueError, CalledProcessError)
