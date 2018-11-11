@@ -5,14 +5,6 @@ from subprocess import CalledProcessError, check_output
 from tests import *
 
 
-def jekyllnb_app(params):
-    JekyllNB.launch_instance(params)
-    JekyllNB.clear_instance()
-
-def jekyllnb_command_line(params):
-    check_output(['jupyter', 'jekyllnb'] + params)
-    JekyllNB.clear_instance()
-
 @pytest.fixture
 def site_dir(tmpdir):
     return tmpdir.join(SITE_DIR)
@@ -49,8 +41,8 @@ def jekyllnb_execute(jekyllnb_args, request):
     JekyllNB.clear_instance()
 
 @pytest.mark.parametrize('jekyllnb_execute', [
-    jekyllnb_app,
-    jekyllnb_command_line
+    lambda params: JekyllNB.launch_instance(params),
+    lambda params: check_output(['jupyter', 'jekyllnb'] + params)
 ], indirect=True)
 class Config(object): pass
 
