@@ -117,20 +117,20 @@ class TestJekyllNB(object):
             pprint(list(diff))
             raise
 
-@pytest.mark.parametrize('engine', [
+@pytest.mark.parametrize('jekyllnb_execute2', [
     jekyllnb_app,
     jekyllnb_command_line
-])
+], indirect=True)
 @pytest.mark.parametrize('argv', [
     [],
     ['--to', 'markdown'],
     ['--to', 'jekyll']
 ])
-def test_jekyllnb_format_exception(jekyllnb_args, engine, argv):
+def test_jekyllnb_format_exception(jekyllnb_execute2, argv):
     raise_exception = 'jekyll' not in [arg.lower() for arg in argv] and len(argv) > 0
     exceptions = (ValueError, CalledProcessError)
     with conditional(raise_exception, pytest.raises(exceptions)) as e:
-        engine(jekyllnb_args(argv))
+        jekyllnb_execute2(argv)
 
 def test_jekyllpath():
     assert jekyllpath('assets\\images') == '{{ site.baseurl }}/assets/images'
