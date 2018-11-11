@@ -8,4 +8,4 @@
 *.pyc
 
 # pytest coverage report
-.coverage
+.coverage*
