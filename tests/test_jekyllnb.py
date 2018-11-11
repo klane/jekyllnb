@@ -86,12 +86,14 @@ def test_jekyllnb_file_contents(jekyllnb_execute, jekyllnb_file):
     jekyllnb_app,
     jekyllnb_command_line
 ], indirect=True)
+class Config(object): pass
+
 @pytest.mark.parametrize('argv', [
     [],
     ['--to', 'jekyll'],
     ['--to', 'Jekyll']
 ])
-class TestJekyllNB(object):
+class TestJekyllNB(Config):
     def test_jekyllnb_file_exists2(self, jekyllnb_execute2, jekyllnb_file, argv):
         jekyllnb_execute2(argv)
         jekyllnb_file.check()
@@ -117,20 +119,17 @@ class TestJekyllNB(object):
             pprint(list(diff))
             raise
 
-@pytest.mark.parametrize('jekyllnb_execute2', [
-    jekyllnb_app,
-    jekyllnb_command_line
-], indirect=True)
 @pytest.mark.parametrize('argv', [
     [],
     ['--to', 'markdown'],
     ['--to', 'jekyll']
 ])
-def test_jekyllnb_format_exception(jekyllnb_execute2, argv):
-    raise_exception = 'jekyll' not in [arg.lower() for arg in argv] and len(argv) > 0
-    exceptions = (ValueError, CalledProcessError)
-    with conditional(raise_exception, pytest.raises(exceptions)) as e:
-        jekyllnb_execute2(argv)
+class TestException(Config):
+    def test_jekyllnb_format_exception(self, jekyllnb_execute2, argv):
+        raise_exception = 'jekyll' not in [arg.lower() for arg in argv] and len(argv) > 0
+        exceptions = (ValueError, CalledProcessError)
+        with conditional(raise_exception, pytest.raises(exceptions)) as e:
+            jekyllnb_execute2(argv)
 
 def test_jekyllpath():
     assert jekyllpath('assets\\images') == '{{ site.baseurl }}/assets/images'
