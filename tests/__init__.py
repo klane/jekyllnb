@@ -1,10 +1,16 @@
 import os
 import pytest
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from difflib import Differ
 from pprint import pprint
 from subprocess import call
 
+try:
+    from abc import ABC
+except ImportError:
+    from abc import ABCMeta
+    class ABC(metaclass=ABCMeta):
+        pass
 
 FILE_NAME = 'hello-world'
 SITE_DIR = 'docs'
