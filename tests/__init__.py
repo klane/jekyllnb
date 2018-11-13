@@ -27,7 +27,7 @@ class AbstractConfig(ABC):
     @pytest.fixture(autouse=True,
                     params=[pytest.lazy_fixture('app'),
                             pytest.lazy_fixture('command_line')])
-    def engine(self, args, request):
+    def engine(self, request):
         yield request.param
         self._app.clear_instance()
 
