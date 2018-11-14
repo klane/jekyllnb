@@ -9,8 +9,8 @@ try:
     from abc import ABC
 except ImportError:
     from abc import ABCMeta
-    class ABC(metaclass=ABCMeta):
-        pass
+    class ABC(object):
+        __metaclass__ = ABCMeta
 
 FILE_NAME = 'hello-world'
 SITE_DIR = 'docs'
