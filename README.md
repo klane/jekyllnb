@@ -8,7 +8,7 @@
 
 JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll header to Markdown files and save generated images to a desired location. This allows you to easily convert all your notebooks to the required format and immediately build your Jekyll site.
 
-## Installation
+## Installation (coming soon)
 
 JekyllNB is hosted on PyPI and can be installed with `pip`.
 
