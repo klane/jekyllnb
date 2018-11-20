@@ -19,7 +19,7 @@ IMAGE_DIR = os.path.join('assets', 'images', FILE_NAME)
 
 class AbstractConfig(ABC):
     @abstractmethod
-    def args():
+    def args(self):
         pass
 
     @pytest.fixture
@@ -47,7 +47,8 @@ class Config(AbstractConfig):
 
     def test_file_contents_match(self, test_file):
         test_lines = test_file.readlines()
-        target_file = os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.md')
+        target_file = os.path.join(os.path.dirname(__file__),
+                                  'resources', FILE_NAME + '.md')
 
         with open(target_file) as target:
             target_lines = target.readlines()

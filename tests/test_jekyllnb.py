@@ -51,7 +51,7 @@ class TestException(JekyllConfig, AbstractConfig):
         raise_exception = '--to' in args_lower and 'jekyll' not in args_lower
         exceptions = (ValueError, CalledProcessError)
 
-        with conditional(raise_exception, pytest.raises(exceptions)) as e:
+        with conditional(raise_exception, pytest.raises(exceptions)):
             engine(self, args)
             self._app.clear_instance()
 
