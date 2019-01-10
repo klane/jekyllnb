@@ -430,7 +430,7 @@ description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "4.0.2"
+version = "4.1.0"
 
 [package.dependencies]
 atomicwrites = ">=1.0"
@@ -553,7 +553,7 @@ python-versions = "*"
 version = "0.5.1"
 
 [metadata]
-content-hash = "4fd09abdbc43cff4ed9a0063aba221a0f68fc2c01d6bc9204867bf579f045459"
+content-hash = "f0ea3f9536b7425d77e5a12d76b974eebf78ef37ca1729dd7d03750b948cdc6e"
 python-versions = "~2.7 || ^3.4"
 
 [metadata.hashes]
