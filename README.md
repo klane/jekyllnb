@@ -3,6 +3,7 @@
 [![GitHub License](https://img.shields.io/github/license/klane/jekyllnb.svg)](https://github.com/klane/jekyllnb/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/klane/jekyllnb.svg?branch=master)](https://travis-ci.org/klane/jekyllnb)
 [![codecov](https://codecov.io/gh/klane/jekyllnb/branch/master/graph/badge.svg)](https://codecov.io/gh/klane/jekyllnb)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=klane/jekyllnb)](https://dependabot.com)
 
 JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll header to Markdown files and save generated images to a desired location. This allows you to easily convert all your notebooks to the required format and immediately build your Jekyll site.
 
