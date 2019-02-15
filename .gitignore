@@ -9,3 +9,6 @@
 
 # pytest coverage report
 .coverage*
+
+# pyenv version file
+.python-version
