@@ -14,6 +14,7 @@ matrix:
       dist: xenial
       sudo: true
 before_install:
+  - pip install --upgrade pip
   - pip install poetry
 install:
   - poetry install
