@@ -24,7 +24,7 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - pytest --cov=jekyllnb --cov-report=xml
+  - pytest tests/ --cov=jekyllnb --cov-report=xml
 after_success:
   - codecov
   - coveralls
