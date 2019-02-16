@@ -22,5 +22,7 @@ install:
   - "poetry install"
   - "if [[ $PYTHON_VERSION == 2.7 ]]; then pip install more-itertools==5.0.0; fi"
 
+build: false
+
 test_script:
   - "pytest tests/ --cov=jekyllnb"
