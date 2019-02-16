@@ -25,4 +25,4 @@ install:
 build: false
 
 test_script:
-  - "pytest tests/ --cov=jekyllnb"
+  - "poetry run pytest tests/ --cov=jekyllnb"
