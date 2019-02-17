@@ -21,8 +21,8 @@ jobs:
   include:
     - stage: safety
       python: 3.6
-      install: pip install safety
-      script: safety check
+      before_script: poetry run pip install safety
+      script: poetry run safety check
 before_install:
   - pip install --upgrade pip
   - pip install poetry
