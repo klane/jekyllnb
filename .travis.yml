@@ -1,5 +1,8 @@
 language: python
 sudo: false
+stages:
+  - safety
+  - test
 cache:
   pip: true
   directories:
@@ -14,6 +17,12 @@ matrix:
     - python: 3.7
       dist: xenial
       sudo: true
+jobs:
+  include:
+    - stage: safety
+      python: 3.6
+      install: pip install safety
+      script: safety check
 before_install:
   - pip install --upgrade pip
   - pip install poetry
