@@ -21,7 +21,7 @@ install:
   - "python -m pip install --upgrade pip"
   - "pip install poetry"
   - "poetry install -v"
-  - "IF %PYTHON_VERSION%==2.7 (pip install more-itertools==5.0.0)"
+  - "IF %PYTHON_VERSION%==2.7 (poetry run pip install more-itertools==5.0.0)"
 
 build: false
 
