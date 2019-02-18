@@ -6,7 +6,7 @@ stages:
 cache:
   pip: true
   directories:
-    - $HOME/.cache/pypoetry
+    - $HOME/virtualenv/python${TRAVIS_PYTHON_VERSION}/
 python:
   - 2.7
   - 3.4
