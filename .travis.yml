@@ -38,6 +38,7 @@ before_install:
   - poetry config settings.virtualenvs.in-project true
 install:
   - poetry install -vv
+  - ls -al $HOME/.venv/lib/python${TRAVIS_PYTHON_VERSION}/site-packages
 script:
   - pytest tests/ --cov=jekyllnb --cov-report=xml
 before_deploy:
