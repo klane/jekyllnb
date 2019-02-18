@@ -25,8 +25,9 @@ jobs:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
     - stage: safety
       python: 3.6
-      install: poetry install --extras safety
-      before_script: poetry config settings.virtualenvs.in-project true
+      install:
+        - poetry config settings.virtualenvs.in-project true
+        - poetry install --extras safety
       script: .venv/bin/safety check
 before_install:
   - pip install --upgrade pip
