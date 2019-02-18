@@ -6,12 +6,14 @@ stages:
 cache:
   pip: true
   directories:
-    - $HOME/virtualenv/python${TRAVIS_PYTHON_VERSION}/
+    - $HOME/virtualenv/$PYTHON_DIR/lib/$PYTHON_DIR/site-packages
 python:
   - 2.7
   - 3.4
   - 3.5
   - 3.6
+env:
+  - PYTHON_DIR=python${TRAVIS_PYTHON_VERSION}
 jobs:
   include:
     - stage: test
