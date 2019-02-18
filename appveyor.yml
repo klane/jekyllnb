@@ -1,5 +1,9 @@
 build: false
 
+cache:
+  - '%LOCALAPPDATA%\pip\Cache'
+  - '%LOCALAPPDATA%\pypoetry\Cache'
+
 environment:
   matrix:
     - PYTHON: "C:/Python27-x64"
