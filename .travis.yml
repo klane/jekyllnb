@@ -1,7 +1,7 @@
 language: python
 sudo: false
 stages:
-  - safety
+  - check
   - test
 cache:
   pip: true
@@ -27,7 +27,8 @@ jobs:
         - coveralls
         - python-codacy-coverage -r coverage.xml
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-    - stage: safety
+    - stage: check
+      name: Safety
       python: 3.6
       install: poetry install --extras safety
       script: safety check
