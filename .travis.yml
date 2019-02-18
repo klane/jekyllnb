@@ -36,6 +36,7 @@ before_install:
   - pip install poetry
 install:
   - poetry install -vv
+  - ls -al $HOME/.cache/pypoetry
 script:
   - pytest tests/ --cov=jekyllnb --cov-report=xml
 before_deploy:
