@@ -6,7 +6,7 @@ stages:
 cache:
   pip: true
   directories:
-    - $HOME/virtualenv/python${TRAVIS_PYTHON_VERSION}/lib/python${TRAVIS_PYTHON_VERSION}/site-packages
+    - $HOME/.venv/lib/python${TRAVIS_PYTHON_VERSION}/site-packages
 python:
   - 2.7
   - 3.4
@@ -35,8 +35,9 @@ jobs:
 before_install:
   - pip install --upgrade pip
   - pip install poetry
+  - poetry config settings.virtualenvs.in-project true
 install:
-  - poetry install
+  - poetry install -vv
 script:
   - pytest tests/ --cov=jekyllnb --cov-report=xml
 before_deploy:
