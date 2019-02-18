@@ -20,7 +20,8 @@ jobs:
     - stage: safety
       python: 3.6
       install: poetry install --extras safety
-      script: poetry run safety check
+      before_script: poetry config settings.virtualenvs.in-project true
+      script: .venv/bin/safety check
 before_install:
   - pip install --upgrade pip
   - pip install poetry
