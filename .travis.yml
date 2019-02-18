@@ -25,7 +25,7 @@ before_install:
   - pip install --upgrade pip
   - pip install poetry
 install:
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then poetry install -vv -E more-itertools=5.0.0; else poetry install -vv fi
+  - poetry install -vv
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
