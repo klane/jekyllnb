@@ -37,6 +37,9 @@ before_install:
 install:
   - poetry install -vv
   - poetry config --list
+  - ls -al $HOME/.cache/pip/
+  - ls -al $HOME/virtualenv/
+  - ls -al $HOME/virtualenv/${TRAVIS_PYTHON_VERSION}/
 script:
   - pytest tests/ --cov=jekyllnb --cov-report=xml
 before_deploy:
