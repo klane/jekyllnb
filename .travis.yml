@@ -20,14 +20,13 @@ jobs:
   include:
     - stage: safety
       python: 3.6
-      before_script: poetry run pip install safety
+      install: poetry install --extras safety
       script: poetry run safety check
 before_install:
   - pip install --upgrade pip
   - pip install poetry
 install:
-  - poetry install -vv
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pip install more-itertools==5.0.0; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then poetry install -vv -E more-itertools=5.0.0; else poetry install -vv fi
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
