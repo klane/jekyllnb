@@ -3,6 +3,7 @@ sudo: false
 stages:
   - check
   - test
+  - deploy
 cache:
   pip: true
   directories:
@@ -32,6 +33,17 @@ jobs:
       python: 3.6
       install: poetry install --extras safety
       script: safety check
+    - stage: deploy
+      name: PyPI
+      python: 3.6
+      script: skip
+      before_deploy: poetry build
+      deploy:
+        provider: script
+        script: poetry publish
+        skip_cleanup: true
+        on:
+          tags: true
 before_install:
   - pip install --upgrade pip
   - pip install poetry
@@ -41,14 +53,6 @@ install:
   - ls -al $HOME/.venv/lib/python${TRAVIS_PYTHON_VERSION}/site-packages
 script:
   - pytest tests/ --cov=jekyllnb --cov-report=xml
-before_deploy:
-  - poetry build
-deploy:
-  provider: script
-  script: poetry publish
-  skip_cleanup: true
-  on:
-    tags: true
 notifications:
   slack:
     rooms:
