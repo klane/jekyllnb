@@ -20,19 +20,19 @@ before_install:
 install: poetry install
 script: pytest tests/ --cov=jekyllnb --cov-report=xml
 
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+after_success:
+  - codecov
+  - coveralls
+  - python-codacy-coverage -r coverage.xml
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
 jobs:
   include:
-    - stage: test
-      before_script:
-        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        - chmod +x ./cc-test-reporter
-        - ./cc-test-reporter before-build
-      after_success:
-        - codecov
-        - coveralls
-        - python-codacy-coverage -r coverage.xml
-        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
     - stage: test
       python: 3.7
       dist: xenial
@@ -43,6 +43,8 @@ jobs:
       python: 3.6
       install: poetry install --extras safety
       script: safety check
+      before_script: skip
+      after_success: skip
 
     - stage: deploy
       name: PyPI
