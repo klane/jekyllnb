@@ -1,18 +1,22 @@
 language: python
 sudo: false
+
 stages:
   - check
   - test
   - deploy
+
 cache:
   pip: true
   directories:
     - $HOME/.venv/lib/python${TRAVIS_PYTHON_VERSION}/site-packages
+
 python:
   - 2.7
   - 3.4
   - 3.5
   - 3.6
+
 jobs:
   include:
     - stage: test
@@ -25,15 +29,18 @@ jobs:
         - coveralls
         - python-codacy-coverage -r coverage.xml
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
     - stage: test
       python: 3.7
       dist: xenial
       sudo: true
+
     - stage: check
       name: Safety
       python: 3.6
       install: poetry install --extras safety
       script: safety check
+
     - stage: deploy
       name: PyPI
       python: 3.6
@@ -45,15 +52,19 @@ jobs:
         skip_cleanup: true
         on:
           tags: true
+
 before_install:
   - pip install --upgrade pip
   - pip install poetry
   - poetry config settings.virtualenvs.in-project true
+
 install:
   - poetry install -vv
   - ls -al $HOME/.venv/lib/python${TRAVIS_PYTHON_VERSION}/site-packages
+
 script:
   - pytest tests/ --cov=jekyllnb --cov-report=xml
+
 notifications:
   slack:
     rooms:
