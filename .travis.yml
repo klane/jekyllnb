@@ -41,15 +41,17 @@ jobs:
     - stage: check
       name: Safety
       python: 3.6
-      install: poetry install --extras safety
+      before_script: pip install safety
       script: safety check
-      before_script: skip
       after_success: skip
 
     - stage: deploy
       name: PyPI
       python: 3.6
+      install: poetry install --no-dev
+      before_script: skip
       script: skip
+      after_success: skip
       before_deploy: poetry build
       deploy:
         provider: script
