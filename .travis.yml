@@ -48,6 +48,7 @@ jobs:
     - stage: deploy
       name: PyPI
       python: 3.6
+      install: poetry install --no-dev
       before_script: skip
       script: skip
       after_success: skip
