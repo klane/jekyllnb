@@ -48,7 +48,9 @@ jobs:
     - stage: deploy
       name: PyPI
       python: 3.6
+      before_script: skip
       script: skip
+      after_success: skip
       before_deploy: poetry build
       deploy:
         provider: script
