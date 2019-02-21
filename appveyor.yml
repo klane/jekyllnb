@@ -1,5 +1,9 @@
 build: false
 
+branches:
+  only:
+    - master
+
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
   - '%LOCALAPPDATA%\pypoetry\Cache'
