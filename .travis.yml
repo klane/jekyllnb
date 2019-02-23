@@ -2,6 +2,10 @@ language: python
 cache: pip
 sudo: false
 
+branches:
+  only:
+    - master
+
 stages:
   - check
   - test
