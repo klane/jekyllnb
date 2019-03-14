@@ -22,13 +22,14 @@ before_install:
   - pip install poetry
 
 install: poetry install
-script: pytest tests/ --cov=jekyllnb --cov-report=xml
 
 before_script:
   - pip install codecov codacy-coverage coveralls
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+
+script: pytest tests/ --cov=jekyllnb --cov-report=xml
 
 after_success:
   - codecov
