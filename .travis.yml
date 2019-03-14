@@ -48,8 +48,9 @@ jobs:
     - stage: check
       name: Safety
       python: 3.6
+      install: skip
       before_script: pip install safety
-      script: safety check
+      script: poetry show -a | awk '{print $1,"==",$2}' | safety check --stdin
       after_success: skip
 
     - stage: deploy
