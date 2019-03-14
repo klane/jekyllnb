@@ -21,7 +21,8 @@ init:
 
 install:
   - python -m pip install --upgrade pip
-  - pip install poetry
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - 'SET PATH=%USERPROFILE%\.poetry\bin;%PATH%'
   - poetry install
 
 test_script:
