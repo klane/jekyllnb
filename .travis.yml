@@ -19,16 +19,18 @@ python:
 
 before_install:
   - pip install --upgrade pip
-  - pip install poetry
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - source $HOME/.poetry/env
 
 install: poetry install
-script: pytest tests/ --cov=jekyllnb --cov-report=xml
 
 before_script:
   - pip install codecov codacy-coverage coveralls
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+
+script: pytest tests/ --cov=jekyllnb --cov-report=xml
 
 after_success:
   - codecov
@@ -46,8 +48,12 @@ jobs:
     - stage: check
       name: Safety
       python: 3.6
+      install: skip
       before_script: pip install safety
-      script: safety check
+      script:
+        - poetry show -a
+        - poetry show -a | wc -l
+        - poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
       after_success: skip
 
     - stage: deploy
