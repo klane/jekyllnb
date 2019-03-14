@@ -53,7 +53,7 @@ jobs:
       script:
         - poetry show -a
         - poetry show -a | wc -l
-        - poetry show -a | awk '{print $1,"==",$2}' | safety check --stdin
+        - poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
       after_success: skip
 
     - stage: deploy
