@@ -1,9 +1,10 @@
 import os
-import pytest
 from abc import abstractmethod
 from difflib import Differ
 from pprint import pprint
 from subprocess import call
+
+import pytest
 
 try:
     from abc import ABC

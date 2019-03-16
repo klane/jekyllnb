@@ -1,8 +1,9 @@
-import click
 import os
 import re
 import shutil
 import sys
+
+import click
 from nbconvert import MarkdownExporter
 from nbconvert.writers import FilesWriter
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases

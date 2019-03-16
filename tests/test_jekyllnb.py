@@ -1,7 +1,9 @@
+from subprocess import CalledProcessError, check_output
+
 from conditional import conditional
+
 from jekyllnb import JekyllNB
 from jekyllnb.jekyllnb import jekyllpath
-from subprocess import CalledProcessError, check_output
 from tests import *
 
 
