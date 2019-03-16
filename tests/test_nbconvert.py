@@ -6,13 +6,16 @@ from tests import *
 def site_dir(tmpdir):
     return tmpdir.join(SITE_DIR, OUTPUT_DIR)
 
+
 @pytest.fixture
 def image_dir(site_dir):
     return site_dir.join(IMAGE_DIR)
 
+
 @pytest.fixture
 def test_file(site_dir):
     return site_dir.join(FILE_NAME + '.md')
+
 
 class TestNbConvert(Config):
     _app = NbConvertApp

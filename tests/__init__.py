@@ -9,6 +9,7 @@ try:
     from abc import ABC
 except ImportError:
     from abc import ABCMeta
+
     class ABC(object):
         __metaclass__ = ABCMeta
 
@@ -16,6 +17,7 @@ FILE_NAME = 'hello-world'
 SITE_DIR = 'docs'
 OUTPUT_DIR = '_pages'
 IMAGE_DIR = os.path.join('assets', 'images', FILE_NAME)
+
 
 class AbstractConfig(ABC):
     @abstractmethod
@@ -37,6 +39,7 @@ class AbstractConfig(ABC):
         yield request.param
         self._app.clear_instance()
 
+
 class Config(AbstractConfig):
     def test_file_exists(self, test_file):
         assert test_file.check()
@@ -48,7 +51,7 @@ class Config(AbstractConfig):
     def test_file_contents_match(self, test_file):
         test_lines = test_file.readlines()
         target_file = os.path.join(os.path.dirname(__file__),
-                                  'resources', FILE_NAME + '.md')
+                                   'resources', FILE_NAME + '.md')
 
         with open(target_file) as target:
             target_lines = target.readlines()

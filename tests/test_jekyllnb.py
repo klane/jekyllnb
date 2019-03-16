@@ -9,13 +9,16 @@ from tests import *
 def site_dir(tmpdir):
     return tmpdir.join(SITE_DIR)
 
+
 @pytest.fixture
 def image_dir(site_dir):
     return site_dir.join(IMAGE_DIR)
 
+
 @pytest.fixture
 def test_file(site_dir):
     return site_dir.join(OUTPUT_DIR, FILE_NAME + '.md')
+
 
 @pytest.fixture
 def args(site_dir):
@@ -26,15 +29,18 @@ def args(site_dir):
         os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.ipynb')
     ]
 
+
 class JekyllConfig(object):
     _app = JekyllNB
     _command = 'jekyllnb'
+
 
 class TestJekyllNB(JekyllConfig, Config):
     @pytest.fixture(autouse=True,
                     params=[[], ['--to', 'jekyll'], ['--to', 'Jekyll']])
     def args(self, args, request):
         return request.param + args
+
 
 class TestException(JekyllConfig, AbstractConfig):
     @pytest.fixture(autouse=True,
@@ -54,6 +60,7 @@ class TestException(JekyllConfig, AbstractConfig):
         with conditional(raise_exception, pytest.raises(exceptions)):
             engine(self, args)
             self._app.clear_instance()
+
 
 def test_jekyllpath():
     assert jekyllpath('assets\\images') == '{{ site.baseurl }}/assets/images'
