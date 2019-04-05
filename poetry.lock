@@ -319,13 +319,13 @@ description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "4.3.1"
+version = "4.4.0"
 
 [package.dependencies]
 atomicwrites = ">=1.0"
 attrs = ">=17.4.0"
 colorama = "*"
-pluggy = ">=0.7"
+pluggy = ">=0.9"
 py = ">=1.5.0"
 setuptools = "*"
 six = ">=1.10.0"
@@ -340,7 +340,7 @@ version = ">=4.0.0"
 
 [package.dependencies.funcsigs]
 python = "<3.0"
-version = "*"
+version = ">=1.0"
 
 [package.dependencies.pathlib2]
 python = "<3.6"
@@ -441,7 +441,7 @@ python-versions = "*"
 version = "0.5.1"
 
 [metadata]
-content-hash = "76721af8eca0f7e6d7fd1c1f01177202730630248c84b710d33b5ee8ac7635fc"
+content-hash = "6c2e51320595b3a3a901f2488958ba5833acb09915910051916bcf9773d57eb4"
 python-versions = "~2.7 || ^3.4"
 
 [metadata.hashes]
@@ -476,7 +476,7 @@ py = ["64f65755aee5b381cea27766a3a147c3f15b9b6b9ac88676de66ba2ae36793fa", "dc639
 pygments = ["5ffada19f6203563680669ee7f53b64dabbeb100eb51b61996085e99c03b284a", "e8218dd399a61674745138520d0d4cf2621d7e032439341bc3f647bff125818d"]
 pyparsing = ["66c9268862641abcac4a96ba74506e594c884e3f57690a696d21ad8210ed667a", "f6c5ef0d7480ad048c054c37632c67fca55299990fff127850181659eea33fc3"]
 pyrsistent = ["3ca82748918eb65e2d89f222b702277099aca77e34843c5eb9d52451173970e2"]
-pytest = ["592eaa2c33fae68c7d75aacf042efc9f77b27c08a6224a4f59beab8d9a420523", "ad3ad5c450284819ecde191a654c09b0ec72257a2c711b9633d677c71c9850c4"]
+pytest = ["13c5e9fb5ec5179995e9357111ab089af350d788cbc944c628f3cde72285809b", "f21d2f1fb8200830dcbb5d8ec466a9c9120e20d8b53c7585d180125cce1d297a"]
 pytest-cov = ["0ab664b25c6aa9716cbf203b17ddb301932383046082c081b9848a0edf5add33", "230ef817450ab0699c6cc3c9c8f7a829c34674456f2ed8df1fe1d39780f7c87f"]
 pytest-lazy-fixture = ["282fe28124eb1478e889088b3f616958caf7ac4cfc86f073b9ded6e2e6675c07", "787833087014b65eb622a16f3cc9a89a4ceccc5ba3f97df9ba8bd086e98c19a4"]
 pytest-sugar = ["26cf8289fe10880cbbc130bd77398c4e6a8b936d8393b116a5c16121d95ab283", "fcd87a74b2bce5386d244b49ad60549bfbc4602527797fac167da147983f58ab"]
