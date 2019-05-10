@@ -10,7 +10,8 @@
 # Python byte code
 *.pyc
 
-# pytest coverage report
+# pytest
+.pytest_cache/
 .coverage*
 
 # pyenv version file
