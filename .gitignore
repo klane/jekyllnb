@@ -4,7 +4,7 @@
 # PyCharm
 .idea/
 
-# Directory from local package installation
+# Local package installation
 *.egg-info/
 
 # Python byte code
