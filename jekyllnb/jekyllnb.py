@@ -7,7 +7,7 @@ import click
 from nbconvert import MarkdownExporter
 from nbconvert.writers import FilesWriter
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases
-from traitlets import Unicode, default, observe
+from traitlets import Bool, Unicode, default, observe
 from traitlets.config import catch_config_error
 
 
@@ -15,12 +15,14 @@ jekyllnb_aliases = {}
 jekyllnb_aliases.update(nbconvert_aliases)
 jekyllnb_aliases.update({
     'image-dir': 'NbConvertApp.output_files_dir',
+    'no-auto-folder': 'JekyllNB.no_auto_folder',
     'site-dir': 'JekyllNB.site_dir',
 })
 
 
 class JekyllNB(NbConvertApp):
     aliases = jekyllnb_aliases
+    no_auto_folder = Bool(False).tag(config=True)
     site_dir = Unicode('').tag(config=True)
 
     @default('export_format')
@@ -42,11 +44,13 @@ class JekyllNB(NbConvertApp):
         try:
             index_site = ['site-dir' in arg for arg in argv].index(True)
             index_output = ['output-dir' in arg for arg in argv].index(True)
-            index_image = ['image-dir' in arg for arg in argv].index(True)
 
             build_dir = os.path.join(argv[index_site+1], argv[index_output+1])
             argv[index_output+1] = build_dir
-            argv[index_image+1] = os.path.join(argv[index_image+1], '{notebook_name}')
+
+            if not self.no_auto_folder:
+                index_image = ['image-dir' in arg for arg in argv].index(True)
+                argv[index_image+1] = os.path.join(argv[index_image+1], '{notebook_name}')
         except ValueError:
             pass
 
