@@ -17,7 +17,7 @@ except ImportError:
 FILE_NAME = 'hello-world'
 SITE_DIR = 'docs'
 OUTPUT_DIR = '_pages'
-IMAGE_DIR = os.path.join('assets', 'images', FILE_NAME)
+IMAGE_DIR = os.path.join('assets', 'images')
 
 
 class AbstractConfig(ABC):
@@ -46,8 +46,10 @@ class Config(AbstractConfig):
         assert test_file.check()
 
     def test_image_exists(self, image_dir):
+        temp = image_dir.join(FILE_NAME)
         assert os.path.isdir(image_dir.strpath)
-        assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
+        assert os.path.isdir(temp)
+        assert os.path.isfile(temp.join(FILE_NAME + '_4_0.png').strpath)
 
     def test_file_contents_match(self, test_file):
         test_lines = test_file.readlines()

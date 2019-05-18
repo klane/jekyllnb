@@ -42,9 +42,11 @@ class JekyllNB(NbConvertApp):
         try:
             index_site = ['site-dir' in arg for arg in argv].index(True)
             index_output = ['output-dir' in arg for arg in argv].index(True)
+            index_image = ['image-dir' in arg for arg in argv].index(True)
 
             build_dir = os.path.join(argv[index_site+1], argv[index_output+1])
             argv[index_output+1] = build_dir
+            argv[index_image+1] = os.path.join(argv[index_image+1], '{notebook_name}')
         except ValueError:
             pass
 
