@@ -1,9 +1,6 @@
 # Local virtual environment
 .venv/
 
-# PyCharm
-.idea/
-
 # Local package installation
 *.egg-info/
 
