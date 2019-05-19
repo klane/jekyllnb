@@ -15,14 +15,14 @@ jekyllnb_aliases = {}
 jekyllnb_aliases.update(nbconvert_aliases)
 jekyllnb_aliases.update({
     'image-dir': 'NbConvertApp.output_files_dir',
-    'no-auto-folder': 'JekyllNB.no_auto_folder',
+    'auto-folder': 'JekyllNB.auto_folder',
     'site-dir': 'JekyllNB.site_dir',
 })
 
 
 class JekyllNB(NbConvertApp):
     aliases = jekyllnb_aliases
-    no_auto_folder = Bool(False).tag(config=True)
+    auto_folder = Bool(True).tag(config=True)
     site_dir = Unicode('').tag(config=True)
 
     @default('export_format')
@@ -48,7 +48,7 @@ class JekyllNB(NbConvertApp):
             build_dir = os.path.join(argv[index_site+1], argv[index_output+1])
             argv[index_output+1] = build_dir
 
-            if not self.no_auto_folder:
+            if self.auto_folder:
                 index_image = ['image-dir' in arg for arg in argv].index(True)
                 argv[index_image+1] = os.path.join(argv[index_image+1], '{notebook_name}')
         except ValueError:
