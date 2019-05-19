@@ -6,7 +6,7 @@ import sys
 import click
 from nbconvert import MarkdownExporter
 from nbconvert.writers import FilesWriter
-from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases
+from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases, nbconvert_flags
 from traitlets import Bool, Unicode, default, observe
 from traitlets.config import catch_config_error
 
@@ -15,13 +15,22 @@ jekyllnb_aliases = {}
 jekyllnb_aliases.update(nbconvert_aliases)
 jekyllnb_aliases.update({
     'image-dir': 'NbConvertApp.output_files_dir',
-    'auto-folder': 'JekyllNB.auto_folder',
     'site-dir': 'JekyllNB.site_dir',
+})
+
+jekyllnb_flags = {}
+jekyllnb_flags.update(nbconvert_flags)
+jekyllnb_flags.update({
+    'no-auto-folder': (
+        {'JekyllNB': {'auto_folder': False}},
+        'Do not create image folder with notebook name at image-dir level.'
+    )
 })
 
 
 class JekyllNB(NbConvertApp):
     aliases = jekyllnb_aliases
+    flags = jekyllnb_flags
     auto_folder = Bool(True).tag(config=True)
     site_dir = Unicode('').tag(config=True)
 
