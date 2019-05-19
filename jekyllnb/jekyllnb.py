@@ -35,7 +35,7 @@ class JekyllNB(NbConvertApp):
 
         if change['new'].lower() != default:
             raise ValueError('Invalid export format {}, value must be {}'
-                            .format(change['new'], default))
+                             .format(change['new'], default))
 
     @catch_config_error
     def initialize(self, argv=None):
@@ -70,18 +70,19 @@ class JekyllNB(NbConvertApp):
 @click.argument('notebook')
 @click.option('--layout', default='page')
 @click.option('--template', default=os.path.join(os.path.dirname(__file__), 'templates',
-                            'jekyll.tpl'))
+                                                 'jekyll.tpl'))
 @click.option('--outdir', default='images')
 def cli(notebook, layout, template, outdir):
     basename = os.path.basename(notebook)
     notebook_name = basename[:basename.rfind('.')]
 
-    resources = {}
-    resources['metadata'] = {}
-    resources['unique_key'] = notebook_name
-    resources['output_files_dir'] = os.path.join(outdir, notebook_name)
-    resources['metadata']['layout'] = layout
-    resources['metadata']['title'] = re.sub(r"[_-]+", " ", notebook_name).title()
+    resources = {
+        'unique_key': notebook_name,
+        'output_files_dir': os.path.join(outdir, notebook_name),
+        'metadata': {'layout': layout,
+                     'title': re.sub(r"[_-]+", " ", notebook_name).title()
+                     }
+    }
 
     exporter = MarkdownExporter(template_file=template,
                                 filters={'jekyllpath': jekyllpath})
