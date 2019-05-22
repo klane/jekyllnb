@@ -10,6 +10,8 @@ from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases, nbconvert_fl
 from traitlets import Bool, Unicode, default, observe
 from traitlets.config import catch_config_error
 
+from .__version__ import __version__
+
 
 jekyllnb_aliases = {}
 jekyllnb_aliases.update(nbconvert_aliases)
@@ -29,6 +31,7 @@ jekyllnb_flags.update({
 
 
 class JekyllNB(NbConvertApp):
+    version = __version__
     aliases = jekyllnb_aliases
     flags = jekyllnb_flags
     auto_folder = Bool(True).tag(config=True)
