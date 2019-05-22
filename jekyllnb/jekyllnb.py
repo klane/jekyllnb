@@ -31,9 +31,13 @@ jekyllnb_flags.update({
 
 
 class JekyllNB(NbConvertApp):
+    name = 'jupyter-jekyllnb'
+    description = 'Convert Jupyter notebooks to Jekyll-ready Markdown'
     version = __version__
+
     aliases = jekyllnb_aliases
     flags = jekyllnb_flags
+
     auto_folder = Bool(True).tag(config=True)
     site_dir = Unicode('').tag(config=True)
 
