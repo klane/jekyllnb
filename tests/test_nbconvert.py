@@ -1,6 +1,15 @@
+import os
+
+import pytest
 from nbconvert.nbconvertapp import NbConvertApp
 
-from tests import *
+from tests import (
+    Config,
+    FILE_NAME,
+    IMAGE_DIR,
+    OUTPUT_DIR,
+    SITE_DIR
+)
 
 
 @pytest.fixture

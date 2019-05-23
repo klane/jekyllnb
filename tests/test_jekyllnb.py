@@ -1,10 +1,19 @@
+import os
 from subprocess import CalledProcessError, check_output
 
+import pytest
 from conditional import conditional
 
 from jekyllnb import JekyllNB
 from jekyllnb.jekyllnb import jekyllpath
-from tests import *
+from tests import (
+    AbstractConfig,
+    Config,
+    FILE_NAME,
+    IMAGE_DIR,
+    OUTPUT_DIR,
+    SITE_DIR
+)
 
 
 @pytest.fixture
