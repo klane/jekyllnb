@@ -1,5 +1,6 @@
 import os
 from abc import abstractmethod
+from collections import namedtuple
 from difflib import Differ
 from pprint import pprint
 from subprocess import call
@@ -40,6 +41,18 @@ class AbstractConfig(ABC):
         yield request.param
         self._app.clear_instance()
 
+    @pytest.fixture
+    def target_contents(self):
+        target_file = os.path.join(os.path.dirname(__file__),
+                                   'resources', FILE_NAME + '.md')
+
+        with open(target_file) as target:
+            return parse_file(target)
+
+    @pytest.fixture
+    def test_contents(self, test_file):
+        return parse_file(test_file)
+
 
 class Config(AbstractConfig):
     def test_file_exists(self, test_file):
@@ -51,18 +64,31 @@ class Config(AbstractConfig):
         assert os.path.isdir(temp.strpath)
         assert os.path.isfile(temp.join(FILE_NAME + '_4_0.png').strpath)
 
-    def test_file_contents_match(self, test_file):
-        test_lines = test_file.readlines()
-        target_file = os.path.join(os.path.dirname(__file__),
-                                   'resources', FILE_NAME + '.md')
-
-        with open(target_file) as target:
-            target_lines = target.readlines()
-
+    def test_file_header(self, test_contents, target_contents):
         try:
-            assert all(a == b for a, b in zip(test_lines, target_lines))
+            assert all(line in target_contents.header for line in test_contents.header)
         except AssertionError:
-            differ = Differ()
-            diff = differ.compare(test_lines, target_lines)
-            pprint(list(diff))
+            print_diff(test_contents.header, target_contents.header)
             raise
+
+    def test_file_body(self, test_contents, target_contents):
+        try:
+            assert all(a == b for a, b in zip(test_contents.body, target_contents.body))
+        except AssertionError:
+            print_diff(test_contents.body, target_contents.body)
+            raise
+
+
+def parse_file(file):
+    lines = file.read().splitlines()
+    index = [i for i, x in enumerate(lines) if x == '---']
+    header, body = lines[index[0]+1:index[1]], lines[index[1]+1:]
+    contents = namedtuple('contents', 'header body')
+
+    return contents(header, body)
+
+
+def print_diff(test_lines, target_lines):
+    differ = Differ()
+    diff = differ.compare(test_lines, target_lines)
+    pprint(list(diff))
