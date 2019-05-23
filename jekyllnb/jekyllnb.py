@@ -111,7 +111,3 @@ def cli(notebook, layout, template, outdir):
 def jekyllpath(path):
     # convert default image path to one compatible with Jekyll
     return "{{ site.baseurl }}/" + path.replace("\\", "/")
-
-
-if __name__ == "__main__":
-    cli()
