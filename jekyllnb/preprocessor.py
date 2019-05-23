@@ -13,7 +13,4 @@ class JekyllPreprocessor(Preprocessor):
         for key in metadata:
             resources['metadata']['jekyll'][key] = metadata[key]
 
-        return super(JekyllPreprocessor, self).preprocess(nb, resources)
-
-    def preprocess_cell(self, cell, resources, cell_index):
-        return cell, resources
+        return nb, resources
