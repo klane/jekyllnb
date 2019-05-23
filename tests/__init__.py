@@ -34,9 +34,14 @@ class AbstractConfig(ABC):
     def command_line(self, args):
         call(['jupyter', self._command] + args)
 
+    @pytest.fixture
+    def package(self, args):
+        call(['python', '-m', self._command] + args)
+
     @pytest.fixture(autouse=True,
                     params=[pytest.lazy_fixture('app'),
-                            pytest.lazy_fixture('command_line')])
+                            pytest.lazy_fixture('command_line'),
+                            pytest.lazy_fixture('package')])
     def engine(self, request):
         yield request.param
         self._app.clear_instance()
