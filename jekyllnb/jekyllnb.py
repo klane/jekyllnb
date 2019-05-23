@@ -17,7 +17,7 @@ jekyllnb_aliases = {}
 jekyllnb_aliases.update(nbconvert_aliases)
 jekyllnb_aliases.update({
     'image-dir': 'NbConvertApp.output_files_dir',
-    'site-dir': 'JekyllNB.site_dir',
+    'site-dir': 'JekyllNB.site_dir'
 })
 
 jekyllnb_flags = {}
