@@ -59,10 +59,8 @@ class Config(AbstractConfig):
         assert test_file.check()
 
     def test_image_exists(self, image_dir):
-        temp = image_dir.join(FILE_NAME)
         assert os.path.isdir(image_dir.strpath)
-        assert os.path.isdir(temp.strpath)
-        assert os.path.isfile(temp.join(FILE_NAME + '_4_0.png').strpath)
+        assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
 
     def test_file_header(self, test_contents, target_contents):
         try:

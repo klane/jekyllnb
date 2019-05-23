@@ -19,7 +19,7 @@ def site_dir(tmpdir):
 
 @pytest.fixture
 def image_dir(site_dir):
-    return site_dir.join(IMAGE_DIR)
+    return site_dir.join(IMAGE_DIR, FILE_NAME)
 
 
 @pytest.fixture
