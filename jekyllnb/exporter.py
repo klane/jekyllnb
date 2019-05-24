@@ -40,8 +40,7 @@ class JekyllExporter(MarkdownExporter):
                                        self.resources['output_files_dir'])
 
         # convert image path to one compatible with Jekyll
-        yield ('jekyllpath', lambda path: "{{ site.baseurl }}/" +
-                                          path2url(os.path.join(
-                                              image_dir,
-                                              os.path.basename(path)
-                                          )))
+        yield ('jekyllpath',
+               lambda path: "{{ site.baseurl }}/" +
+                            path2url(os.path.join(image_dir, os.path.basename(path)))
+               )
