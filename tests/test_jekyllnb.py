@@ -52,15 +52,13 @@ class JekyllConfig(object):
 
 
 class TestJekyllNB(JekyllConfig, Config):
-    @pytest.fixture(autouse=True,
-                    params=[[], ['--to', 'jekyll'], ['--to', 'Jekyll']])
+    @pytest.fixture(params=[[], ['--to', 'jekyll'], ['--to', 'Jekyll']])
     def args(self, default_args, image_args, request):
         return request.param + image_args + default_args
 
 
 class TestException(JekyllConfig, AbstractConfig):
-    @pytest.fixture(autouse=True,
-                    params=[[], ['--to', 'markdown'], ['--to', 'jekyll']])
+    @pytest.fixture(params=[[], ['--to', 'markdown'], ['--to', 'jekyll']])
     def args(self, default_args, image_args, request):
         return request.param + image_args + default_args
 

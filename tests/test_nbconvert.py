@@ -31,7 +31,7 @@ class TestNbConvert(Config):
     _app = NbConvertApp
     _command = 'nbconvert'
 
-    @pytest.fixture(autouse=True)
+    @pytest.fixture
     def args(self, site_dir):
         return [
             '--to', 'jekyll',
