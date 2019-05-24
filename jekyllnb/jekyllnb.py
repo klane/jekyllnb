@@ -1,9 +1,5 @@
 import os
-import re
 
-import click
-from nbconvert import MarkdownExporter
-from nbconvert.writers import FilesWriter
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases, nbconvert_flags
 from traitlets import Bool, Unicode, default, observe
 from traitlets.config import catch_config_error
@@ -68,33 +64,6 @@ class JekyllNB(NbConvertApp):
                                                      resources['output_files_dir'])
 
         return resources
-
-
-# setup command line arguments and options
-@click.command()
-@click.argument('notebook')
-@click.option('--layout', default='page')
-@click.option('--template', default=os.path.join(os.path.dirname(__file__), 'templates',
-                                                 'jekyll.tpl'))
-@click.option('--outdir', default='images')
-def cli(notebook, layout, template, outdir):
-    basename = os.path.basename(notebook)
-    notebook_name = basename[:basename.rfind('.')]
-
-    resources = {
-        'unique_key': notebook_name,
-        'output_files_dir': os.path.join(outdir, notebook_name),
-        'metadata': {'layout': layout,
-                     'title': re.sub(r"[_-]+", " ", notebook_name).title()
-                     }
-    }
-
-    exporter = MarkdownExporter(template_file=template,
-                                filters={'jekyllpath': jekyllpath})
-    output, resources = exporter.from_filename(notebook, resources=resources)
-
-    writer = FilesWriter()
-    writer.write(output, resources, notebook_name=notebook_name)
 
 
 def jekyllpath(path):
