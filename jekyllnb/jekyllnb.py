@@ -68,13 +68,13 @@ class JekyllNB(NbConvertApp):
         super(JekyllNB, self).parse_command_line(argv)
 
     def init_single_notebook_resources(self, notebook_filename):
-        self.output_files_dir = os.path.join(self.site_dir, self.output_files_dir)
-
         if self.auto_folder:
             self.output_files_dir = os.path.join(self.output_files_dir, '{notebook_name}')
 
         resources = super(JekyllNB, self).init_single_notebook_resources(notebook_filename)
-        resources['site_dir'] = self.site_dir
+        resources['image_dir'] = resources['output_files_dir']
+        resources['output_files_dir'] = os.path.join(self.site_dir,
+                                                     resources['output_files_dir'])
 
         return resources
 

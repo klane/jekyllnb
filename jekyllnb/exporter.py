@@ -36,11 +36,12 @@ class JekyllExporter(MarkdownExporter):
         for pair in super(JekyllExporter, self).default_filters():
             yield pair
 
-        site_dir = self.resources.get('site_dir', '')
-
-        if site_dir and not site_dir.endswith('/'):
-            site_dir = site_dir + '/'
+        image_dir = self.resources.get('image_dir',
+                                       self.resources['output_files_dir'])
 
         # convert image path to one compatible with Jekyll
         yield ('jekyllpath', lambda path: "{{ site.baseurl }}/" +
-                                          path2url(path.replace(site_dir, '')))
+                                          path2url(os.path.join(
+                                              image_dir,
+                                              os.path.basename(path)
+                                          )))
