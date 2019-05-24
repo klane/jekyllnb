@@ -64,7 +64,10 @@ class TestException(JekyllConfig, AbstractConfig):
     @pytest.mark.parametrize('engine', [
         lambda self, args: self._app.launch_instance(args),
         lambda self, args: check_output(['jupyter', self._command] + args),
-        lambda self, args: check_output(['python', '-m', self._command] + args)
+        pytest.param(
+            lambda self, args: check_output(['python', '-m', self._command] + args),
+            marks=pytest.mark.unix
+        )
     ])
     def test_jekyllnb_format_exception(self, engine, args):
         args_lower = [arg.lower() for arg in args]
