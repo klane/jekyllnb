@@ -50,6 +50,10 @@ class AbstractConfig(ABC):
         yield request.param
         self._app.clear_instance()
 
+    @pytest.fixture(autouse=True)
+    def cleanup(self):
+        self._app.clear_instance()
+
     @pytest.fixture
     def target_contents(self):
         target_file = os.path.join(os.path.dirname(__file__),
