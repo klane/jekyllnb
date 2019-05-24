@@ -32,13 +32,18 @@ def test_file(site_dir):
 
 
 @pytest.fixture
-def args(site_dir):
+def default_args(site_dir):
     return [
         '--site-dir', site_dir.strpath,
         '--output-dir', OUTPUT_DIR,
-        '--image-dir', IMAGE_DIR,
         os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.ipynb')
     ]
+
+
+@pytest.fixture(params=[[IMAGE_DIR],
+                        [os.path.join(IMAGE_DIR, FILE_NAME), '--no-auto-folder']])
+def image_args(request):
+    return ['--image-dir'] + request.param
 
 
 class JekyllConfig(object):
@@ -49,15 +54,15 @@ class JekyllConfig(object):
 class TestJekyllNB(JekyllConfig, Config):
     @pytest.fixture(autouse=True,
                     params=[[], ['--to', 'jekyll'], ['--to', 'Jekyll']])
-    def args(self, args, request):
-        return request.param + args
+    def args(self, default_args, image_args, request):
+        return request.param + image_args + default_args
 
 
 class TestException(JekyllConfig, AbstractConfig):
     @pytest.fixture(autouse=True,
                     params=[[], ['--to', 'markdown'], ['--to', 'jekyll']])
-    def args(self, args, request):
-        return request.param + args
+    def args(self, default_args, image_args, request):
+        return request.param + image_args + default_args
 
     @pytest.mark.parametrize('engine', [
         lambda self, args: self._app.launch_instance(args),
