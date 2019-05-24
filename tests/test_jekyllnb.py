@@ -1,10 +1,10 @@
 import os
-from subprocess import CalledProcessError, check_output
+from subprocess import CalledProcessError, Popen, PIPE, check_output
 
 import pytest
 from conditional import conditional
 
-from jekyllnb import JekyllNB
+from jekyllnb import JekyllNB, __version__
 from tests import (
     AbstractConfig,
     Config,
@@ -76,3 +76,13 @@ class TestException(JekyllConfig, AbstractConfig):
 
         with conditional(raise_exception, pytest.raises(exceptions)):
             engine(self, args)
+
+
+class TestVersion(JekyllConfig):
+    @pytest.mark.parametrize('engine', [
+        ['jupyter'],
+        pytest.param(['python', '-m'], marks=pytest.mark.unix)
+    ])
+    def test_version(self, engine):
+        process = Popen(engine + [self._command, '--version'], stdout=PIPE)
+        assert str(process.stdout.readline(), 'UTF8').strip() == __version__
