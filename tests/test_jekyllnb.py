@@ -11,7 +11,7 @@ from tests import (
     Config,
     FILE_NAME,
     IMAGE_DIR,
-    OUTPUT_DIR,
+    PAGE_DIR,
     SITE_DIR
 )
 
@@ -28,14 +28,14 @@ def image_dir(site_dir):
 
 @pytest.fixture
 def test_file(site_dir):
-    return site_dir.join(OUTPUT_DIR, FILE_NAME + '.md')
+    return site_dir.join(PAGE_DIR, FILE_NAME + '.md')
 
 
 @pytest.fixture
 def default_args(site_dir):
     return [
         '--site-dir', site_dir.strpath,
-        '--output-dir', OUTPUT_DIR,
+        '--page-dir', PAGE_DIR,
         os.path.join(os.path.dirname(__file__), 'resources', FILE_NAME + '.ipynb')
     ]
 

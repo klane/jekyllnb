@@ -7,14 +7,14 @@ from tests import (
     Config,
     FILE_NAME,
     IMAGE_DIR,
-    OUTPUT_DIR,
+    PAGE_DIR,
     SITE_DIR
 )
 
 
 @pytest.fixture
 def site_dir(tmpdir):
-    return tmpdir.join(SITE_DIR, OUTPUT_DIR)
+    return tmpdir.join(SITE_DIR, PAGE_DIR)
 
 
 @pytest.fixture

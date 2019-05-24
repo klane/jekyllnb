@@ -17,7 +17,7 @@ except ImportError:
 
 FILE_NAME = 'hello-world'
 SITE_DIR = 'docs'
-OUTPUT_DIR = '_pages'
+PAGE_DIR = '_pages'
 IMAGE_DIR = os.path.join('assets', 'images')
 
 

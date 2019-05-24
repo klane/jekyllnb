@@ -1,6 +1,5 @@
 import os
 import re
-import sys
 
 import click
 from nbconvert import MarkdownExporter
@@ -15,8 +14,9 @@ from .__version__ import __version__
 jekyllnb_aliases = {}
 jekyllnb_aliases.update(nbconvert_aliases)
 jekyllnb_aliases.update({
-    'image-dir': 'NbConvertApp.output_files_dir',
-    'site-dir': 'JekyllNB.site_dir'
+    'site-dir': 'JekyllNB.site_dir',
+    'page-dir': 'JekyllNB.page_dir',
+    'image-dir': 'NbConvertApp.output_files_dir'
 })
 
 jekyllnb_flags = {}
@@ -39,6 +39,7 @@ class JekyllNB(NbConvertApp):
 
     auto_folder = Bool(True).tag(config=True)
     site_dir = Unicode('').tag(config=True)
+    page_dir = Unicode('').tag(config=True)
 
     @default('export_format')
     def _export_format_default(self):
@@ -53,24 +54,14 @@ class JekyllNB(NbConvertApp):
                              .format(change['new'], default))
 
     @catch_config_error
-    def parse_command_line(self, argv=None):
-        argv = sys.argv[1:] if argv is None else argv
+    def initialize(self, argv=None):
+        super(JekyllNB, self).initialize(argv)
+        self.writer.build_directory = os.path.join(self.site_dir, self.page_dir)
 
-        try:
-            index_site = ['site-dir' in arg for arg in argv].index(True)
-            index_output = ['output-dir' in arg for arg in argv].index(True)
-
-            build_dir = os.path.join(argv[index_site+1], argv[index_output+1])
-            argv[index_output+1] = build_dir
-        except ValueError:
-            pass
-
-        super(JekyllNB, self).parse_command_line(argv)
-
-    def init_single_notebook_resources(self, notebook_filename):
         if self.auto_folder:
             self.output_files_dir = os.path.join(self.output_files_dir, '{notebook_name}')
 
+    def init_single_notebook_resources(self, notebook_filename):
         resources = super(JekyllNB, self).init_single_notebook_resources(notebook_filename)
         resources['image_dir'] = resources['output_files_dir']
         resources['output_files_dir'] = os.path.join(self.site_dir,
