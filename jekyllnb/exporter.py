@@ -7,6 +7,12 @@ from traitlets.config import Config
 
 
 class JekyllExporter(MarkdownExporter):
+    resources = {}
+
+    def from_filename(self, filename, resources=None, **kw):
+        self.resources = resources
+        return super(JekyllExporter, self).from_filename(filename, resources=resources, **kw)
+
     @default('template_file')
     def _template_file_default(self):
         return 'jekyll'
@@ -29,5 +35,12 @@ class JekyllExporter(MarkdownExporter):
     def default_filters(self):
         for pair in super(JekyllExporter, self).default_filters():
             yield pair
+
+        site_dir = self.resources.get('site_dir', '')
+
+        if site_dir and not site_dir.endswith('/'):
+            site_dir = site_dir + '/'
+
         # convert image path to one compatible with Jekyll
-        yield ('jekyllpath', lambda path: "{{ site.baseurl }}/" + path2url(path))
+        yield ('jekyllpath', lambda path: "{{ site.baseurl }}/" +
+                                          path2url(path.replace(site_dir, '')))
