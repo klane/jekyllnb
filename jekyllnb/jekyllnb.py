@@ -1,6 +1,5 @@
 import os
 import re
-import shutil
 import sys
 
 import click
@@ -54,7 +53,7 @@ class JekyllNB(NbConvertApp):
                              .format(change['new'], default))
 
     @catch_config_error
-    def initialize(self, argv=None):
+    def parse_command_line(self, argv=None):
         argv = sys.argv[1:] if argv is None else argv
 
         try:
@@ -63,22 +62,21 @@ class JekyllNB(NbConvertApp):
 
             build_dir = os.path.join(argv[index_site+1], argv[index_output+1])
             argv[index_output+1] = build_dir
-
-            if self.auto_folder:
-                index_image = ['image-dir' in arg for arg in argv].index(True)
-                argv[index_image+1] = os.path.join(argv[index_image+1], '{notebook_name}')
         except ValueError:
             pass
 
-        super(JekyllNB, self).initialize(argv)
+        super(JekyllNB, self).parse_command_line(argv)
 
-    def start(self):
-        super(JekyllNB, self).start()
+    def init_single_notebook_resources(self, notebook_filename):
+        self.output_files_dir = os.path.join(self.site_dir, self.output_files_dir)
 
-        if self.site_dir:
-            image_dir = os.path.join(self.writer.build_directory,
-                                     self.output_files_dir.split(os.path.sep)[0])
-            shutil.move(image_dir, self.site_dir)
+        if self.auto_folder:
+            self.output_files_dir = os.path.join(self.output_files_dir, '{notebook_name}')
+
+        resources = super(JekyllNB, self).init_single_notebook_resources(notebook_filename)
+        resources['site_dir'] = self.site_dir
+
+        return resources
 
 
 # setup command line arguments and options
