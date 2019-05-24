@@ -41,11 +41,7 @@ class AbstractConfig(ABC):
     @pytest.fixture(autouse=True,
                     params=[pytest.lazy_fixture('app'),
                             pytest.lazy_fixture('command_line'),
-                            pytest.param(
-                                pytest.lazy_fixture('package'),
-                                marks=pytest.mark.unix
-                            )]
-                    )
+                            pytest.lazy_fixture('package')])
     def engine(self):
         pass
 
