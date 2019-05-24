@@ -46,9 +46,8 @@ class AbstractConfig(ABC):
                                 marks=pytest.mark.unix
                             )]
                     )
-    def engine(self, request):
-        yield request.param
-        self._app.clear_instance()
+    def engine(self):
+        pass
 
     @pytest.fixture(autouse=True)
     def cleanup(self):

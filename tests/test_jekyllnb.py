@@ -79,7 +79,6 @@ class TestException(JekyllConfig, AbstractConfig):
 
         with conditional(raise_exception, pytest.raises(exceptions)):
             engine(self, args)
-            self._app.clear_instance()
 
 
 def test_jekyllpath():
