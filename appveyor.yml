@@ -26,4 +26,4 @@ install:
   - poetry install
 
 test_script:
-  - poetry run pytest tests/ --cov=jekyllnb
+  - poetry run pytest tests/ -m "not unix" --cov=jekyllnb
