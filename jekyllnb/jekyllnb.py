@@ -64,8 +64,3 @@ class JekyllNB(NbConvertApp):
                                                      resources['output_files_dir'])
 
         return resources
-
-
-def jekyllpath(path):
-    # convert default image path to one compatible with Jekyll
-    return "{{ site.baseurl }}/" + path.replace("\\", "/")

@@ -5,7 +5,6 @@ import pytest
 from conditional import conditional
 
 from jekyllnb import JekyllNB
-from jekyllnb.jekyllnb import jekyllpath
 from tests import (
     AbstractConfig,
     Config,
@@ -77,7 +76,3 @@ class TestException(JekyllConfig, AbstractConfig):
 
         with conditional(raise_exception, pytest.raises(exceptions)):
             engine(self, args)
-
-
-def test_jekyllpath():
-    assert jekyllpath('assets\\images') == '{{ site.baseurl }}/assets/images'
