@@ -85,4 +85,4 @@ class TestVersion(JekyllConfig):
     ])
     def test_version(self, engine):
         process = Popen(engine + [self._command, '--version'], stdout=PIPE)
-        assert str(process.stdout.readline(), 'UTF8').strip() == __version__
+        assert process.stdout.readline().decode('UTF8').strip() == __version__
