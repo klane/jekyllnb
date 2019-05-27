@@ -24,19 +24,11 @@ before_install:
 
 install: poetry install
 
-before_script:
-  - pip install codecov codacy-coverage coveralls
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+before_script: pip install codecov
 
 script: pytest tests/ --cov=jekyllnb --cov-report=xml
 
-after_success:
-  - codecov
-  - coveralls
-  - python-codacy-coverage -r coverage.xml
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+after_success: codecov
 
 jobs:
   include:
