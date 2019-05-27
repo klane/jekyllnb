@@ -26,7 +26,7 @@ install: poetry install
 
 before_script: pip install codecov
 
-script: pytest tests/ --cov=jekyllnb --cov-report=xml
+script: pytest tests/ --cov=jekyllnb
 
 after_success: codecov
 
