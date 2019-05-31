@@ -23,34 +23,26 @@ before_install:
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
   - source $HOME/.poetry/env
 
-install: poetry install
-
-before_script: pip install codecov
-
-script: pytest tests/ --cov=jekyllnb
-
-after_success: codecov
-
 jobs:
   include:
     - stage: check
       name: Safety
       python: 3.6
-      install: skip
       before_script: pip install safety
       script:
         - poetry show -a
         - poetry show -a | wc -l
         - poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
-      after_success: skip
+
+    - stage: test
+      install: poetry install
+      before_script: pip install codecov
+      script: pytest tests/ --cov=jekyllnb
+      after_success: codecov
 
     - stage: deploy
       name: PyPI
       python: 3.6
-      install: skip
-      before_script: skip
-      script: skip
-      after_success: skip
       before_deploy: poetry build
       deploy:
         provider: script
