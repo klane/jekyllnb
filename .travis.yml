@@ -1,6 +1,6 @@
+dist: xenial
 language: python
 cache: pip
-sudo: false
 
 branches:
   only:
@@ -16,6 +16,7 @@ python:
   - 3.4
   - 3.5
   - 3.6
+  - 3.7
 
 before_install:
   - pip install --upgrade pip
@@ -32,11 +33,6 @@ after_success: codecov
 
 jobs:
   include:
-    - stage: test
-      python: 3.7
-      dist: xenial
-      sudo: true
-
     - stage: check
       name: Safety
       python: 3.6
