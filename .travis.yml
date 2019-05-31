@@ -11,13 +11,6 @@ stages:
   - test
   - deploy
 
-python:
-  - 2.7
-  - 3.4
-  - 3.5
-  - 3.6
-  - 3.7
-
 before_install:
   - pip install --upgrade pip
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
@@ -35,6 +28,12 @@ jobs:
         - poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
 
     - stage: test
+      python:
+        - 2.7
+        - 3.4
+        - 3.5
+        - 3.6
+        - 3.7
       install: poetry install
       before_script: pip install codecov
       script: pytest tests/ --cov=jekyllnb
