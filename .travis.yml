@@ -28,7 +28,7 @@ jobs:
     - stage: check
       name: Safety
       python: 3.6
-      before_script: pip install safety
+      install: pip install safety
       script:
         - poetry show -a
         - poetry show -a | wc -l
