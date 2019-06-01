@@ -11,10 +11,24 @@ stages:
   - test
   - deploy
 
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
+  - 3.7
+
 before_install:
   - pip install --upgrade pip
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
   - source $HOME/.poetry/env
+
+install:
+  - poetry install
+  - pip install codecov
+
+script: pytest tests/ --cov=jekyllnb
+after_success: codecov
 
 jobs:
   include:
@@ -26,22 +40,14 @@ jobs:
         - poetry show -a
         - poetry show -a | wc -l
         - poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
-
-    - stage: test
-      python:
-        - 2.7
-        - 3.4
-        - 3.5
-        - 3.6
-        - 3.7
-      install: poetry install
-      before_script: pip install codecov
-      script: pytest tests/ --cov=jekyllnb
-      after_success: codecov
+      after_success: skip
 
     - stage: deploy
       name: PyPI
       python: 3.6
+      install: skip
+      script: skip
+      after_success: skip
       before_deploy: poetry build
       deploy:
         provider: script
