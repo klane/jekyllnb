@@ -9,7 +9,8 @@ branches:
 stages:
   - check
   - test
-  - deploy
+  - name: deploy
+    if: tag IS present
 
 python:
   - 2.7
