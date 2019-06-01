@@ -55,10 +55,13 @@ class JekyllNB(NbConvertApp):
         self.writer.build_directory = os.path.join(self.site_dir, self.page_dir)
 
         if self.auto_folder:
-            self.output_files_dir = os.path.join(self.output_files_dir, '{notebook_name}')
+            self.output_files_dir = os.path.join(self.output_files_dir,
+                                                 '{notebook_name}')
 
     def init_single_notebook_resources(self, notebook_filename):
-        resources = super(JekyllNB, self).init_single_notebook_resources(notebook_filename)
+        resources = super(JekyllNB, self).init_single_notebook_resources(
+            notebook_filename
+        )
         resources['image_dir'] = resources['output_files_dir']
         resources['output_files_dir'] = os.path.join(self.site_dir,
                                                      resources['output_files_dir'])

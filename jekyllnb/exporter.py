@@ -11,7 +11,9 @@ class JekyllExporter(MarkdownExporter):
 
     def from_filename(self, filename, resources=None, **kw):
         self.resources = resources
-        return super(JekyllExporter, self).from_filename(filename, resources=resources, **kw)
+        return super(JekyllExporter, self).from_filename(filename,
+                                                         resources=resources,
+                                                         **kw)
 
     @default('template_file')
     def _template_file_default(self):
