@@ -33,6 +33,10 @@ tox = "^3.12"
 [tool.poetry.plugins."nbconvert.exporters"]
 "jekyll" = "jekyllnb:JekyllExporter"
 
+[tool.isort]
+known_third_party = ["conditional", "nbconvert", "pytest", "traitlets"]
+multi_line_output = 3
+
 [tool.tox]
 legacy_tox_ini = """
 [tox]
