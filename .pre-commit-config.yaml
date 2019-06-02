@@ -3,7 +3,7 @@ repos:
     rev: v2.2.3
     hooks:
     -   id: flake8
-        args: [--ignore=F401, --max-line-length=88, --select=B,C,E,F,W,T4,B9]
+        args: [--config=pyproject.toml]
     -   id: end-of-file-fixer
     -   id: mixed-line-ending
     -   id: trailing-whitespace

@@ -46,6 +46,11 @@ whitelist_externals = poetry
 commands =
     poetry install
     poetry run pytest tests/ --cov=jekyllnb
+
+[flake8]
+ignore = F401
+max-line-length = 88
+select = B,C,E,F,W,T4,B9
 """
 
 [build-system]
