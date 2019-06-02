@@ -43,8 +43,8 @@ class AbstractConfig(ABC):
                             pytest.lazy_fixture('command_line'),
                             pytest.param(
                                 pytest.lazy_fixture('package'),
-                                marks=pytest.mark.unix
-                            )]
+                                marks=pytest.mark.unix)
+                            ]
                     )
     def engine(self):
         pass
@@ -92,7 +92,7 @@ class Config(AbstractConfig):
 def parse_file(file):
     lines = file.read().splitlines()
     index = [i for i, x in enumerate(lines) if x == '---']
-    header, body = lines[index[0]+1:index[1]], lines[index[1]+1:]
+    header, body = lines[index[0] + 1:index[1]], lines[index[1] + 1:]
     contents = namedtuple('contents', 'header body')
 
     return contents(header, body)

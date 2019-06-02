@@ -26,7 +26,8 @@ class JekyllExporter(MarkdownExporter):
 
     @property
     def preprocessors(self):
-        return super(JekyllExporter, self).preprocessors+["jekyllnb.JekyllPreprocessor"]
+        return super(JekyllExporter, self).preprocessors +\
+            ["jekyllnb.JekyllPreprocessor"]
 
     @property
     def default_config(self):
@@ -42,7 +43,5 @@ class JekyllExporter(MarkdownExporter):
                                        self.resources['output_files_dir'])
 
         # convert image path to one compatible with Jekyll
-        yield ('jekyllpath',
-               lambda path: "{{ site.baseurl }}/" +
-                            path2url(os.path.join(image_dir, os.path.basename(path)))
-               )
+        yield ('jekyllpath', lambda path: "{{ site.baseurl }}/" + path2url(
+            os.path.join(image_dir, os.path.basename(path))))
