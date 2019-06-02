@@ -33,6 +33,21 @@ tox = "^3.12"
 [tool.poetry.plugins."nbconvert.exporters"]
 "jekyll" = "jekyllnb:JekyllExporter"
 
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = true
+skipsdist = true
+envlist = py{27,34,35,36,37}
+
+[testenv]
+skip_install = true
+whitelist_externals = poetry
+commands =
+    poetry install
+    poetry run pytest tests/ --cov=jekyllnb
+"""
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
