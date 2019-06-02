@@ -43,6 +43,15 @@ jobs:
         - poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
       after_success: skip
 
+    - name: Linting
+      python: 3.6
+      before_install: skip
+      install:
+        - pip install pre-commit
+        - pre-commit install-hooks
+      script: pre-commit run --all-files
+      after_success: skip
+
     - stage: deploy
       name: PyPI
       python: 3.6
