@@ -11,5 +11,8 @@
 .pytest_cache/
 .coverage*
 
+# tox
+.tox/
+
 # pyenv version file
 .python-version
