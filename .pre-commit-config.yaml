@@ -3,3 +3,6 @@ repos:
     rev: v2.2.3
     hooks:
     -   id: flake8
+    -   id: end-of-file-fixer
+    -   id: mixed-line-ending
+    -   id: trailing-whitespace
