@@ -1,17 +1,18 @@
 # Local virtual environment
 .venv/
 
-# PyCharm
-.idea/
-
-# Directory from local package installation
+# Local package installation
 *.egg-info/
 
 # Python byte code
 *.pyc
 
-# pytest coverage report
+# pytest
+.pytest_cache/
 .coverage*
+
+# tox
+.tox/
 
 # pyenv version file
 .python-version

@@ -1,6 +1,6 @@
+dist: xenial
 language: python
 cache: pip
-sudo: false
 
 branches:
   only:
@@ -9,45 +9,47 @@ branches:
 stages:
   - check
   - test
-  - deploy
+  - name: deploy
+    if: tag IS present
 
 python:
   - 2.7
   - 3.4
   - 3.5
   - 3.6
+  - 3.7
 
 before_install:
   - pip install --upgrade pip
-  - pip install poetry
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - source $HOME/.poetry/env
 
-install: poetry install
-script: pytest tests/ --cov=jekyllnb --cov-report=xml
+install:
+  - poetry install
+  - pip install codecov
 
-before_script:
-  - pip install codecov codacy-coverage coveralls
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
-after_success:
-  - codecov
-  - coveralls
-  - python-codacy-coverage -r coverage.xml
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+script: pytest tests/ --cov=jekyllnb
+after_success: codecov
 
 jobs:
   include:
-    - stage: test
-      python: 3.7
-      dist: xenial
-      sudo: true
-
     - stage: check
       name: Safety
       python: 3.6
-      before_script: pip install safety
-      script: safety check
+      install: pip install safety
+      script:
+        - poetry show -a
+        - poetry show -a | wc -l
+        - poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
+      after_success: skip
+
+    - name: Linting
+      python: 3.6
+      before_install: skip
+      install:
+        - pip install pre-commit
+        - pre-commit install-hooks
+      script: pre-commit run --all-files
       after_success: skip
 
     - stage: check
@@ -64,8 +66,7 @@ jobs:
     - stage: deploy
       name: PyPI
       python: 3.6
-      install: poetry install --no-dev
-      before_script: skip
+      install: skip
       script: skip
       after_success: skip
       before_deploy: poetry build

@@ -2,9 +2,9 @@
 
 {%- block header -%}
 ---
-layout: {{ resources['metadata']['layout'] }}
-title: {{ resources['metadata']['title'] }}
-permalink: {{ resources['metadata']['permalink'] }}
+{%- for key, value in resources['metadata']['jekyll'].items() %}
+{{ key }}: {{ value }}
+{%- endfor %}
 ---
 {% endblock header %}
 
