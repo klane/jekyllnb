@@ -1,17 +1,17 @@
 import os
-from subprocess import CalledProcessError, Popen, PIPE, check_output
+from subprocess import PIPE, CalledProcessError, Popen, check_output
 
 import pytest
 from conditional import conditional
 
 from jekyllnb import JekyllNB, __version__
 from tests import (
-    AbstractConfig,
-    Config,
     FILE_NAME,
     IMAGE_DIR,
     PAGE_DIR,
-    SITE_DIR
+    SITE_DIR,
+    AbstractConfig,
+    Config
 )
 
 

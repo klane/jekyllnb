@@ -1,11 +1,14 @@
 import os
 
-from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases, nbconvert_flags
+from nbconvert.nbconvertapp import (
+    NbConvertApp,
+    nbconvert_aliases,
+    nbconvert_flags
+)
 from traitlets import Bool, Unicode, default, observe
 from traitlets.config import catch_config_error
 
 from .__version__ import __version__
-
 
 jekyllnb_aliases = {}
 jekyllnb_aliases.update(nbconvert_aliases)

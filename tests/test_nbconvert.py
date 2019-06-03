@@ -3,13 +3,7 @@ import os
 import pytest
 from nbconvert.nbconvertapp import NbConvertApp
 
-from tests import (
-    Config,
-    FILE_NAME,
-    IMAGE_DIR,
-    PAGE_DIR,
-    SITE_DIR
-)
+from tests import FILE_NAME, IMAGE_DIR, PAGE_DIR, SITE_DIR, Config
 
 
 @pytest.fixture
