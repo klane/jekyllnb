@@ -38,7 +38,11 @@ line-length = 88
 
 [tool.isort]
 known_third_party = ["conditional", "nbconvert", "pytest", "traitlets"]
+line_length = 88
 multi_line_output = 3
+force_grid_wrap = 0
+include_trailing_comma = "True"
+use_parentheses = "True"
 
 [tool.tox]
 legacy_tox_ini = """
@@ -55,7 +59,7 @@ commands =
     poetry run pytest tests/ --cov=jekyllnb
 
 [flake8]
-ignore = F401
+ignore = E203, F401, W503
 max-line-length = 88
 select = B,C,E,F,W,T4,B9
 """
