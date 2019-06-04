@@ -15,10 +15,11 @@ except ImportError:
     class ABC(object):
         __metaclass__ = ABCMeta
 
-FILE_NAME = 'hello-world'
-SITE_DIR = 'docs'
-PAGE_DIR = '_pages'
-IMAGE_DIR = os.path.join('assets', 'images')
+
+FILE_NAME = "hello-world"
+SITE_DIR = "docs"
+PAGE_DIR = "_pages"
+IMAGE_DIR = os.path.join("assets", "images")
 
 
 class AbstractConfig(ABC):
@@ -32,20 +33,20 @@ class AbstractConfig(ABC):
 
     @pytest.fixture
     def command_line(self, args):
-        call(['jupyter', self._command] + args)
+        call(["jupyter", self._command] + args)
 
     @pytest.fixture
     def package(self, args):
-        call(['python', '-m', self._command] + args)
+        call(["python", "-m", self._command] + args)
 
-    @pytest.fixture(autouse=True,
-                    params=[pytest.lazy_fixture('app'),
-                            pytest.lazy_fixture('command_line'),
-                            pytest.param(
-                                pytest.lazy_fixture('package'),
-                                marks=pytest.mark.unix)
-                            ]
-                    )
+    @pytest.fixture(
+        autouse=True,
+        params=[
+            pytest.lazy_fixture("app"),
+            pytest.lazy_fixture("command_line"),
+            pytest.param(pytest.lazy_fixture("package"), marks=pytest.mark.unix),
+        ],
+    )
     def engine(self):
         pass
 
@@ -55,8 +56,9 @@ class AbstractConfig(ABC):
 
     @pytest.fixture
     def target_contents(self):
-        target_file = os.path.join(os.path.dirname(__file__),
-                                   'resources', FILE_NAME + '.md')
+        target_file = os.path.join(
+            os.path.dirname(__file__), "resources", FILE_NAME + ".md"
+        )
 
         with open(target_file) as target:
             return parse_file(target)
@@ -72,7 +74,7 @@ class Config(AbstractConfig):
 
     def test_image_exists(self, image_dir):
         assert os.path.isdir(image_dir.strpath)
-        assert os.path.isfile(image_dir.join(FILE_NAME + '_4_0.png').strpath)
+        assert os.path.isfile(image_dir.join(FILE_NAME + "_4_0.png").strpath)
 
     def test_file_header(self, test_contents, target_contents):
         try:
@@ -91,9 +93,9 @@ class Config(AbstractConfig):
 
 def parse_file(file):
     lines = file.read().splitlines()
-    index = [i for i, x in enumerate(lines) if x == '---']
-    header, body = lines[index[0] + 1:index[1]], lines[index[1] + 1:]
-    contents = namedtuple('contents', 'header body')
+    index = [i for i, x in enumerate(lines) if x == "---"]
+    header, body = lines[index[0] + 1 : index[1]], lines[index[1] + 1 :]
+    contents = namedtuple("contents", "header body")
 
     return contents(header, body)
 
