@@ -56,7 +56,7 @@ skip_install = true
 whitelist_externals = poetry
 commands =
     poetry install
-    poetry run pytest tests/ --cov=jekyllnb
+    poetry run pytest tests/ --cov=jekyllnb {posargs}
 
 [flake8]
 ignore = E203, F401, W503
