@@ -10,10 +10,10 @@ cache:
 
 environment:
   matrix:
-    - PYTHON: "C:/Python27-x64"
-    - PYTHON: "C:/Python35-x64"
-    - PYTHON: "C:/Python36-x64"
-    - PYTHON: "C:/Python37-x64"
+    - TOXENV: py27
+    - TOXENV: py35
+    - TOXENV: py36
+    - TOXENV: py37
 
 init:
   - 'SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%'
@@ -23,7 +23,7 @@ install:
   - python -m pip install --upgrade pip
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
   - 'SET PATH=%USERPROFILE%\.poetry\bin;%PATH%'
-  - poetry install
+  - pip install tox
 
 test_script:
-  - poetry run pytest tests/ -m "not unix" --cov=jekyllnb
+  - tox -- -m "not unix"
