@@ -9,11 +9,12 @@ cache:
   - '%LOCALAPPDATA%\pypoetry\Cache'
 
 environment:
+  TOXENV: py
   matrix:
-    - TOXENV: py27
-    - TOXENV: py35
-    - TOXENV: py36
-    - TOXENV: py37
+    - PYTHON: "C:/Python27-x64"
+    - PYTHON: "C:/Python35-x64"
+    - PYTHON: "C:/Python36-x64"
+    - PYTHON: "C:/Python37-x64"
 
 init:
   - 'SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%'
