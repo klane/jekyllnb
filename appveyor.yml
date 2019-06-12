@@ -9,7 +9,6 @@ cache:
   - '%LOCALAPPDATA%\pypoetry\Cache'
 
 environment:
-  TOXENV: py
   matrix:
     - PYTHON: "C:/Python27-x64"
     - PYTHON: "C:/Python35-x64"
@@ -24,7 +23,7 @@ install:
   - python -m pip install --upgrade pip
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
   - 'SET PATH=%USERPROFILE%\.poetry\bin;%PATH%'
-  - pip install tox
+  - poetry install
 
 test_script:
-  - tox -- -m "not unix"
+  - poetry run pytest tests/ -m "not unix" --cov=jekyllnb
