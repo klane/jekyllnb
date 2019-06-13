@@ -6,7 +6,7 @@ branches:
 
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
-  - '%LOCALAPPDATA%\pypoetry\Cache'
+  - '%LOCALAPPDATA%\pypoetry\Cache -> poetry.lock'
 
 environment:
   matrix:
