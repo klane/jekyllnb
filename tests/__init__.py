@@ -6,6 +6,7 @@ from pprint import pprint
 from subprocess import call
 
 import pytest
+from pytest_lazyfixture import lazy_fixture
 
 try:
     from abc import ABC
@@ -42,9 +43,9 @@ class AbstractConfig(ABC):
     @pytest.fixture(
         autouse=True,
         params=[
-            pytest.lazy_fixture("app"),
-            pytest.lazy_fixture("command_line"),
-            pytest.param(pytest.lazy_fixture("package"), marks=pytest.mark.unix),
+            lazy_fixture("app"),
+            lazy_fixture("command_line"),
+            pytest.param(lazy_fixture("package"), marks=pytest.mark.unix),
         ],
     )
     def engine(self):
