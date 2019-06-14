@@ -49,7 +49,7 @@ legacy_tox_ini = """
 [tox]
 isolated_build = true
 skipsdist = true
-envlist = py{27,34,35,36,37}
+envlist = py{27,34,35,36,37},lint
 
 [testenv]
 skip_install = true
@@ -57,6 +57,12 @@ whitelist_externals = poetry
 commands =
     poetry install
     poetry run pytest tests/ --cov=jekyllnb {posargs}
+
+[testenv:lint]
+deps = pre-commit
+commands =
+    pre-commit install-hooks
+    pre-commit run --all-files
 
 [flake8]
 ignore = E203, F401, W503
