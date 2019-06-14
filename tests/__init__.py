@@ -1,12 +1,10 @@
 import os
 from abc import abstractmethod
-from collections import namedtuple
 from difflib import Differ
 from pprint import pprint
 from subprocess import call
 
 import pytest
-from pytest_lazyfixture import lazy_fixture
 
 try:
     from abc import ABC
@@ -40,33 +38,9 @@ class AbstractConfig(ABC):
     def package(self, args):
         call(["python", "-m", self._command] + args)
 
-    @pytest.fixture(
-        autouse=True,
-        params=[
-            lazy_fixture("app"),
-            lazy_fixture("command_line"),
-            pytest.param(lazy_fixture("package"), marks=pytest.mark.unix),
-        ],
-    )
-    def engine(self):
-        pass
-
     @pytest.fixture(autouse=True)
     def cleanup(self):
         self._app.clear_instance()
-
-    @pytest.fixture
-    def target_contents(self):
-        target_file = os.path.join(
-            os.path.dirname(__file__), "resources", FILE_NAME + ".md"
-        )
-
-        with open(target_file) as target:
-            return parse_file(target)
-
-    @pytest.fixture
-    def test_contents(self, test_file):
-        return parse_file(test_file)
 
 
 class Config(AbstractConfig):
@@ -90,15 +64,6 @@ class Config(AbstractConfig):
         except AssertionError:
             print_diff(test_contents.body, target_contents.body)
             raise
-
-
-def parse_file(file):
-    lines = file.read().splitlines()
-    index = [i for i, x in enumerate(lines) if x == "---"]
-    header, body = lines[index[0] + 1 : index[1]], lines[index[1] + 1 :]
-    contents = namedtuple("contents", "header body")
-
-    return contents(header, body)
 
 
 def print_diff(test_lines, target_lines):
