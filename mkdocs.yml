@@ -1,0 +1,10 @@
+site_name: JekyllNB
+site_description: Convert Jupyter Notebooks to Jekyll-ready Markdown
+site_author: Kevin Lane
+
+repo_url: https://github.com/klane/jekyllnb
+
+theme: readthedocs
+
+nav:
+  - Overview: index.md
