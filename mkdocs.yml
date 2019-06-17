@@ -8,3 +8,6 @@ theme: readthedocs
 
 nav:
   - Overview: index.md
+  - About:
+      - Release Notes: changelog.md
+      - License: license.md
