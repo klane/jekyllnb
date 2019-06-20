@@ -12,7 +12,7 @@ JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll heade
 
 ## Installation (coming soon)
 
-JekyllNB is hosted on PyPI and can be installed with `pip`.
+JekyllNB is available on PyPI and can be installed with `pip`.
 
 ```bash
 pip install jekyllnb
