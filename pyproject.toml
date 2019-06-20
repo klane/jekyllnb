@@ -6,6 +6,7 @@ authors = ["Kevin Lane <lane.kevin.a@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/klane/jekyllnb"
+documentation = "https://jekyllnb.readthedocs.io"
 keywords = ["jekyll", "jupyter", "nbconvert"]
 classifiers = [
     "Framework :: Jupyter",
