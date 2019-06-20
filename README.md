@@ -1,4 +1,4 @@
-# JekyllNB: Host Jupyter Notebooks on Jekyll Sites with Ease
+<h1>JekyllNB: Host Jupyter Notebooks on Jekyll Sites</h1>
 
 [![Unix Build Status](https://img.shields.io/travis/klane/jekyllnb.svg?label=Unix&logo=travis)](https://travis-ci.org/klane/jekyllnb)
 [![Windows Build Status](https://img.shields.io/appveyor/ci/klane/jekyllnb.svg?label=Windows&logo=appveyor)](https://ci.appveyor.com/project/klane/jekyllnb)
