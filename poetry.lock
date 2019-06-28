@@ -572,13 +572,14 @@ description = "tox is a generic virtualenv management and test command line tool
 name = "tox"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "3.12.1"
+version = "3.13.1"
 
 [package.dependencies]
 filelock = ">=3.0.0,<4"
-pluggy = ">=0.3.0,<1"
+importlib-metadata = ">=0.12,<1"
+packaging = ">=14"
+pluggy = ">=0.12.0,<1"
 py = ">=1.4.17,<2"
-setuptools = ">=30.0.0"
 six = ">=1.0.0,<2"
 toml = ">=0.9.4"
 virtualenv = ">=14.0.0"
@@ -603,6 +604,7 @@ version = "*"
 [[package]]
 category = "dev"
 description = "Type Hints for Python"
+marker = "python_version < \"3.5\""
 name = "typing"
 optional = false
 python-versions = "*"
@@ -641,7 +643,7 @@ python-versions = ">=2.7"
 version = "0.5.1"
 
 [metadata]
-content-hash = "421dc02ace777c3969f849337d40790391cf62924354adb9f86a39a2997a9326"
+content-hash = "7533486e172b1ec85194c2f04529c665a83252b0be8af602a6c697e687d090f7"
 python-versions = "~2.7 || ^3.4"
 
 [metadata.hashes]
@@ -695,7 +697,7 @@ six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a
 termcolor = ["1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"]
 testpath = ["46c89ebb683f473ffe2aab0ed9f12581d4d078308a3cb3765d79c6b2317b0109", "b694b3d9288dbd81685c5d2e7140b81365d46c29f5db4bc659de5aa6b98780f8"]
 toml = ["229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c", "235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e", "f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3"]
-tox = ["f5c8e446b51edd2ea97df31d4ded8c8b72e7d6c619519da6bb6084b9dd5770f9", "f87fd33892a2df0950e5e034def9468988b8d008c7e9416be665fcc0dd45b14f"]
+tox = ["45a265e953368fb372cca3eac33b69fdb1b1453e5b114be231c84fc3dfadceed", "f5cb0b5b8d14f2100982b0981c750d840228180a348e6bad355aa38e949fbc3f"]
 traitlets = ["9c4bd2d267b7153df9152698efb1050a5d84982d3384a37b2c1f7723ba3e7835", "c6cb5e6f57c5a9bdaa40fa71ce7b4af30298fbab9ece9815b5d995ab6217c7d9"]
 typing = ["38566c558a0a94d6531012c8e917b1b8518a41e418f7f15f00e129cc80162ad3", "53765ec4f83a2b720214727e319607879fec4acde22c4fbb54fa2604e79e44ce", "84698954b4e6719e912ef9a42a2431407fe3755590831699debda6fba92aac55"]
 virtualenv = ["b7335cddd9260a3dd214b73a2521ffc09647bde3e9457fcca31dc3be3999d04a", "d28ca64c0f3f125f59cabf13e0a150e1c68e5eea60983cc4395d88c584495783"]
