@@ -43,4 +43,4 @@ jobs:
       - name: Test
         run: |
           source $HOME/.poetry/env
-          pytest tests/ --cov=jekyllnb
+          poetry run pytest tests/ --cov=jekyllnb
