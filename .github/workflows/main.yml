@@ -36,8 +36,11 @@ jobs:
     - name: Install Poetry
       run: |
         curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-        source $HOME/.poetry/env
     - name: Install dependencies
-      run: poetry install
+      run: |
+        source $HOME/.poetry/env
+        poetry install
     - name: Test
-      run: pytest tests/ --cov=jekyllnb
+      run: |
+        source $HOME/.poetry/env
+        pytest tests/ --cov=jekyllnb
