@@ -19,11 +19,12 @@ jobs:
           pre-commit install-hooks
           pre-commit run --all-files
 
-  Linux:
+  Unix:
     needs: Linting
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest]
         python: [2.7, 3.5, 3.6, 3.7]
 
     steps:
