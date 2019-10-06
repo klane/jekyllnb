@@ -3,6 +3,29 @@ name: Main
 on: push
 
 jobs:
+  Safety:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+      - name: Install Safety
+        run: |
+          pip install safety
+      - name: Check dependencies
+        run: |
+          source $HOME/.poetry/env
+          poetry show -a
+          poetry show -a | wc -l
+          poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
+
   Linting:
     runs-on: ubuntu-latest
 
