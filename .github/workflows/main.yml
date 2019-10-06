@@ -44,7 +44,7 @@ jobs:
 
   test:
     name: "${{ matrix.os }}: Python ${{ matrix.python }}"
-    needs: Linting
+    needs: [Safety, Linting]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
