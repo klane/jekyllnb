@@ -43,7 +43,7 @@ jobs:
           pre-commit run --all-files
 
   test:
-    name: "${{ matrix.os }}: Python ${{ matrix.python }}"
+    name: "${{ echo matrix.os | sed 's/ubuntu-latest/Linux/;s/macos-latest/macOS/' }}: Python ${{ matrix.python }}"
     needs: [Safety, Linting]
     runs-on: ${{ matrix.os }}
     strategy:
