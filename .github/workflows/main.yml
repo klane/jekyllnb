@@ -22,8 +22,6 @@ jobs:
       - name: Check dependencies
         run: |
           source $HOME/.poetry/env
-          poetry show -a
-          poetry show -a | wc -l
           poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
 
   Linting:
