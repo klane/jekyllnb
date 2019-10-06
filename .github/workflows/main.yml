@@ -19,7 +19,8 @@ jobs:
           pre-commit install-hooks
           pre-commit run --all-files
 
-  Unix:
+  test:
+    name: "${{ matrix.os }}: Python ${{ matrix.python }}"
     needs: Linting
     runs-on: ${{ matrix.os }}
     strategy:
