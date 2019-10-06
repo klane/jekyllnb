@@ -87,4 +87,4 @@ jobs:
         if: matrix.os_name == 'Windows'
         run: |
           SET PATH=%USERPROFILE%\\.poetry\\bin;%PATH%
-          poetry run pytest tests/ --cov=jekyllnb
+          poetry run pytest tests/ -m "not unix" --cov=jekyllnb
