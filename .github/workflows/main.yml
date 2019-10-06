@@ -48,13 +48,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python: [2.7, 3.5, 3.6, 3.7]
         include:
           - os: ubuntu-latest
             os_name: Linux
           - os: macos-latest
             os_name: macOS
+          - os: windows-latest
+            os_name: Windows
 
     steps:
       - name: Checkout
@@ -67,10 +69,22 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
       - name: Install dependencies
+        if: matrix.os_name != 'Windows'
         run: |
           source $HOME/.poetry/env
           poetry install
+      - name: Install dependencies
+        if: matrix.os_name == 'Windows'
+        run: |
+          SET PATH=%USERPROFILE%\\.poetry\\bin;%PATH%
+          poetry install
       - name: Runs tests
+        if: matrix.os_name != 'Windows'
         run: |
           source $HOME/.poetry/env
+          poetry run pytest tests/ --cov=jekyllnb
+      - name: Runs tests
+        if: matrix.os_name == 'Windows'
+        run: |
+          SET PATH=%USERPROFILE%\\.poetry\\bin;%PATH%
           poetry run pytest tests/ --cov=jekyllnb
