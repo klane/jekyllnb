@@ -13,10 +13,12 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.7
-      - name: Linting
+      - name: Install pre-commit
         run: |
           pip install pre-commit
           pre-commit install-hooks
+      - name: Run hooks
+        run: |
           pre-commit run --all-files
 
   test:
@@ -42,7 +44,7 @@ jobs:
         run: |
           source $HOME/.poetry/env
           poetry install
-      - name: Test
+      - name: Runs tests
         run: |
           source $HOME/.poetry/env
           poetry run pytest tests/ --cov=jekyllnb
