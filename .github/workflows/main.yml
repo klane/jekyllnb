@@ -57,6 +57,9 @@ jobs:
             os_name: macOS
           - os: windows-latest
             os_name: Windows
+        exclude:
+          - os: windows-latest
+            python: 2.7
 
     steps:
       - name: Checkout
