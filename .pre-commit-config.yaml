@@ -1,28 +1,28 @@
 repos:
--   repo: https://github.com/python/black
+  - repo: https://github.com/python/black
     rev: 19.3b0
     hooks:
-    -   id: black
+      - id: black
         language_version: python3.7
--   repo: https://github.com/asottile/seed-isort-config
+  - repo: https://github.com/asottile/seed-isort-config
     rev: v1.9.3
     hooks:
-    -   id: seed-isort-config
--   repo: https://github.com/pre-commit/mirrors-isort
+      - id: seed-isort-config
+  - repo: https://github.com/pre-commit/mirrors-isort
     rev: v4.3.21
     hooks:
-    -   id: isort
+      - id: isort
         additional_dependencies: [toml]
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
-    -   id: flake8
+      - id: flake8
         args: [--config=pyproject.toml]
-    -   id: end-of-file-fixer
-    -   id: mixed-line-ending
-    -   id: trailing-whitespace
--   repo: https://github.com/Lucas-C/pre-commit-hooks
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.1.7
     hooks:
-    -   id: forbid-crlf
-    -   id: forbid-tabs
+      - id: forbid-crlf
+      - id: forbid-tabs
