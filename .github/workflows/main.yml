@@ -95,9 +95,9 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
       - name: Install dependencies
         run: |
-          SET PATH=%USERPROFILE%\\.poetry\\bin;%PATH%
+          $env:Path += ";$env:Userprofile\.poetry\bin"
           poetry install
       - name: Runs tests
         run: |
-          SET PATH=%USERPROFILE%\\.poetry\\bin;%PATH%
+          $env:Path += ";$env:Userprofile\.poetry\bin"
           poetry run pytest tests/ -m "not unix" --cov=jekyllnb
