@@ -74,6 +74,11 @@ jobs:
         run: |
           source $HOME/.poetry/env
           poetry run pytest tests/ --cov=jekyllnb
+      - name: Upload coverage report
+        if: success()
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   windows:
     name: "Windows: Python ${{ matrix.python }}"
@@ -101,3 +106,8 @@ jobs:
         run: |
           $env:Path += ";$env:Userprofile\.poetry\bin"
           poetry run pytest tests/ -m "not unix" --cov=jekyllnb
+      - name: Upload coverage report
+        if: success()
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

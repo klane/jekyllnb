@@ -30,10 +30,8 @@ before_install:
 
 install:
   - poetry install
-  - pip install codecov
 
 script: pytest tests/ --cov=jekyllnb
-after_success: codecov
 
 jobs:
   include:
