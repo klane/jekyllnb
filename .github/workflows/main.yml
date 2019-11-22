@@ -53,8 +53,10 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
+            cache: ~/.cache/pypoetry
           - os: macos-latest
             os_name: macOS
+            cache: ~/Library/Caches/pypoetry
 
     steps:
       - name: Checkout
@@ -66,6 +68,13 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+      - name: Restore cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ matrix.cache }}
+          key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-python${{ matrix.python }}-poetry-
       - name: Install dependencies
         run: |
           source $HOME/.poetry/env
@@ -99,6 +108,13 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+      - name: Restore cache
+        uses: actions/cache@v1
+        with:
+          path: $env:Userprofile\AppData\Local\pypoetry\Cache
+          key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-python${{ matrix.python }}-poetry-
       - name: Install dependencies
         run: |
           $env:Path += ";$env:Userprofile\.poetry\bin"
