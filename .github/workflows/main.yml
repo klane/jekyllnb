@@ -82,7 +82,8 @@ jobs:
       - name: Runs tests
         run: |
           source $HOME/.poetry/env
-          poetry run pytest tests/ --cov=jekyllnb --cov-report=xml
+          poetry run pytest tests/ --cov=jekyllnb
+          poetry run coverage xml
       - name: Upload coverage report
         if: success()
         uses: codecov/codecov-action@v1
@@ -122,7 +123,8 @@ jobs:
       - name: Runs tests
         run: |
           $env:Path += ";$env:Userprofile\.poetry\bin"
-          poetry run pytest tests/ -m "not unix" --cov=jekyllnb --cov-report=xml
+          poetry run pytest tests/ -m "not unix" --cov=jekyllnb
+          poetry run coverage xml
       - name: Upload coverage report
         if: success()
         uses: codecov/codecov-action@v1
