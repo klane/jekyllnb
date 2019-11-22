@@ -112,7 +112,7 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v1
         with:
-          path: $env:Userprofile\AppData\Local\pypoetry\Cache
+          path: ~\AppData\Local\pypoetry\Cache
           key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             ${{ runner.os }}-python${{ matrix.python }}-poetry-
