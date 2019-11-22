@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Set up Python 3.7
+      - name: Set up Python
         uses: actions/setup-python@v1
         with:
           python-version: 3.7
@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Set up Python 3.7
+      - name: Set up Python
         uses: actions/setup-python@v1
         with:
           python-version: 3.7
@@ -70,7 +70,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Set up Python ${{ matrix.python }}
+      - name: Set up Python
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python }}
@@ -111,7 +111,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Set up Python ${{ matrix.python }}
+      - name: Set up Python
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python }}
