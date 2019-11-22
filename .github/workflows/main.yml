@@ -62,10 +62,10 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
-            cache: ~/.cache/pypoetry
+            poetry_cache: ~/.cache/pypoetry
           - os: macos-latest
             os_name: macOS
-            cache: ~/Library/Caches/pypoetry
+            poetry_cache: ~/Library/Caches/pypoetry
 
     steps:
       - name: Checkout
@@ -81,7 +81,7 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v1
         with:
-          path: ${{ matrix.cache }}
+          path: ${{ matrix.poetry_cache }}
           key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             ${{ runner.os }}-python${{ matrix.python }}-poetry-
