@@ -37,6 +37,15 @@ jobs:
       - name: Install pre-commit
         run: |
           pip install pre-commit
+      - name: Restore cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            pre-commit-
+      - name: Install hooks
+        run: |
           pre-commit install-hooks
       - name: Run hooks
         run: |
