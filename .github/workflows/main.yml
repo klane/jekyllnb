@@ -138,3 +138,18 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
+
+  Slack:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Slack notification
+        uses: homoluctus/slatify@master
+        if: always()
+        with:
+          type: ${{ job.status }}
+          job_name: ':snake: Tests'
+          url: ${{ secrets.SLACK_WEBHOOK }}
+          commit: 'true'
+          token: ${{ secrets.GITHUB_TOKEN }}
