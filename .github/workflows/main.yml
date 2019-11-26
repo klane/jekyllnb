@@ -82,9 +82,9 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ matrix.poetry_cache }}
-          key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
+          key: poetry-python${{ matrix.python }}-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-python${{ matrix.python }}-poetry-
+            poetry-python${{ matrix.python }}-${{ runner.os }}-
       - name: Install dependencies
         run: |
           poetry install
@@ -131,9 +131,9 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~\AppData\Local\pypoetry\Cache
-          key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
+          key: poetry-python${{ matrix.python }}-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-python${{ matrix.python }}-poetry-
+            poetry-python${{ matrix.python }}-${{ runner.os }}-
       - name: Install dependencies
         run: |
           poetry install
