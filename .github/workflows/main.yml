@@ -98,6 +98,15 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
+      - name: Slack notification
+        uses: homoluctus/slatify@master
+        if: "! success()"
+        with:
+          type: ${{ job.status }}
+          job_name: '${{ runner.os }} :snake: ${{ matrix.python }} Tests'
+          url: ${{ secrets.SLACK_WEBHOOK }}
+          commit: 'true'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   windows:
     name: "Windows: Python ${{ matrix.python }}"
@@ -138,6 +147,15 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
+      - name: Slack notification
+        uses: homoluctus/slatify@master
+        if: "! success()"
+        with:
+          type: ${{ job.status }}
+          job_name: '${{ runner.os }} :snake: ${{ matrix.python }} Tests'
+          url: ${{ secrets.SLACK_WEBHOOK }}
+          commit: 'true'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   Slack:
     needs: [unix, windows]
