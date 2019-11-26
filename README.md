@@ -1,4 +1,4 @@
-<h1>JekyllNB: Host Jupyter Notebooks on Jekyll Sites</h1>
+# JekyllNB: Host Jupyter Notebooks on Jekyll Sites
 
 [![Test Status](https://github.com/klane/jekyllnb/workflows/Tests/badge.svg)](https://github.com/klane/jekyllnb/actions)
 [![Unix Build Status](https://img.shields.io/travis/klane/jekyllnb.svg?label=Unix&logo=travis)](https://travis-ci.org/klane/jekyllnb)
