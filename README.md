@@ -1,8 +1,6 @@
 # JekyllNB: Host Jupyter Notebooks on Jekyll Sites
 
 [![Test Status](https://github.com/klane/jekyllnb/workflows/Tests/badge.svg)](https://github.com/klane/jekyllnb/actions)
-[![Unix Build Status](https://img.shields.io/travis/klane/jekyllnb.svg?label=Unix&logo=travis)](https://travis-ci.org/klane/jekyllnb)
-[![Windows Build Status](https://img.shields.io/appveyor/ci/klane/jekyllnb.svg?label=Windows&logo=appveyor)](https://ci.appveyor.com/project/klane/jekyllnb)
 [![Documentation Status](https://img.shields.io/readthedocs/jekyllnb.svg?label=Docs&logo=read%20the%20docs)](https://jekyllnb.readthedocs.io/en/latest)
 [![Coverage Status](https://img.shields.io/codecov/c/github/klane/jekyllnb.svg?label=Coverage&logo=codecov)](https://codecov.io/gh/klane/jekyllnb)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=klane/jekyllnb)](https://dependabot.com)
