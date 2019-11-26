@@ -140,7 +140,7 @@ jobs:
           file: ./coverage.xml
 
   Slack:
-    needs: test
+    needs: [unix, windows]
     runs-on: ubuntu-latest
 
     steps:
