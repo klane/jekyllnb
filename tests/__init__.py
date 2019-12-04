@@ -10,9 +10,11 @@ try:
     from abc import ABC
 except ImportError:
     from abc import ABCMeta
+    from six import add_metaclass
 
+    @add_metaclass(ABCMeta)
     class ABC(object):
-        __metaclass__ = ABCMeta
+        pass
 
 
 FILE_NAME = "hello-world"
