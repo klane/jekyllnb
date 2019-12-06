@@ -16,7 +16,7 @@ class JekyllExporter(MarkdownExporter):
         )
 
     @default("template_file")
-    def _template_file_default(self):
+    def _template_file_default(self):  # skipcq: PYL-R0201
         return "jekyll"
 
     @property

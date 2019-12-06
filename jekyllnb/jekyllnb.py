@@ -41,7 +41,7 @@ class JekyllNB(NbConvertApp):
     page_dir = Unicode("").tag(config=True)
 
     @default("export_format")
-    def _export_format_default(self):
+    def _export_format_default(self):  # skipcq: PYL-R0201
         return "jekyll"
 
     @observe("export_format")
