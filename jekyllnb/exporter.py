@@ -33,9 +33,9 @@ class JekyllExporter(MarkdownExporter):
 
     @property
     def default_config(self):
-        c = Config({"JekyllPreprocessor": {"enabled": True}})
-        c.merge(super(JekyllExporter, self).default_config)
-        return c
+        config = Config({"JekyllPreprocessor": {"enabled": True}})
+        config.merge(super(JekyllExporter, self).default_config)
+        return config
 
     def default_filters(self):
         for pair in super(JekyllExporter, self).default_filters():
