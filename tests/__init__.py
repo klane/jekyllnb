@@ -13,7 +13,7 @@ except ImportError:
     from six import add_metaclass
 
     @add_metaclass(ABCMeta)
-    class ABC(object):
+    class ABC:
         pass
 
 
