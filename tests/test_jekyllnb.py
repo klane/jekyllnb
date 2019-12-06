@@ -41,7 +41,7 @@ def image_args(request):
     return ["--image-dir"] + request.param
 
 
-class JekyllConfig(object):
+class JekyllConfig:
     _app = JekyllNB
     _command = "jekyllnb"
 

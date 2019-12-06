@@ -6,9 +6,9 @@ from traitlets.config import catch_config_error
 
 from .__version__ import __version__
 
-jekyllnb_aliases = {}
-jekyllnb_aliases.update(nbconvert_aliases)
-jekyllnb_aliases.update(
+JEKYLLNB_ALIASES = {}
+JEKYLLNB_ALIASES.update(nbconvert_aliases)
+JEKYLLNB_ALIASES.update(
     {
         "site-dir": "JekyllNB.site_dir",
         "page-dir": "JekyllNB.page_dir",
@@ -16,9 +16,9 @@ jekyllnb_aliases.update(
     }
 )
 
-jekyllnb_flags = {}
-jekyllnb_flags.update(nbconvert_flags)
-jekyllnb_flags.update(
+JEKYLLNB_FLAGS = {}
+JEKYLLNB_FLAGS.update(nbconvert_flags)
+JEKYLLNB_FLAGS.update(
     {
         "no-auto-folder": (
             {"JekyllNB": {"auto_folder": False}},
@@ -33,8 +33,8 @@ class JekyllNB(NbConvertApp):
     description = "Convert Jupyter notebooks to Jekyll-ready Markdown"
     version = __version__
 
-    aliases = jekyllnb_aliases
-    flags = jekyllnb_flags
+    aliases = JEKYLLNB_ALIASES
+    flags = JEKYLLNB_FLAGS
 
     auto_folder = Bool(True).tag(config=True)
     site_dir = Unicode("").tag(config=True)
@@ -46,12 +46,12 @@ class JekyllNB(NbConvertApp):
 
     @observe("export_format")
     def _export_format_changed(self, change):
-        default = self._export_format_default()
+        default_format = self._export_format_default()
 
-        if change["new"].lower() != default:
+        if change["new"].lower() != default_format:
             raise ValueError(
                 "Invalid export format {}, value must be {}".format(
-                    change["new"], default
+                    change["new"], default_format
                 )
             )
 
