@@ -87,6 +87,7 @@ jobs:
             poetry-python${{ matrix.python }}-${{ runner.os }}-
       - name: Install dependencies
         run: |
+          rm -rf jekyllnb.egg-info/
           poetry install
       - name: Runs tests
         run: |
