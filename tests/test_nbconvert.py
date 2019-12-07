@@ -26,7 +26,7 @@ class TestNbConvert(Config):
     _command = "nbconvert"
 
     @pytest.fixture
-    def args(self, site_dir):
+    def args(self, site_dir):  # skipcq: PYL-W0221
         return [
             "--to",
             "jekyll",

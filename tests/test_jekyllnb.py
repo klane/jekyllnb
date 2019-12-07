@@ -48,13 +48,13 @@ class JekyllConfig:
 
 class TestJekyllNB(JekyllConfig, Config):
     @pytest.fixture(params=[[], ["--to", "jekyll"], ["--to", "Jekyll"]])
-    def args(self, default_args, image_args, request):
+    def args(self, default_args, image_args, request):  # skipcq: PYL-W0221
         return request.param + image_args + default_args
 
 
 class TestException(JekyllConfig, AbstractConfig):
     @pytest.fixture(params=[[], ["--to", "markdown"], ["--to", "jekyll"]])
-    def args(self, default_args, image_args, request):
+    def args(self, default_args, image_args, request):  # skipcq: PYL-W0221
         return request.param + image_args + default_args
 
     @pytest.mark.parametrize(
