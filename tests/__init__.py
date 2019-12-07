@@ -25,6 +25,7 @@ IMAGE_DIR = os.path.join("assets", "images")
 
 class AbstractConfig(ABC):
     @abstractmethod
+    @pytest.fixture
     def args(self):
         pass
 
