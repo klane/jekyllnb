@@ -106,7 +106,7 @@ jobs:
           type: ${{ job.status }}
           job_name: '${{ runner.os }} :snake: ${{ matrix.python }} Tests'
           url: ${{ secrets.SLACK_WEBHOOK }}
-          commit: 'true'
+          commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
   windows:
@@ -155,7 +155,7 @@ jobs:
           type: ${{ job.status }}
           job_name: '${{ runner.os }} :snake: ${{ matrix.python }} Tests'
           url: ${{ secrets.SLACK_WEBHOOK }}
-          commit: 'true'
+          commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
   Slack:
@@ -170,5 +170,5 @@ jobs:
           type: ${{ job.status }}
           job_name: ':snake: Tests'
           url: ${{ secrets.SLACK_WEBHOOK }}
-          commit: 'true'
+          commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
