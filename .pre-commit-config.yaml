@@ -14,7 +14,7 @@ repos:
     rev: 1.6.2
     hooks:
       - id: bandit
-        args: [--config=.bandit]
+        args: [--skip, "B101,B404,B603"]
   - repo: https://github.com/asottile/seed-isort-config
     rev: v1.9.3
     hooks:
