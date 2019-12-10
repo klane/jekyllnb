@@ -42,7 +42,7 @@ jobs:
           restore-keys: |
             pre-commit-
       - name: Run pre-commit
-        uses: pre-commit/action@v1
+        uses: pre-commit/action@v1.0.0
 
   test:
     name: "${{ matrix.os_name }}: Python ${{ matrix.python }}"
