@@ -14,9 +14,7 @@ jobs:
         with:
           python-version: 3.7
       - name: Install Poetry
-        run: |
-          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-          echo '::add-path::~/.poetry/bin'
+        uses: dschep/install-poetry-action@v1.2
       - name: Install Safety
         run: pip install safety
       - name: Check dependencies
@@ -54,15 +52,12 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
-            poetry_path: ~/.poetry/bin
             poetry_cache: ~/.cache/pypoetry
           - os: macos-latest
             os_name: macOS
-            poetry_path: ~/.poetry/bin
             poetry_cache: ~/Library/Caches/pypoetry
           - os: windows-latest
             os_name: Windows
-            poetry_path: $env:Userprofile\.poetry\bin
             poetry_cache: ~\AppData\Local\pypoetry\Cache
         exclude:
           - os: windows-latest
@@ -76,9 +71,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
-        run: |
-          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-          echo "::add-path::${{ matrix.poetry_path }}"
+        uses: dschep/install-poetry-action@v1.2
       - name: Restore cache
         uses: actions/cache@v1
         with:
