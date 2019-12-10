@@ -73,6 +73,9 @@ jobs:
             os_name: Windows
             poetry_path: $env:Userprofile\.poetry\bin
             poetry_cache: ~\AppData\Local\pypoetry\Cache
+        exclude:
+          - os: windows-latest
+            python: 2.7
 
     steps:
       - name: Checkout
