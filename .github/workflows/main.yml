@@ -142,7 +142,7 @@ jobs:
           poetry install
       - name: Runs tests
         run: |
-          poetry run pytest tests/ -m "not unix" --cov=jekyllnb
+          poetry run pytest tests/ --cov=jekyllnb
           poetry run coverage xml
       - name: Upload coverage report
         if: success()

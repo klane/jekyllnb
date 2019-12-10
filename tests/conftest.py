@@ -1,14 +1,11 @@
 import os
+import sys
 from collections import namedtuple
 
 import pytest
 from pytest_lazyfixture import lazy_fixture
 
 from tests import FILE_NAME
-
-
-def pytest_configure(config):
-    config.addinivalue_line("markers", "unix: mark test to run only on Unix systems")
 
 
 def parse_file(file):
@@ -25,7 +22,12 @@ def parse_file(file):
     params=[
         lazy_fixture("app"),
         lazy_fixture("command_line"),
-        pytest.param(lazy_fixture("package"), marks=pytest.mark.unix),
+        pytest.param(
+            lazy_fixture("package"),
+            marks=pytest.mark.skipif(
+                sys.platform.startswith("win"), reason="fails on windows"
+            ),
+        ),
     ],
 )
 def engine():

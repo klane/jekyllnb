@@ -1,4 +1,5 @@
 import os
+import sys
 from subprocess import PIPE, CalledProcessError, Popen, check_output
 
 import pytest
@@ -64,7 +65,9 @@ class TestException(JekyllConfig, AbstractConfig):
             lambda self, args: check_output(["jupyter", self._command] + args),
             pytest.param(
                 lambda self, args: check_output(["python", "-m", self._command] + args),
-                marks=pytest.mark.unix,
+                marks=pytest.mark.skipif(
+                    sys.platform.startswith("win"), reason="fails on windows"
+                ),
             ),
         ],
     )
@@ -79,7 +82,16 @@ class TestException(JekyllConfig, AbstractConfig):
 
 class TestVersion(JekyllConfig):
     @pytest.mark.parametrize(
-        "engine", [["jupyter"], pytest.param(["python", "-m"], marks=pytest.mark.unix)]
+        "engine",
+        [
+            ["jupyter"],
+            pytest.param(
+                ["python", "-m"],
+                marks=pytest.mark.skipif(
+                    sys.platform.startswith("win"), reason="fails on windows"
+                ),
+            ),
+        ],
     )
     def test_version(self, engine):
         process = Popen(engine + [self._command, "--version"], stdout=PIPE)
