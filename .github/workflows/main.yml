@@ -16,13 +16,11 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+          echo '::add-path::~/.poetry/bin'
       - name: Install Safety
-        run: |
-          pip install safety
+        run: pip install safety
       - name: Check dependencies
-        run: |
-          source $HOME/.poetry/env
-          poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
+        run: poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
 
   Linting:
     runs-on: ubuntu-latest
@@ -45,7 +43,7 @@ jobs:
         uses: pre-commit/action@v1.0.0
 
   test:
-    name: "${{ matrix.os_name }}: Python ${{ matrix.python }}"
+    name: '${{ matrix.os_name }}: Python ${{ matrix.python }}'
     needs: [Safety, Linting]
     runs-on: ${{ matrix.os }}
     strategy:
@@ -80,7 +78,7 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-          echo "::add-path::${{ matrix.poetry_path }}"
+          echo '::add-path::${{ matrix.poetry_path }}'
       - name: Restore cache
         uses: actions/cache@v1
         with:
@@ -93,21 +91,18 @@ jobs:
         run: |
           rm ${{ matrix.poetry_cache }}/virtualenvs/jekyllnb-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/jekyllnb.egg-link
       - name: Install dependencies
-        run: |
-          poetry install
-      - name: Runs tests
-        run: |
-          poetry run pytest tests/ --cov=jekyllnb
+        run: poetry install
+      - name: Run tests
+        run: poetry run pytest tests/ --cov=jekyllnb
       - name: Generate coverage report
-        run: |
-          poetry run coverage xml
+        run: poetry run coverage xml
       - name: Upload coverage report
-        if: success()
         uses: codecov/codecov-action@v1
+        if: success()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
-      - name: Slack notification
+      - name: Send Slack message on failure
         uses: homoluctus/slatify@master
         if: failure()
         with:
@@ -122,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Slack notification
+      - name: Send Slack message
         uses: homoluctus/slatify@master
         if: always()
         with:
