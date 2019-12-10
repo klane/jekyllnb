@@ -113,7 +113,7 @@ jobs:
           file: ./coverage.xml
       - name: Slack notification
         uses: homoluctus/slatify@master
-        if: "! success()"
+        if: failure()
         with:
           type: ${{ job.status }}
           job_name: '${{ runner.os }} :snake: ${{ matrix.python }} Tests'
