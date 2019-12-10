@@ -102,6 +102,8 @@ jobs:
       - name: Runs tests
         run: |
           poetry run pytest tests/ --cov=jekyllnb
+      - name: Generate coverage report
+        run: |
           poetry run coverage xml
       - name: Upload coverage report
         if: success()
