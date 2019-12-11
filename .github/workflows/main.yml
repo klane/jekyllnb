@@ -96,7 +96,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
       - name: Send Slack message on failure
-        uses: homoluctus/slatify@master
+        uses: homoluctus/slatify@v2.0.1
         if: failure()
         with:
           type: ${{ job.status }}
@@ -111,7 +111,7 @@ jobs:
 
     steps:
       - name: Send Slack message
-        uses: homoluctus/slatify@master
+        uses: homoluctus/slatify@v2.0.1
         if: always()
         with:
           type: ${{ job.status }}
