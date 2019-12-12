@@ -7,6 +7,7 @@ test_patterns = [
 [[analyzers]]
 name = "python"
 enabled = true
+dependency_file_paths = ["poetry.lock"]
 
 [analyzers.meta]
 runtime_version = "3.x.x"
