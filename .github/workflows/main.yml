@@ -82,7 +82,7 @@ jobs:
       - name: Remove egg link on macOS
         if: startsWith(runner.os, 'macOS')
         run: |
-          rm ${{ matrix.poetry_cache }}/virtualenvs/jekyllnb-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/jekyllnb.egg-link
+          rm -f ${{ matrix.poetry_cache }}/virtualenvs/jekyllnb-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/jekyllnb.egg-link
       - name: Install dependencies
         run: poetry install
       - name: Run tests
