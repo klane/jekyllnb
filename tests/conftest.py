@@ -36,9 +36,7 @@ def engine():
 
 @pytest.fixture
 def target_contents():
-    target_file = os.path.join(
-        os.path.dirname(__file__), "resources", FILE_NAME + ".md"
-    )
+    target_file = os.path.join(os.path.dirname(__file__), "assets", FILE_NAME + ".md")
 
     with open(target_file) as target:
         return parse_file(target)

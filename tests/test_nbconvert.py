@@ -33,5 +33,5 @@ class TestNbConvert(Config):
             "--output-dir",
             site_dir.strpath,
             "--NbConvertApp.output_files_dir=" + os.path.join(IMAGE_DIR, FILE_NAME),
-            os.path.join(os.path.dirname(__file__), "resources", FILE_NAME + ".ipynb"),
+            os.path.join(os.path.dirname(__file__), "assets", FILE_NAME + ".ipynb"),
         ]

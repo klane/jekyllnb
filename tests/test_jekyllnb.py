@@ -31,7 +31,7 @@ def default_args(site_dir):
         site_dir.strpath,
         "--page-dir",
         PAGE_DIR,
-        os.path.join(os.path.dirname(__file__), "resources", FILE_NAME + ".ipynb"),
+        os.path.join(os.path.dirname(__file__), "assets", FILE_NAME + ".ipynb"),
     ]
 
 
