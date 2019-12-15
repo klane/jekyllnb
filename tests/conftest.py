@@ -20,10 +20,11 @@ def parse_file(file):
 @pytest.fixture(
     autouse=True,
     params=[
-        lazy_fixture("app"),
-        lazy_fixture("command"),
+        pytest.param(lazy_fixture("app"), id="app"),
+        pytest.param(lazy_fixture("command"), id="cmd"),
         pytest.param(
             lazy_fixture("package"),
+            id="pkg",
             marks=pytest.mark.skipif(
                 sys.platform.startswith("win"), reason="fails on windows"
             ),
