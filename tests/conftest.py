@@ -21,7 +21,7 @@ def parse_file(file):
     autouse=True,
     params=[
         lazy_fixture("app"),
-        lazy_fixture("command_line"),
+        lazy_fixture("command"),
         pytest.param(
             lazy_fixture("package"),
             marks=pytest.mark.skipif(

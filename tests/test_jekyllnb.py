@@ -71,7 +71,7 @@ class TestException(JekyllConfig, AbstractConfig):
             ),
         ],
     )
-    def test_jekyllnb_format_exception(self, engine, args):
+    def test_exception(self, engine, args):
         args_lower = [arg.lower() for arg in args]
         raise_exception = "--to" in args_lower and "jekyll" not in args_lower
         exceptions = (ValueError, CalledProcessError)
