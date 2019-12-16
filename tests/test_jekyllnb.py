@@ -58,7 +58,7 @@ class TestJekyllNB(JekyllConfig, Config):
             pytest.param([], id="empty"),
             pytest.param(["--to", "jekyll"], id="lower"),
             pytest.param(["--to", "Jekyll"], id="upper"),
-        ]
+        ]  # skipcq: PYL-W0221
     )
     def args(self, default_args, image_args, request):  # skipcq: PYL-W0221
         return request.param + image_args + default_args
@@ -70,7 +70,7 @@ class TestException(JekyllConfig, AbstractConfig):
             pytest.param([], id="empty"),
             pytest.param(["--to", "markdown"], id="md"),
             pytest.param(["--to", "jekyll"], id="jekyll"),
-        ]
+        ]  # skipcq: PYL-W0221
     )
     def args(self, default_args, image_args, request):  # skipcq: PYL-W0221
         return request.param + image_args + default_args
