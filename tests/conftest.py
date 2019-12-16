@@ -35,6 +35,16 @@ def engine():
     pass
 
 
+@pytest.fixture(
+    params=[
+        pytest.param(FILE_NAME + ".ipynb", id="file"),
+        pytest.param("*.ipynb", id="wild"),
+    ]
+)
+def input_file(request):
+    return os.path.join(os.path.dirname(__file__), "assets", request.param)
+
+
 @pytest.fixture
 def target_contents():
     target_file = os.path.join(os.path.dirname(__file__), "assets", FILE_NAME + ".md")

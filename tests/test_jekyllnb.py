@@ -25,13 +25,13 @@ def output_file(site_dir):
 
 
 @pytest.fixture
-def default_args(site_dir):
+def default_args(site_dir, input_file):
     return [
         "--site-dir",
         site_dir.strpath,
         "--page-dir",
         PAGE_DIR,
-        os.path.join(os.path.dirname(__file__), "assets", FILE_NAME + ".ipynb"),
+        input_file,
     ]
 
 

@@ -26,12 +26,12 @@ class TestNbConvert(Config):
     _command = "nbconvert"
 
     @pytest.fixture
-    def args(self, site_dir):  # skipcq: PYL-W0221
+    def args(self, site_dir, input_file):  # skipcq: PYL-W0221
         return [
             "--to",
             "jekyll",
             "--output-dir",
             site_dir.strpath,
             "--NbConvertApp.output_files_dir=" + os.path.join(IMAGE_DIR, FILE_NAME),
-            os.path.join(os.path.dirname(__file__), "assets", FILE_NAME + ".ipynb"),
+            input_file,
         ]
