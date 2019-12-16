@@ -44,5 +44,5 @@ def target_contents():
 
 
 @pytest.fixture
-def test_contents(test_file):
-    return parse_file(test_file)
+def file_contents(output_file):
+    return parse_file(output_file)

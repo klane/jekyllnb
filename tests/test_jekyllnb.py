@@ -20,7 +20,7 @@ def image_dir(site_dir):
 
 
 @pytest.fixture
-def test_file(site_dir):
+def output_file(site_dir):
     return site_dir.join(PAGE_DIR, FILE_NAME + ".md")
 
 
