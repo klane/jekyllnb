@@ -68,17 +68,15 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
         uses: dschep/install-poetry-action@v1.2
+      - name: Hash working directory and Python version
+        run: echo "::set-env name=PY::$(( pwd & python --version ) | sha256sum | cut -d' ' -f1)"
       - name: Restore cache
         uses: actions/cache@v1
         with:
           path: ${{ matrix.poetry_cache }}
-          key: poetry-python${{ matrix.python }}-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+          key: poetry|${{ env.PY }}|${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            poetry-python${{ matrix.python }}-${{ runner.os }}-
-      - name: Remove egg link on macOS
-        if: startsWith(runner.os, 'macOS')
-        run: |
-          rm -f ${{ matrix.poetry_cache }}/virtualenvs/jekyllnb-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/jekyllnb.egg-link
+            poetry|${{ env.PY }}
       - name: Install dependencies
         run: poetry install
       - name: Run tests
