@@ -68,15 +68,17 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
         uses: dschep/install-poetry-action@v1.2
-      - name: Hash working directory and Python version
-        run: echo "::set-env name=PY::$(python --version | sha256sum | cut -d' ' -f1)"
+      - name: Write environment information to a file
+        run: |
+          pwd > environment
+          python --version >> environment
       - name: Restore cache
         uses: actions/cache@v1
         with:
           path: ${{ matrix.poetry_cache }}
-          key: poetry|${{ env.PY }}|${{ hashFiles('poetry.lock') }}
+          key: poetry|${{ hashFiles('environment') }}|${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            poetry|${{ env.PY }}
+            poetry|${{ hashFiles('environment') }}
       - name: Install dependencies
         run: poetry install
       - name: Run tests
