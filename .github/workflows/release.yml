@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  GitHub:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Get changes
+        id: changelog
+        run: |
+          echo "::set-output name=changelog::$(sed '0,/0.1.0/d;/[0-9]\+\.[0-9]\+\.[0-9]\+/Q' CHANGELOG.md | head -n -1 | tail -n +2)"
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          draft: true
+          prerelease: ${{ contains(github.ref, 'rc') }}
+
+  PyPI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set up Python
+        uses: actions/setup-python@v1
+      - name: Install Poetry
+        uses: dschep/install-poetry-action@v1.2
+      - name: Install dependencies
+        run: poetry install --no-dev
+      - name: Build project
+        run: poetry build
+      - name: Publish to PyPI
+        env:
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+        run: poetry publish
