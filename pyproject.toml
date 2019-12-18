@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jekyllnb"
-version = "0.1.0"
+version = "0.1.0rc1"
 description = "Convert Jupyter Notebooks to Jekyll-ready Markdown files"
 authors = ["Kevin Lane <lane.kevin.a@gmail.com>"]
 license = "MIT"
