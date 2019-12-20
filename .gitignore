@@ -3,6 +3,7 @@
 
 # Local package installation
 *.egg-info/
+dist/
 
 # Python byte code
 *.pyc
