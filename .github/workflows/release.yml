@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - v*
 
 jobs:
   GitHub:
@@ -15,17 +15,18 @@ jobs:
       - name: Get changes
         id: changelog
         run: |
-          echo "::set-output name=changelog::$(sed '0,/0.1.0/d;/[0-9]\+\.[0-9]\+\.[0-9]\+/Q' CHANGELOG.md | head -n -1 | tail -n +2)"
+          pattern='0,/${{ github.ref }}/d;/[0-9]\+\.[0-9]\+\.[0-9]\+/Q'
+          echo ::set-output name=changelog::$(sed $pattern CHANGELOG.md | head -n -1 | tail -n +2)
       - name: Create release
-        uses: actions/create-release@v1
+        uses: actions/create-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           body: ${{ steps.changelog.outputs.changelog }}
-          draft: true
-          prerelease: ${{ contains(github.ref, 'rc') }}
+          draft: false
+          prerelease: ${{ contains(github.ref, '-') }}
 
   PyPI:
     runs-on: ubuntu-latest
