@@ -12,10 +12,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      - name: Get tag
+        id: tag
+        run: |
+          echo ::set-output name=tag::${GITHUB_REF#refs/tags/v}
       - name: Get changes
         id: changelog
         run: |
-          pattern='0,/${GITHUB_REF#refs/tags/v}/d;/[0-9]\+\.[0-9]\+\.[0-9]\+/Q'
+          pattern='0,/${{ steps.tag.outputs.tag }}/d;/[0-9]\+\.[0-9]\+\.[0-9]\+/Q'
           echo ::set-output name=changelog::$(sed $pattern CHANGELOG.md | head -n -1 | tail -n +2)
       - name: Create release
         uses: actions/create-release@master
