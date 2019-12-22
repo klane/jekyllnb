@@ -3,7 +3,7 @@
 Multiple notebooks can be converted at once using a wildcard.
 Calling `jupyter jekyllnb --site-dir docs --page-dir _pages --image-dir assets/images *.ipynb`
 
-```
+```text
 docs
 ├── _pages
 │   ├── hello-world.md
@@ -20,7 +20,7 @@ docs
 
 Adding the `--no-auto-folder` flag will place all images in `image-dir`.
 
-```
+```text
 docs
 ├── _pages
 │   ├── hello-world.md

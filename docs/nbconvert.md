@@ -5,7 +5,7 @@ You can use the Jekyll exporter with `nbconvert` by calling `jupyter nbconvert -
 
 **Note**: None of the options added by JekyllNB are available with `nbconvert`.
 
-```
+```text
 site-dir
 ├── page-dir
 │   └── notebook.md
@@ -22,7 +22,7 @@ Calling `jupyter nbconvert --to jekyll --output-dir docs/_pages
 with the notebook located [here](https://github.com/klane/jekyllnb/blob/master/tests/assets/hello-world.ipynb)
 will result in the following site layout.
 
-```
+```text
 docs
 └── _pages
     ├── hello-world.md

@@ -5,7 +5,7 @@ By default images are organized into folders for each notebook.
 
 Given a Jupyter notebook `notebook.ipynb`, calling `jekyllnb` will result in the following site layout.
 
-```
+```text
 site-dir
 ├── page-dir
 │   └── notebook.md
@@ -21,7 +21,7 @@ Calling `jupyter jekyllnb --site-dir docs --page-dir _pages --image-dir assets/i
 with the notebook located [here](https://github.com/klane/jekyllnb/blob/master/tests/assets/hello-world.ipynb)
 will result in the following site layout.
 
-```
+```text
 docs
 ├── _pages
 │   └── hello-world.md
@@ -33,7 +33,7 @@ docs
 
 Adding the `--no-auto-folder` flag will place all images in `image-dir`.
 
-```
+```text
 docs
 ├── _pages
 │   └── hello-world.md

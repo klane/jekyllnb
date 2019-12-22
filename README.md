@@ -24,7 +24,7 @@ JekyllNB is a Jupyter app just like `nbconvert`. Call it with `jupyter jekyllnb`
 The preprocessor reads metadata from your notebook to populate the Jekyll header.
 Add a `jekyll` section to your notebook metadata similar to:
 
-```
+```json
 "jekyll": {
     "layout": "notebook",
     "permalink": "/hello/",
@@ -34,7 +34,7 @@ Add a `jekyll` section to your notebook metadata similar to:
 
 The exporter will add the following header to the generated Markdown:
 
-```
+```text
 ---
 layout: notebook
 permalink: /hello/
