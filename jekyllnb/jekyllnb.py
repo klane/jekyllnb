@@ -29,6 +29,8 @@ JEKYLLNB_FLAGS.update(
 
 
 class JekyllNB(NbConvertApp):
+    """Application to convert notebooks (``*.ipynb``) to Jekyll Markdown (``.md``)"""
+
     name = "jupyter-jekyllnb"
     description = "Convert Jupyter notebooks to Jekyll-ready Markdown"
     version = __version__
@@ -42,10 +44,12 @@ class JekyllNB(NbConvertApp):
 
     @default("export_format")
     def _export_format_default(self):  # skipcq: PYL-R0201
+        """Default export format"""
         return "jekyll"
 
     @observe("export_format")
     def _export_format_changed(self, change):
+        """Ensure export format is jekyll"""
         default_format = self._export_format_default()
 
         if change["new"].lower() != default_format:
@@ -57,6 +61,7 @@ class JekyllNB(NbConvertApp):
 
     @catch_config_error
     def initialize(self, argv=None):
+        """Initialize application, notebooks, writer, and postprocessor"""
         super(JekyllNB, self).initialize(argv)
         self.writer.build_directory = os.path.join(self.site_dir, self.page_dir)
 
@@ -66,6 +71,21 @@ class JekyllNB(NbConvertApp):
             )
 
     def init_single_notebook_resources(self, notebook_filename):
+        """Initialize resources
+
+        Initializes the resources dictionary for a single notebook.
+
+        Args:
+            notebook_filename (str): Full filename of the notebook to convert.
+
+        Returns:
+            dict: Resources dictionary for a single notebook.
+
+            Dictionary must include the following keys:
+                - config_dir: location of the Jupyter config directory
+                - unique_key: notebook name
+                - output_files_dir: directory where output files should be saved
+        """
         resources = super(JekyllNB, self).init_single_notebook_resources(
             notebook_filename
         )
