@@ -4,5 +4,5 @@
 
 Initial release
 
-[Unreleased]: https://github.com/klane/jekyllnb/compare/0.1.0...master
-[0.1.0]: https://github.com/klane/jekyllnb/releases/tag/0.1.0
+[Unreleased]: https://github.com/klane/jekyllnb/compare/v0.1.0...master
+[0.1.0]: https://github.com/klane/jekyllnb/releases/tag/v0.1.0
