@@ -8,6 +8,10 @@ theme: readthedocs
 
 nav:
   - Overview: index.md
+  - Usage:
+      - Site Layout: layout.md
+      - Multiple Notebooks: multiple-notebooks.md
+      - nbconvert: nbconvert.md
   - About:
       - Release Notes: changelog.md
       - License: license.md
