@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [0.1.1]
 
 ### Added
 
@@ -21,5 +21,6 @@
 
 Initial release
 
-[Unreleased]: https://github.com/klane/jekyllnb/compare/v0.1.0...master
+[Unreleased]: https://github.com/klane/jekyllnb/compare/v0.1.1...master
+[0.1.1]: https://github.com/klane/jekyllnb/releases/tag/v0.1.1
 [0.1.0]: https://github.com/klane/jekyllnb/releases/tag/v0.1.0
