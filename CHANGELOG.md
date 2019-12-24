@@ -1,5 +1,21 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+
+- Added tox environment for Python 3.8.
+
+### Changed
+
+- Ensured `output_files_dir` is not a relative path and gets appended to `build_directory`.
+- Put quotes around release workflow body to preserve newlines in GitHub releases.
+- Set hash with output variable instead of environment variable for CI linting cache key.
+
+### Fixed
+
+- Fixed PyPI link.
+
 ## [0.1.1]
 
 ### Added
