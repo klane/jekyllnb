@@ -91,7 +91,7 @@ class JekyllNB(NbConvertApp):
         )
         resources["image_dir"] = resources["output_files_dir"]
         resources["output_files_dir"] = os.path.join(
-            self.site_dir, resources["output_files_dir"]
+            os.getcwd(), self.site_dir, resources["output_files_dir"]
         )
 
         return resources
