@@ -1,21 +1,10 @@
 import os
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from difflib import Differ
 from pprint import pprint
 from subprocess import call
 
 import pytest
-
-try:
-    from abc import ABC
-except ImportError:
-    from abc import ABCMeta
-    from six import add_metaclass
-
-    @add_metaclass(ABCMeta)
-    class ABC:
-        pass
-
 
 FILE_NAME = "hello-world"
 SITE_DIR = "docs"
