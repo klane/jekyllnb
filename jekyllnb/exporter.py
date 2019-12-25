@@ -24,9 +24,7 @@ class JekyllExporter(MarkdownExporter):
             dict: Resources dictionary.
         """
         self.resources = resources
-        return super(JekyllExporter, self).from_filename(
-            filename, resources=resources, **kwargs
-        )
+        return super().from_filename(filename, resources=resources, **kwargs)
 
     @default("template_file")
     def _template_file_default(self):  # skipcq: PYL-R0201
@@ -36,27 +34,25 @@ class JekyllExporter(MarkdownExporter):
     @property
     def template_path(self):
         """Path to available template files"""
-        return super(JekyllExporter, self).template_path + [
+        return super().template_path + [
             os.path.join(os.path.dirname(__file__), "templates")
         ]
 
     @property
     def preprocessors(self):
         """Add JekyllPreprocessor to list of enabled preprocessors"""
-        return super(JekyllExporter, self).preprocessors + [
-            "jekyllnb.JekyllPreprocessor"
-        ]
+        return super().preprocessors + ["jekyllnb.JekyllPreprocessor"]
 
     @property
     def default_config(self):
         """Default configuration"""
         config = Config({"JekyllPreprocessor": {"enabled": True}})
-        config.merge(super(JekyllExporter, self).default_config)
+        config.merge(super().default_config)
         return config
 
     def default_filters(self):
         """Default filters"""
-        for pair in super(JekyllExporter, self).default_filters():
+        for pair in super().default_filters():
             yield pair
 
         image_dir = self.resources.get("image_dir", self.resources["output_files_dir"])
