@@ -3,6 +3,11 @@ repos:
     rev: 19.10b0
     hooks:
       - id: black
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v1.25.2
+    hooks:
+      - id: pyupgrade
+        args: [--py3-plus]
   - repo: https://github.com/asottile/seed-isort-config
     rev: v1.9.3
     hooks:

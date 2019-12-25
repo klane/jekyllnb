@@ -52,8 +52,7 @@ class JekyllExporter(MarkdownExporter):
 
     def default_filters(self):
         """Default filters"""
-        for pair in super().default_filters():
-            yield pair
+        yield from super().default_filters()
 
         image_dir = self.resources.get("image_dir", self.resources["output_files_dir"])
 
