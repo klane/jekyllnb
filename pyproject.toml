@@ -16,7 +16,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "~2.7 || ^3.4"
+python = "^3.4"
 nbconvert = "^5.4"
 
 [tool.poetry.dev-dependencies]
@@ -50,7 +50,7 @@ legacy_tox_ini = """
 [tox]
 isolated_build = true
 skipsdist = true
-envlist = py{27,35,36,37,38},lint
+envlist = py{35,36,37,38},lint
 
 [testenv]
 skip_install = true
