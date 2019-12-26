@@ -1,4 +1,5 @@
 import os
+from typing import Any, Dict, Sequence
 
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases, nbconvert_flags
 from traitlets import Bool, Unicode, default, observe
@@ -6,7 +7,7 @@ from traitlets.config import catch_config_error
 
 from .__version__ import __version__
 
-JEKYLLNB_ALIASES = {}
+JEKYLLNB_ALIASES: Dict[str, str] = {}
 JEKYLLNB_ALIASES.update(nbconvert_aliases)
 JEKYLLNB_ALIASES.update(
     {
@@ -16,7 +17,7 @@ JEKYLLNB_ALIASES.update(
     }
 )
 
-JEKYLLNB_FLAGS = {}
+JEKYLLNB_FLAGS: Dict[str, Sequence[Any]] = {}
 JEKYLLNB_FLAGS.update(nbconvert_flags)
 JEKYLLNB_FLAGS.update(
     {

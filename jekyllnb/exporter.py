@@ -1,4 +1,5 @@
 import os
+from typing import Any, Dict
 
 from nbconvert.exporters import MarkdownExporter
 from nbconvert.filters.strings import path2url
@@ -9,7 +10,7 @@ from traitlets.config import Config
 class JekyllExporter(MarkdownExporter):
     """Exporter to write Markdown with Jekyll metadata"""
 
-    resources = {}
+    resources: Dict[str, Any] = {}
 
     def from_filename(self, filename, resources=None, **kwargs):
         """Convert notebook from a file
