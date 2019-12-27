@@ -1,4 +1,5 @@
 import os
+from typing import Any, Dict, Sequence
 
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases, nbconvert_flags
 from traitlets import Bool, Unicode, default, observe
@@ -6,7 +7,7 @@ from traitlets.config import catch_config_error
 
 from .__version__ import __version__
 
-JEKYLLNB_ALIASES = {}
+JEKYLLNB_ALIASES = {}  # type: Dict[str, str]
 JEKYLLNB_ALIASES.update(nbconvert_aliases)
 JEKYLLNB_ALIASES.update(
     {
@@ -16,7 +17,7 @@ JEKYLLNB_ALIASES.update(
     }
 )
 
-JEKYLLNB_FLAGS = {}
+JEKYLLNB_FLAGS = {}  # type: Dict[str, Sequence[Any]]
 JEKYLLNB_FLAGS.update(nbconvert_flags)
 JEKYLLNB_FLAGS.update(
     {
@@ -62,7 +63,7 @@ class JekyllNB(NbConvertApp):
     @catch_config_error
     def initialize(self, argv=None):
         """Initialize application, notebooks, writer, and postprocessor"""
-        super(JekyllNB, self).initialize(argv)
+        super().initialize(argv)
         self.writer.build_directory = os.path.join(self.site_dir, self.page_dir)
 
         if self.auto_folder:
@@ -86,9 +87,7 @@ class JekyllNB(NbConvertApp):
                 - unique_key: notebook name
                 - output_files_dir: directory where output files should be saved
         """
-        resources = super(JekyllNB, self).init_single_notebook_resources(
-            notebook_filename
-        )
+        resources = super().init_single_notebook_resources(notebook_filename)
         resources["image_dir"] = resources["output_files_dir"]
         resources["output_files_dir"] = os.path.join(
             os.getcwd(), self.site_dir, resources["output_files_dir"]

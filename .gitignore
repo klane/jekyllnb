@@ -8,6 +8,9 @@ dist/
 # Python byte code
 *.pyc
 
+# mypy
+.mypy_cache/
+
 # pytest
 .pytest_cache/
 .coverage*
