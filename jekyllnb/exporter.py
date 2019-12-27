@@ -10,7 +10,7 @@ from traitlets.config import Config
 class JekyllExporter(MarkdownExporter):
     """Exporter to write Markdown with Jekyll metadata"""
 
-    resources: Dict[str, Any] = {}
+    resources = {}  # type: Dict[str, Any]
 
     def from_filename(self, filename, resources=None, **kwargs):
         """Convert notebook from a file
