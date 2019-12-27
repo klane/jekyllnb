@@ -13,6 +13,7 @@
 - Changed super calls to Python 3 standard ([#116](https://github.com/klane/jekyllnb/issues/116)).
 - Dropped Python 2 support ([#121](https://github.com/klane/jekyllnb/pull/121)).
 - Skipped CI tests on changes to docs and Markdown files.
+- Removed restore-keys from GitHub cache action.
 
 ### Fixed
 

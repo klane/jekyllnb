@@ -40,8 +40,6 @@ jobs:
         with:
           path: ~/.cache/pre-commit
           key: pre-commit|${{ steps.hash.outputs.hash }}|${{ hashFiles('.pre-commit-config.yaml') }}
-          restore-keys: |
-            pre-commit|${{ steps.hash.outputs.hash }}
       - name: Run pre-commit
         uses: pre-commit/action@v1.0.0
 
@@ -83,8 +81,6 @@ jobs:
         with:
           path: ${{ matrix.poetry_cache }}
           key: poetry|${{ hashFiles('environment') }}|${{ hashFiles('poetry.lock') }}
-          restore-keys: |
-            poetry|${{ hashFiles('environment') }}
       - name: Install dependencies
         run: poetry install
       - name: Run tests
