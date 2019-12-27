@@ -1,5 +1,23 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+
+- Added [mypy](https://github.com/pre-commit/mirrors-mypy) support ([#115](https://github.com/klane/jekyllnb/issues/115)).
+- Added [pyupgrade](https://github.com/asottile/pyupgrade) check.
+
+### Changed
+
+- Removed ABC import check ([#114](https://github.com/klane/jekyllnb/issues/114)).
+- Changed super calls to Python 3 standard ([#116](https://github.com/klane/jekyllnb/issues/116)).
+- Dropped Python 2 support ([#121](https://github.com/klane/jekyllnb/pull/121)).
+- Skipped CI tests on changes to docs and Markdown files.
+
+### Fixed
+
+- Fixed GitHub release body.
+
 ## [0.1.2]
 
 ### Added
