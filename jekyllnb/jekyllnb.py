@@ -55,9 +55,7 @@ class JekyllNB(NbConvertApp):
 
         if change["new"].lower() != default_format:
             raise ValueError(
-                "Invalid export format {}, value must be {}".format(
-                    change["new"], default_format
-                )
+                f"Invalid export format {change['new']}, value must be {default_format}"
             )
 
     @catch_config_error
