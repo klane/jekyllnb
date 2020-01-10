@@ -7,7 +7,7 @@ from traitlets.config import catch_config_error
 
 from .__version__ import __version__
 
-JEKYLLNB_ALIASES = {}  # type: Dict[str, str]
+JEKYLLNB_ALIASES: Dict[str, str] = {}
 JEKYLLNB_ALIASES.update(nbconvert_aliases)
 JEKYLLNB_ALIASES.update(
     {
@@ -17,7 +17,7 @@ JEKYLLNB_ALIASES.update(
     }
 )
 
-JEKYLLNB_FLAGS = {}  # type: Dict[str, Sequence[Any]]
+JEKYLLNB_FLAGS: Dict[str, Sequence[Any]] = {}
 JEKYLLNB_FLAGS.update(nbconvert_flags)
 JEKYLLNB_FLAGS.update(
     {
@@ -55,9 +55,7 @@ class JekyllNB(NbConvertApp):
 
         if change["new"].lower() != default_format:
             raise ValueError(
-                "Invalid export format {}, value must be {}".format(
-                    change["new"], default_format
-                )
+                f"Invalid export format {change['new']}, value must be {default_format}"
             )
 
     @catch_config_error
