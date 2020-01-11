@@ -1,4 +1,4 @@
-<h1>Site Layout</h1>
+# Site Layout
 
 All files are placed relative to `site-dir` (root directory) with Markdown files in `page-dir` and images in `image-dir`.
 By default images are organized into folders for each notebook.

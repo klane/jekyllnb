@@ -1,4 +1,4 @@
-<h1>Usage with nbconvert</h1>
+# Usage with nbconvert
 
 JekyllNB also supports `nbconvert` by registering an entry point for the exporter.
 You can use the Jekyll exporter with `nbconvert` by calling `jupyter nbconvert --to jekyll`.

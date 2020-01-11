@@ -40,8 +40,10 @@ class JekyllNB(NbConvertApp):
     flags = JEKYLLNB_FLAGS
 
     auto_folder = Bool(True).tag(config=True)
-    site_dir = Unicode("").tag(config=True)
-    page_dir = Unicode("").tag(config=True)
+    site_dir = Unicode("", help="Root directory of the Jekyll site.").tag(config=True)
+    page_dir = Unicode(
+        "", help="Directory in which to place converted Markdown pages."
+    ).tag(config=True)
 
     @default("export_format")
     def _export_format_default(self):  # skipcq: PYL-R0201
