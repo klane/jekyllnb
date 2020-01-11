@@ -5,6 +5,7 @@ site_author: Kevin Lane
 repo_url: https://github.com/klane/jekyllnb
 
 theme: readthedocs
+extra_css: [css/toc.css]
 
 nav:
   - Overview: index.md
