@@ -1,4 +1,4 @@
-<h1>Multiple Notebooks</h1>
+# Multiple Notebooks
 
 Multiple notebooks can be converted at once using a wildcard.
 Calling `jupyter jekyllnb --site-dir docs --page-dir _pages --image-dir assets/images *.ipynb`
