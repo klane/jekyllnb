@@ -427,7 +427,7 @@ description = "It helps to use fixtures in pytest.mark.parametrize"
 name = "pytest-lazy-fixture"
 optional = false
 python-versions = "*"
-version = "0.6.2"
+version = "0.6.3"
 
 [package.dependencies]
 pytest = ">=3.2.5"
@@ -584,7 +584,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "bfd5977a4a947d77ab1a11d110724639f8f4174631b4ba3c1187dafdd4b80bdd"
+content-hash = "8ef42b2dc4082083e2d97cf31924625683c2aebdc7c9f6ae2901511726d4d747"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -786,8 +786,8 @@ pytest-cov = [
     {file = "pytest_cov-2.8.1-py2.py3-none-any.whl", hash = "sha256:cdbdef4f870408ebdbfeb44e63e07eb18bb4619fae852f6e760645fa36172626"},
 ]
 pytest-lazy-fixture = [
-    {file = "pytest-lazy-fixture-0.6.2.tar.gz", hash = "sha256:eb2f4573b371c690b91e637d09dfa30e2d6ba1234833df1920fc8b7b0d0fcebb"},
-    {file = "pytest_lazy_fixture-0.6.2-py3-none-any.whl", hash = "sha256:bcdc184ef988abbde2d906330a7f681595c8e9753a5ff07c5a9860389aa3b766"},
+    {file = "pytest-lazy-fixture-0.6.3.tar.gz", hash = "sha256:0e7d0c7f74ba33e6e80905e9bfd81f9d15ef9a790de97993e34213deb5ad10ac"},
+    {file = "pytest_lazy_fixture-0.6.3-py3-none-any.whl", hash = "sha256:e0b379f38299ff27a653f03eaa69b08a6fd4484e46fd1c9907d984b9f9daeda6"},
 ]
 pytest-sugar = [
     {file = "pytest-sugar-0.9.2.tar.gz", hash = "sha256:fcd87a74b2bce5386d244b49ad60549bfbc4602527797fac167da147983f58ab"},
