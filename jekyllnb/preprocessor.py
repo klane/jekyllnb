@@ -23,3 +23,6 @@ class JekyllPreprocessor(Preprocessor):
         resources["metadata"]["jekyll"] = metadata
 
         return nb, resources
+
+    def preprocess_cell(self, cell, resources, index):
+        pass
