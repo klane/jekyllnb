@@ -68,6 +68,7 @@ commands =
 [flake8]
 ignore = B950,E203,W503
 max-line-length = 88
+max-complexity = 10
 select = B,C,E,F,W,T4,B9
 """
 
