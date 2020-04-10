@@ -1,7 +1,7 @@
 from nbconvert.preprocessors import Preprocessor
 
 
-class JekyllPreprocessor(Preprocessor):
+class JekyllPreprocessor(Preprocessor):  # skipcq: PYL-W0223
     """Preprocessor to add Jekyll metadata"""
 
     def preprocess(self, nb, resources):  # skipcq: PYL-R0201
@@ -23,6 +23,3 @@ class JekyllPreprocessor(Preprocessor):
         resources["metadata"]["jekyll"] = metadata
 
         return nb, resources
-
-    def preprocess_cell(self, cell, resources, index):
-        pass
