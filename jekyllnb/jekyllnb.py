@@ -88,9 +88,10 @@ class JekyllNB(NbConvertApp):
                 - output_files_dir: directory where output files should be saved
         """
         resources = super().init_single_notebook_resources(notebook_filename)
+        resources["site_dir"] = os.path.join(os.getcwd(), self.site_dir)
         resources["image_dir"] = resources["output_files_dir"]
         resources["output_files_dir"] = os.path.join(
-            os.getcwd(), self.site_dir, resources["output_files_dir"]
+            resources["site_dir"], resources["output_files_dir"]
         )
 
         return resources
