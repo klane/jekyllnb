@@ -38,7 +38,7 @@ tox = "^3.14.6"
 line-length = 88
 
 [tool.isort]
-known_third_party = ["conditional", "nbconvert", "pytest", "pytest_lazyfixture", "traitlets"]
+known_third_party = ["nbconvert", "pytest", "pytest_lazyfixture", "traitlets"]
 line_length = 88
 multi_line_output = 3
 force_grid_wrap = 0

@@ -1,12 +1,12 @@
 import os
 import sys
+from contextlib import ExitStack as does_not_raise
 from subprocess import PIPE, CalledProcessError, Popen, check_output
 
 import pytest
-from conditional import conditional
 
 from jekyllnb import JekyllNB, __version__
-from tests import FILE_NAME, IMAGE_DIR, PAGE_DIR, SITE_DIR, AbstractConfig, Config
+from tests import FILE_NAME, IMAGE_DIR, PAGE_DIR, SITE_DIR, Config
 
 
 @pytest.fixture
@@ -64,17 +64,16 @@ class TestJekyllNB(JekyllConfig, Config):
         return request.param + image_args + default_args
 
 
-class TestException(JekyllConfig, AbstractConfig):
-    @pytest.fixture(
-        params=[
-            pytest.param([], id="empty"),
-            pytest.param(["--to", "markdown"], id="md"),
-            pytest.param(["--to", "jekyll"], id="jekyll"),
-        ]  # skipcq: PYL-W0221
-    )
-    def args(self, default_args, image_args, request):  # skipcq: PYL-W0221
-        return request.param + image_args + default_args
-
+@pytest.mark.parametrize(
+    "args,expectation",
+    [
+        ([], does_not_raise()),
+        (["--to", "jekyll"], does_not_raise()),
+        (["--to", "markdown"], pytest.raises((ValueError, CalledProcessError))),
+    ],
+    ids=["empty", "jekyll", "markdown"],
+)
+class TestException(JekyllConfig):
     @pytest.mark.parametrize(
         "engine",
         [
@@ -92,13 +91,13 @@ class TestException(JekyllConfig, AbstractConfig):
             ),
         ],
     )
-    def test_exception(self, engine, args):
-        args_lower = [arg.lower() for arg in args]
-        raise_exception = "--to" in args_lower and "jekyll" not in args_lower
-        exceptions = (ValueError, CalledProcessError)
+    def test_exception(self, engine, args, expectation, default_args, image_args):
+        with expectation:
+            engine(self, args + image_args + default_args)
 
-        with conditional(raise_exception, pytest.raises(exceptions)):
-            engine(self, args)
+    @pytest.fixture(autouse=True)
+    def cleanup(self):
+        self._app.clear_instance()
 
 
 class TestVersion(JekyllConfig):
