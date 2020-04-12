@@ -60,14 +60,6 @@ version = "0.4.3"
 
 [[package]]
 category = "dev"
-description = "Conditionally enter a context manager"
-name = "conditional"
-optional = false
-python-versions = "*"
-version = "1.3"
-
-[[package]]
-category = "dev"
 description = "Code coverage measurement for Python"
 name = "coverage"
 optional = false
@@ -608,7 +600,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "14ece2e22d183843f4f05d0b57c43a69b6fd9eed3e32867d232f739fc9d5b7b6"
+content-hash = "a564cdc06b0ba98fafaa3815c4da751d4c0f8640ae7352e0843618b9658259b4"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -635,10 +627,6 @@ cfgv = [
 colorama = [
     {file = "colorama-0.4.3-py2.py3-none-any.whl", hash = "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff"},
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
-]
-conditional = [
-    {file = "conditional-1.3-py2.py3-none-any.whl", hash = "sha256:61599e56358b635e17dc6b86a95de36825d49334ecab20e94c36609c8de92361"},
-    {file = "conditional-1.3.zip", hash = "sha256:4948fd9c923a9336e96dded17000fa0978122ee3b46ed146190d07c01953c56c"},
 ]
 coverage = [
     {file = "coverage-5.0.4-cp27-cp27m-macosx_10_12_x86_64.whl", hash = "sha256:8a620767b8209f3446197c0e29ba895d75a1e272a36af0786ec70fe7834e4307"},
