@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/github/license/klane/jekyllnb.svg?label=License)](LICENSE)
 [![Code Style](https://img.shields.io/badge/Code%20Style-black-000000.svg)](https://github.com/psf/black)
 
-JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll header to Markdown files and save generated images to a desired location.
+JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll front matter to Markdown files and save generated images to a desired location.
 This allows you to easily convert all your notebooks to the required format and immediately build your Jekyll site.
 
 ## Installation
@@ -22,7 +22,7 @@ pip install jekyllnb
 ## Usage
 
 JekyllNB is a Jupyter app just like `nbconvert`. Call it with `jupyter jekyllnb`.
-The preprocessor reads metadata from your notebook to populate the Jekyll header.
+The preprocessor reads metadata from your notebook to populate the Jekyll front matter.
 Add a `jekyll` section to your notebook metadata similar to:
 
 ```json
@@ -33,7 +33,7 @@ Add a `jekyll` section to your notebook metadata similar to:
 }
 ```
 
-The exporter will add the following header to the generated Markdown:
+The exporter will add the following front matter to the generated Markdown:
 
 ```text
 ---
