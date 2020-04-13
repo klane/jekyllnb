@@ -1,5 +1,26 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+
+- Added help strings for new parameters ([#122](https://github.com/klane/jekyllnb/issues/122)).
+
+### Changed
+
+- Parametrized conditional raising ([#117](https://github.com/klane/jekyllnb/issues/117)).
+- Deleted unused config files ([#118](https://github.com/klane/jekyllnb/issues/118)).
+- Excluded page titles from MkDocs TOC ([#123](https://github.com/klane/jekyllnb/issues/123)).
+- Converted string formatting to f-strings ([#124](https://github.com/klane/jekyllnb/issues/124)).
+- Dropped Python 3.5 support ([#125](https://github.com/klane/jekyllnb/pull/125)).
+- Improved documentation ([#126](https://github.com/klane/jekyllnb/pull/126)).
+- Improved CI checks.
+- Removed conditional from dev dependencies.
+
+### Fixed
+
+- Fixed bug that used first image dir when converting multiple notebooks.
+
 ## [0.2.0]
 
 ### Added
