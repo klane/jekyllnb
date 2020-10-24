@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from nbconvert.exporters import MarkdownExporter
 from nbconvert.filters.strings import path2url
@@ -10,7 +10,14 @@ from traitlets.config import Config
 class JekyllExporter(MarkdownExporter):
     """Exporter to write Markdown with Jekyll metadata"""
 
+    # enabled preprocessors
+    preprocessors: List[str] = ["jekyllnb.JekyllPreprocessor"]
+
+    # placeholder to store notebook resources
     resources: Dict[str, Any] = {}
+
+    # path to available template files
+    template_path: List[str] = [os.path.join(os.path.dirname(__file__), "templates")]
 
     def from_filename(self, filename, resources=None, **kwargs):
         """Convert notebook from a file
@@ -31,18 +38,6 @@ class JekyllExporter(MarkdownExporter):
     def _template_file_default(self):  # skipcq: PYL-R0201
         """Default template file"""
         return "jekyll"
-
-    @property
-    def template_path(self):
-        """Path to available template files"""
-        return super().template_path + [
-            os.path.join(os.path.dirname(__file__), "templates")
-        ]
-
-    @property
-    def preprocessors(self):
-        """Add JekyllPreprocessor to list of enabled preprocessors"""
-        return super().preprocessors + ["jekyllnb.JekyllPreprocessor"]
 
     @property
     def default_config(self):
