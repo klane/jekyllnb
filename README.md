@@ -3,7 +3,7 @@
 [![Test Status](https://github.com/klane/jekyllnb/workflows/Tests/badge.svg)](https://github.com/klane/jekyllnb/actions)
 [![Documentation Status](https://img.shields.io/readthedocs/jekyllnb?label=Docs&logo=read%20the%20docs)](https://jekyllnb.readthedocs.io/en/latest)
 [![Coverage Status](https://img.shields.io/codecov/c/github/klane/jekyllnb?label=Coverage&logo=codecov)](https://codecov.io/gh/klane/jekyllnb)
-[![PyPI Version](https://img.shields.io/pypi/v/jekyllnb?color=blue&label=Version&logo=python)](https://pypi.org/project/jekyllnb)
+[![PyPI Version](https://img.shields.io/pypi/v/jekyllnb?color=blue&label=Version&logo=python&logoColor=white)](https://pypi.org/project/jekyllnb)
 [![Downloads](https://static.pepy.tech/personalized-badge/jekyllnb?period=total&units=international_system&left_color=grey&right_color=blue&left_text=Downloads)](https://pepy.tech/project/jekyllnb)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=klane/jekyllnb)](https://dependabot.com)
 [![License](https://img.shields.io/github/license/klane/jekyllnb?color=brightgreen&label=License)](LICENSE)
