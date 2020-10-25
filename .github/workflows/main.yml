@@ -22,7 +22,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
       - name: Install Poetry
-        uses: dschep/install-poetry-action@v1.2
+        uses: Gr1N/setup-poetry@v4
       - name: Install Safety
         run: pip install safety
       - name: Check dependencies
@@ -75,7 +75,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
-        uses: dschep/install-poetry-action@v1.2
+        uses: Gr1N/setup-poetry@v4
       - name: Write environment information to a file
         run: |
           pwd > environment
