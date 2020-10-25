@@ -1,13 +1,13 @@
 # JekyllNB: Jupyter Notebooks to Jekyll Markdown
 
 [![Test Status](https://github.com/klane/jekyllnb/workflows/Tests/badge.svg)](https://github.com/klane/jekyllnb/actions)
-[![Documentation Status](https://img.shields.io/readthedocs/jekyllnb.svg?label=Docs&logo=read%20the%20docs)](https://jekyllnb.readthedocs.io/en/latest)
-[![Coverage Status](https://img.shields.io/codecov/c/github/klane/jekyllnb.svg?label=Coverage&logo=codecov)](https://codecov.io/gh/klane/jekyllnb)
-[![PyPI Version](https://img.shields.io/pypi/v/jekyllnb?label=Version&logo=pypi)](https://pypi.org/project/jekyllnb)
-[![Downloads](https://pepy.tech/badge/jekyllnb)](https://pepy.tech/project/jekyllnb)
+[![Documentation Status](https://img.shields.io/readthedocs/jekyllnb?label=Docs&logo=read%20the%20docs)](https://jekyllnb.readthedocs.io/en/latest)
+[![Coverage Status](https://img.shields.io/codecov/c/github/klane/jekyllnb?label=Coverage&logo=codecov)](https://codecov.io/gh/klane/jekyllnb)
+[![PyPI Version](https://img.shields.io/pypi/v/jekyllnb?color=blue&label=Version&logo=python)](https://pypi.org/project/jekyllnb)
+[![Downloads](https://static.pepy.tech/personalized-badge/jekyllnb?period=total&units=international_system&left_color=grey&right_color=blue&left_text=Downloads)](https://pepy.tech/project/jekyllnb)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=klane/jekyllnb)](https://dependabot.com)
-[![License](https://img.shields.io/github/license/klane/jekyllnb.svg?label=License)](LICENSE)
-[![Code Style](https://img.shields.io/badge/Code%20Style-black-000000.svg)](https://github.com/psf/black)
+[![License](https://img.shields.io/github/license/klane/jekyllnb?color=brightgreen&label=License)](LICENSE)
+[![Code Style](https://img.shields.io/badge/Code%20Style-black-black)](https://github.com/psf/black)
 
 JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll front matter to Markdown files and save generated images to a desired location.
 This allows you to easily convert all your notebooks to the required format and immediately build your Jekyll site.
