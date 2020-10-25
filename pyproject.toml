@@ -17,7 +17,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.6"
-nbconvert = "^5.6.1"
+nbconvert = ">=5.6.1,<7.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.0"
@@ -28,7 +28,7 @@ pre-commit = "^2.1.1"
 tox = "^3.20.0"
 
 [tool.poetry.plugins."console_scripts"]
-"jupyter-jekyllnb" = "jekyllnb:JekyllNB.launch_instance"
+"jupyter-jekyllnb" = "jekyllnb.jekyllnb:JekyllNB.launch_instance"
 
 [tool.poetry.plugins."nbconvert.exporters"]
 "jekyll" = "jekyllnb:JekyllExporter"

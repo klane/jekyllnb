@@ -5,7 +5,8 @@ from subprocess import PIPE, CalledProcessError, Popen, check_output
 
 import pytest
 
-from jekyllnb import JekyllNB, __version__
+from jekyllnb import __version__
+from jekyllnb.jekyllnb import JekyllNB
 from tests import FILE_NAME, IMAGE_DIR, PAGE_DIR, SITE_DIR, Config
 
 
