@@ -28,7 +28,7 @@ pre-commit = "^2.1.1"
 tox = "^3.20.0"
 
 [tool.poetry.plugins."console_scripts"]
-"jupyter-jekyllnb" = "jekyllnb:JekyllNB.launch_instance"
+"jupyter-jekyllnb" = "jekyllnb.jekyllnb:JekyllNB.launch_instance"
 
 [tool.poetry.plugins."nbconvert.exporters"]
 "jekyll" = "jekyllnb:JekyllExporter"
