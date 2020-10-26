@@ -79,10 +79,10 @@ jobs:
       - name: Write environment information to a file
         run: |
           pwd > environment
-          whoami >> environment
           python --version >> environment
       - name: Restore cache
         uses: actions/cache@v2.1.2
+        if: runner.os != 'Windows'
         with:
           path: ${{ matrix.poetry_cache }}
           key: poetry|${{ hashFiles('environment') }}|${{ hashFiles('poetry.lock') }}
