@@ -1,5 +1,19 @@
 # Change Log
 
+## [Unreleased]
+
+### Changed
+
+- Modified template to adhere to new nbconvert format.
+- Ignored poetry cache on Windows CI runs to prevent occasional hang on install step.
+- Updated migrated and archived CI actions to new repos.
+- Customized README badges.
+
+### Fixed
+
+- Fixed issue with traitlets version 5 ([#147](https://github.com/klane/jekyllnb/issues/147)).
+- Updated code to be compatible with nbconvert version 6.
+
 ## [0.3.0]
 
 ### Added
