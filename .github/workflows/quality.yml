@@ -29,3 +29,47 @@ jobs:
 
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v1
+
+  linting:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2.1.4
+
+      - name: Hash Python version
+        id: hash
+        run: echo ::set-output name=hash::$(python --version | sha256sum | cut -d' ' -f1)
+
+      - name: Restore cache
+        uses: actions/cache@v2.1.2
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit|${{ steps.hash.outputs.hash }}|${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v2.0.0
+
+  safety:
+    name: Safety
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2.1.4
+
+      - name: Install Poetry
+        uses: Gr1N/setup-poetry@v4
+
+      - name: Install Safety
+        run: pip install safety
+
+      - name: Check dependencies
+        run: poetry export --dev --format requirements.txt | safety check --stdin
