@@ -6,21 +6,25 @@ on:
       - v*
 
 jobs:
-  GitHub:
+  github:
+    name: GitHub
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.3
+
       - name: Get tag
         id: tag
         run: |
           echo ::set-output name=tag::${GITHUB_REF#refs/tags/v}
+
       - name: Get changes
         id: changelog
         run: |
           pattern='0,/${{ steps.tag.outputs.tag }}/d;/[0-9]\+\.[0-9]\+\.[0-9]\+/Q'
           sed $pattern CHANGELOG.md | head -n -1 | tail -n +2 > RELEASE.md
+
       - name: Create release
         uses: softprops/action-gh-release@v1
         env:
@@ -29,20 +33,26 @@ jobs:
           body_path: RELEASE.md
           prerelease: ${{ contains(github.ref, '-') }}
 
-  PyPI:
+  pypi:
+    name: PyPI
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.3
+
       - name: Set up Python
         uses: actions/setup-python@v2.1.4
+
       - name: Install Poetry
         uses: Gr1N/setup-poetry@v4
+
       - name: Install dependencies
         run: poetry install --no-dev
+
       - name: Build project
         run: poetry build
+
       - name: Publish to PyPI
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
