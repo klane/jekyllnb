@@ -37,12 +37,8 @@ tox = "^3.20.1"
 line-length = 88
 
 [tool.isort]
+profile = "black"
 known_third_party = ["nbconvert", "pytest", "pytest_lazyfixture", "traitlets"]
-line_length = 88
-multi_line_output = 3
-force_grid_wrap = 0
-include_trailing_comma = "True"
-use_parentheses = "True"
 
 [tool.tox]
 legacy_tox_ini = """
