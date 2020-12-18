@@ -28,12 +28,12 @@ repos:
     hooks:
       - id: mypy
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.6.3
+    rev: 1.7.0
     hooks:
       - id: bandit
         args: [--skip, "B101,B404,B603"]
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.3.0
+    rev: v3.4.0
     hooks:
       - id: end-of-file-fixer
       - id: mixed-line-ending
