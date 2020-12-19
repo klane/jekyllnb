@@ -73,3 +73,17 @@ jobs:
 
       - name: Check dependencies
         run: poetry export --dev --format requirements.txt | safety check --stdin
+
+  slack:
+    name: Slack
+    runs-on: ubuntu-latest
+    needs: [analyze, linting, safety]
+
+    steps:
+      - name: Send Slack message
+        uses: lazy-actions/slatify@v3.0.0
+        if: always()
+        with:
+          type: ${{ job.status }}
+          job_name: ':snake: Quality'
+          url: ${{ secrets.SLACK_WEBHOOK }}
