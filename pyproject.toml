@@ -33,6 +33,10 @@ tox = "^3.20.1"
 [tool.poetry.plugins."nbconvert.exporters"]
 "jekyll" = "jekyllnb:JekyllExporter"
 
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.black]
 line-length = 88
 
@@ -66,7 +70,3 @@ max-line-length = 88
 max-complexity = 10
 select = B,C,E,F,W,T4,B9
 """
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
