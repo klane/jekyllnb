@@ -7,6 +7,8 @@ updates:
       time: "00:00"
       timezone: America/Los_Angeles
     open-pull-requests-limit: 99
+    assignees:
+      - klane
     labels:
       - dependencies
       - actions
@@ -17,6 +19,8 @@ updates:
       time: "00:00"
       timezone: America/Los_Angeles
     open-pull-requests-limit: 99
+    assignees:
+      - klane
     labels:
       - dependencies
       - python
