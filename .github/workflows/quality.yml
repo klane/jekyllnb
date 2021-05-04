@@ -39,20 +39,20 @@ jobs:
         uses: actions/checkout@v2.3.3
 
       - name: Set up Python
-        uses: actions/setup-python@v2.2.1
+        uses: actions/setup-python@v2.2.2
 
       - name: Hash Python version
         id: hash
         run: echo ::set-output name=hash::$(python --version | sha256sum | cut -d' ' -f1)
 
       - name: Restore cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.5
         with:
           path: ~/.cache/pre-commit
           key: pre-commit|${{ steps.hash.outputs.hash }}|${{ hashFiles('.pre-commit-config.yaml') }}
 
       - name: Run pre-commit
-        uses: pre-commit/action@v2.0.0
+        uses: pre-commit/action@v2.0.3
 
   safety:
     name: Safety
@@ -63,7 +63,7 @@ jobs:
         uses: actions/checkout@v2.3.3
 
       - name: Set up Python
-        uses: actions/setup-python@v2.2.1
+        uses: actions/setup-python@v2.2.2
 
       - name: Install Poetry
         uses: Gr1N/setup-poetry@v4
