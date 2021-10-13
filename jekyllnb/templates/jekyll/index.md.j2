@@ -9,9 +9,13 @@
 {% endblock header %}
 
 {%- block input -%}
-{{ '```python' }}
+{{ '<details>
+<summary>Code</summary>
+{% highlight python %}
+' }}
 {{ cell.source }}
-{{ '```' }}
+{{ '{% endhighlight %}' }}
+{{ '</details>'}}
 {% endblock input %}
 
 {% block stream %}
