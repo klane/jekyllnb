@@ -20,7 +20,7 @@ python = "^3.6"
 nbconvert = "^6.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2"
+pytest = "^7.0"
 pytest-cov = "^3.0"
 pytest-lazy-fixture = "^0.6"
 pytest-sugar = "^0.9"
