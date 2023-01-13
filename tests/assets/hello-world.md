@@ -48,6 +48,6 @@ series = pd.Series(np.random.randn(1000))
 series.plot.hist(edgecolor='black');
 ```
 
-![png]({{ site.baseurl }}/assets/images/hello-world/hello-world_4_0.png){: .center-image }
+![png]({{ "/assets/images/hello-world/hello-world_4_0.png" | relative_url }}){: .center-image }
 
 # Goodbye World!

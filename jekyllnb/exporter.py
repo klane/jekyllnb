@@ -48,15 +48,14 @@ class JekyllExporter(MarkdownExporter):
         config.merge(super().default_config)
         return config
 
+    def _jekyll_path(self, path):
+        site_dir = self.resources.get("site_dir")
+        url = path2url(os.path.relpath(path, site_dir))
+        return f'\u007b\u007b "/{url}" | relative_url \u007d\u007d'
+
     def default_filters(self):
         """Default filters"""
         yield from super().default_filters()
 
-        site_dir = self.resources.get("site_dir")
-
         # convert image path to one compatible with Jekyll
-        yield (
-            "jekyllpath",
-            lambda path: "{{ site.baseurl }}/"
-            + path2url(os.path.relpath(path, site_dir)),
-        )
+        yield ("jekyllpath", self._jekyll_path)
