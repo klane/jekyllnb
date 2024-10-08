@@ -52,7 +52,7 @@ jobs:
           key: pre-commit|${{ steps.hash.outputs.hash }}|${{ hashFiles('.pre-commit-config.yaml') }}
 
       - name: Run pre-commit
-        uses: pre-commit/action@v2.0.3
+        uses: pre-commit/action@v3.0.1
 
   safety:
     name: Safety
