@@ -1,29 +1,28 @@
-import os
 import sys
-from collections import namedtuple
+from pathlib import Path
 
 import pytest
-from pytest_lazyfixture import lazy_fixture
+from pytest import FixtureRequest
 
-from tests import FILE_NAME
+from tests import FILE_NAME, FileContents
 
 
-def parse_file(file):
-    lines = file.read().splitlines()
+def parse_file(file: Path) -> FileContents:
+    lines = file.read_text().splitlines()
     index = [i for i, x in enumerate(lines) if x == "---"]
-    header, body = lines[index[0] + 1 : index[1]], lines[index[1] + 1 :]
-    contents = namedtuple("contents", "header body")
-
-    return contents(header, body)
+    return FileContents(
+        header=lines[index[0] + 1 : index[1]],
+        body=lines[index[1] + 1 :],
+    )
 
 
 @pytest.fixture(
     autouse=True,
     params=[
-        pytest.param(lazy_fixture("app"), id="app"),
-        pytest.param(lazy_fixture("command"), id="cmd"),
+        pytest.param("app", id="app"),
+        pytest.param("command", id="cmd"),
         pytest.param(
-            lazy_fixture("package"),
+            "package",
             id="pkg",
             marks=pytest.mark.skipif(
                 sys.platform.startswith("win"), reason="fails on windows"
@@ -31,8 +30,10 @@ def parse_file(file):
         ),
     ],
 )
-def engine():
-    pass
+def engine(args: list[str], request: FixtureRequest) -> None:
+    # converts the notebook using the specified engine
+    # args is required to pick up the parametrized fixture in each engine
+    request.getfixturevalue(request.param)
 
 
 @pytest.fixture(
@@ -41,18 +42,16 @@ def engine():
         pytest.param("*.ipynb", id="wild"),
     ]
 )
-def input_file(request):
-    return os.path.join(os.path.dirname(__file__), "assets", request.param)
+def input_file(request: FixtureRequest) -> Path:
+    return Path(__file__).parent / "assets" / request.param
 
 
 @pytest.fixture
-def target_contents():
-    target_file = os.path.join(os.path.dirname(__file__), "assets", FILE_NAME + ".md")
-
-    with open(target_file) as target:
-        return parse_file(target)
+def target_contents() -> FileContents:
+    target_file = Path(__file__).parent / "assets" / (FILE_NAME + ".md")
+    return parse_file(target_file)
 
 
 @pytest.fixture
-def file_contents(output_file):
+def file_contents(output_file: Path) -> FileContents:
     return parse_file(output_file)
