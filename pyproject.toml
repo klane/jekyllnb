@@ -12,7 +12,7 @@ classifiers = [
     "Framework :: Jupyter",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Text Processing",
-    "Topic :: Utilities"
+    "Topic :: Utilities",
 ]
 
 [tool.poetry.dependencies]
@@ -36,36 +36,42 @@ tox = "^4.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.black]
+[tool.ruff]
 line-length = 88
+exclude = ["*.ipynb"]
 
-[tool.isort]
-profile = "black"
-known_third_party = ["nbconvert", "pytest", "pytest_lazyfixture", "traitlets"]
+[tool.ruff.format]
+docstring-code-format = true
+quote-style = "double"
 
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-isolated_build = true
-skipsdist = true
-envlist = py{36,37,38,39},lint
+[tool.ruff.lint]
+select = [
+    "A",        # flake8-builtins
+    "B",        # flake8-bugbear
+    "BLE",      # flake8-blind-except
+    "C4",       # flake8-comprehensions
+    "C90",      # mccabe
+    "D",        # pydocstyle
+    "E",        # pycodestyle (error)
+    "ERA",      # eradicate
+    "F",        # pyflakes
+    "I",        # isort
+    "PERF",     # perflint
+    "PGH",      # pygrep-hooks
+    "PIE",      # flake8-pie
+    "PL",       # pylint
+    "Q",        # flake8-quotes
+    "RUF",      # ruff-specific rules
+    "S",        # flake8-bandit
+    "W",        # pycodestyle (warning)
+    "UP",       # pyupgrade
+]
+ignore = [
+    "D100",     # https://docs.astral.sh/ruff/rules/undocumented-public-module/
+    "D104",     # https://docs.astral.sh/ruff/rules/undocumented-public-package/
+    "D203",     # https://docs.astral.sh/ruff/rules/one-blank-line-before-class/
+    "D213",     # https://docs.astral.sh/ruff/rules/multi-line-summary-second-line/
+]
 
-[testenv]
-skip_install = true
-whitelist_externals = poetry
-commands =
-    poetry install
-    poetry run pytest tests/ --cov=jekyllnb {posargs}
-
-[testenv:lint]
-deps = pre-commit
-commands =
-    pre-commit install-hooks
-    pre-commit run --all-files
-
-[flake8]
-ignore = B950,E203,W503
-max-line-length = 88
-max-complexity = 10
-select = B,C,E,F,W,T4,B9
-"""
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "S101", "S603", "S607"]
