@@ -19,7 +19,7 @@ classifiers = [
 python = "^3.9"
 nbconvert = "^7.0"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.test.dependencies]
 pytest = "^8.0"
 pytest-cov = "^5.0"
 pytest-sugar = "^1.0"
