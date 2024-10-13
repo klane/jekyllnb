@@ -28,7 +28,7 @@ class TestNbConvert(Config):
 
     @pytest.fixture
     def args(self, site_dir: Path, input_file: Path) -> list[str]:
-        return [
+        args = [
             "--to",
             "jekyll",
             "--output-dir",
@@ -36,3 +36,8 @@ class TestNbConvert(Config):
             "--NbConvertApp.output_files_dir=" + os.path.join(IMAGE_DIR, FILE_NAME),
             str(input_file),
         ]
+        print("=" * 50)
+        print("test")
+        print(args)
+        print("=" * 50)
+        return args

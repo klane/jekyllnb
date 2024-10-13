@@ -58,6 +58,14 @@ class JekyllExporter(MarkdownExporter):
         site_dir = self.resources.get("site_dir")
         relative_path = os.path.relpath(Path(path).resolve(), site_dir)
         url = path2url(relative_path)
+        print("=" * 50)
+        print("exporter")
+        print(f"path: {path}")
+        print(f"site_dir: {site_dir}")
+        print(f"resolved path: {Path(path).resolve()}")
+        print(f"relative path: {relative_path}")
+        print(f"url: {url}")
+        print("=" * 50)
         return f"{{{{ site.baseurl }}}}/{url}"
 
     def default_filters(self) -> list[tuple[str, Callable]]:
