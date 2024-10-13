@@ -7,20 +7,19 @@ permalink: /hello/world/
 # Hello World!
 
 ```python
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from IPython.display import HTML, display
 ```
 
 ```python
-print('Hello World!')
+print("Hello World!")
 ```
 
     Hello World!
 
 ```python
-df = pd.DataFrame({'a': ['one', 'two'], 'b': [1, 2]})
+df = pd.DataFrame({"a": ["one", "two"], "b": [1, 2]})
 display(HTML(df.to_html(index=False)))
 ```
 
@@ -45,7 +44,7 @@ display(HTML(df.to_html(index=False)))
 
 ```python
 series = pd.Series(np.random.randn(1000))
-series.plot.hist(edgecolor='black');
+series.plot.hist(edgecolor="black");
 ```
 
 ![png]({{ site.baseurl }}/assets/images/hello-world/hello-world_4_0.png){: .center-image }
