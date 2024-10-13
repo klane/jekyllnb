@@ -4,7 +4,7 @@
 [![pre-commit.ci Status](https://results.pre-commit.ci/badge/github/klane/jekyllnb/main.svg)](https://results.pre-commit.ci/latest/github/klane/jekyllnb/main)
 [![Documentation Status](https://img.shields.io/readthedocs/jekyllnb?label=Docs&logo=read%20the%20docs&logoColor=white)](https://jekyllnb.readthedocs.io/en/latest)
 [![Coverage Status](https://img.shields.io/codecov/c/github/klane/jekyllnb?label=Coverage&logo=codecov)](https://codecov.io/gh/klane/jekyllnb)
-[![PyPI Version](https://img.shields.io/pypi/v/jekyllnb?color=blue&label=Version&logo=python&logoColor=white)](https://pypi.org/project/jekyllnb)
+[![PyPI Version](https://img.shields.io/pypi/v/jekyllnb?color=blue&label=PyPI&logo=python&logoColor=white)](https://pypi.org/project/jekyllnb)
 [![License](https://img.shields.io/github/license/klane/jekyllnb?color=blue&label=License)](LICENSE)
 
 JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll front matter to Markdown files and save generated images to a desired location.
