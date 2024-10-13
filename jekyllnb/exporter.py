@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from typing import Any, Callable, ClassVar, Literal, Optional
 
@@ -56,14 +55,19 @@ class JekyllExporter(MarkdownExporter):
 
     def _jekyll_path(self, path: str) -> str:
         site_dir = self.resources.get("site_dir")
-        relative_path = os.path.relpath(Path(path).resolve(), site_dir)
-        url = path2url(relative_path)
         print("=" * 50)
         print("exporter")
-        print(f"path: {path}")
-        print(f"site_dir: {site_dir}")
-        print(f"resolved path: {Path(path).resolve()}")
-        print(f"relative path: {relative_path}")
+        if (_path := Path(path)).is_relative_to(site_dir):
+            relative_path = str(_path.relative_to(site_dir))
+            url = path2url(relative_path)
+            print(f"path: {path}")
+            print(f"site_dir: {site_dir}")
+            print(f"resolved path: {_path}")
+            print(f"relative path: {relative_path}")
+        else:
+            print("path is already relative")
+            url = path2url(path)
+
         print(f"url: {url}")
         print("=" * 50)
         return f"{{{{ site.baseurl }}}}/{url}"
