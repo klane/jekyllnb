@@ -29,11 +29,11 @@ pytest-sugar = "^1.0"
 pytest-xdist = "^3.6.1"
 pre-commit = "^4.0"
 
-[tool.poetry.plugins."console_scripts"]
-"jupyter-jekyllnb" = "jekyllnb.jekyllnb:JekyllNB.launch_instance"
+[tool.poetry.scripts]
+jupyter-jekyllnb = "jekyllnb.jekyllnb:JekyllNB.launch_instance"
 
 [tool.poetry.plugins."nbconvert.exporters"]
-"jekyll" = "jekyllnb:JekyllExporter"
+jekyll = "jekyllnb:JekyllExporter"
 
 [build-system]
 requires = ["poetry-core"]
