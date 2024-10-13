@@ -18,7 +18,7 @@ site-dir
 ## Example
 
 Calling `jupyter jekyllnb --site-dir docs --page-dir _pages --image-dir assets/images hello-word.ipynb`
-with the notebook located [here](https://github.com/klane/jekyllnb/blob/master/tests/assets/hello-world.ipynb)
+with the notebook located [here](https://github.com/klane/jekyllnb/blob/main/tests/assets/hello-world.ipynb)
 will result in the following site layout.
 
 ```text

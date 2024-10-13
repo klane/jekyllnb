@@ -10,7 +10,7 @@
 JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll front matter to Markdown files and save generated images to a desired location.
 This allows you to easily convert all your notebooks to the required format and immediately build your Jekyll site.
 It works great in a GitHub Actions workflow to convert your notebooks to Markdown and deploy to GitHub Pages.
-See JekyllNB in action [here](https://github.com/klane/databall/blob/master/.github/workflows/gh-pages.yml).
+See JekyllNB in action [here](https://github.com/klane/databall/blob/main/.github/workflows/gh-pages.yml).
 
 ## Installation
 
