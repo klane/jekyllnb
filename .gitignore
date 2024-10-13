@@ -20,3 +20,6 @@ dist/
 
 # pyenv version file
 .python-version
+
+# docs site
+site/
