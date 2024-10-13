@@ -37,6 +37,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 88
+exclude = ["*.ipynb"]
 
 [tool.ruff.format]
 docstring-code-format = true
