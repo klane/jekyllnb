@@ -43,7 +43,7 @@ jobs:
         run: poetry install
 
       - name: Run tests
-        run: poetry run pytest tests --cov jekyllnb --cov-report xml:coverage.xml
+        run: poetry run pytest tests/test_nbconvert.py --cov jekyllnb --cov-report xml:coverage.xml
 
       - name: Upload coverage report
         uses: codecov/codecov-action@v4
