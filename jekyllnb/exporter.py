@@ -55,22 +55,12 @@ class JekyllExporter(MarkdownExporter):
 
     def _jekyll_path(self, path: str) -> str:
         site_dir = self.resources.get("site_dir")
-        print("=" * 50)
-        print("exporter")
-        print(f"path: {path}")
-        print(f"site_dir: {site_dir}")
-        if site_dir and (_path := Path(path)).is_relative_to(site_dir):
-            relative_path = str(_path.relative_to(site_dir))
-            url = path2url(relative_path)
-            print(f"resolved path: {_path}")
-            print(f"relative path: {relative_path}")
-        else:
-            print("path is already relative")
-            url = path2url(path)
+        _path = Path(path)
 
-        print(f"url: {url}")
-        print("=" * 50)
-        return f"{{{{ site.baseurl }}}}/{url}"
+        if site_dir and _path.is_relative_to(site_dir):
+            path = str(_path.relative_to(site_dir))
+
+        return f"{{{{ site.baseurl }}}}/{path2url(path)}"
 
     def default_filters(self) -> list[tuple[str, Callable]]:
         """Specify default filters."""
