@@ -3,7 +3,7 @@ name: Tests
 on:
   push:
     branches:
-      - '*'
+      - main
     paths-ignore:
       - 'docs/**'
       - '**.md'
@@ -14,66 +14,56 @@ on:
 
 jobs:
   test:
-    name: '${{ matrix.os_name }}: Python ${{ matrix.python }}'
-    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} / ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}-latest
+    defaults:
+      run:
+        shell: bash
 
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python: [3.6, 3.7, 3.8, 3.9]
-        include:
-          - os: ubuntu-latest
-            os_name: Linux
-            poetry_cache: ~/.cache/pypoetry
-
-          - os: macos-latest
-            os_name: macOS
-            poetry_cache: ~/Library/Caches/pypoetry
-
-          - os: windows-latest
-            os_name: Windows
-            poetry_cache: ~\AppData\Local\pypoetry\Cache
+        os: [Ubuntu, macOS, Windows]
+        python: [3.9, 3.10, 3.11, 3.12]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.3
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v2.2.2
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
+      - name: Get Python version
+        id: python-version
+        run: echo version=$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))") >> $GITHUB_OUTPUT
+
       - name: Install Poetry
-        uses: Gr1N/setup-poetry@v7
-
-      - name: Write environment information to a file
-        run: |
-          pwd > environment
-          python --version >> environment
-
-      - name: Restore cache
-        uses: actions/cache@v2.1.6
-        if: runner.os != 'Windows'
+        uses: snok/install-poetry@v1
         with:
-          path: ${{ matrix.poetry_cache }}
-          key: poetry|${{ hashFiles('environment') }}|${{ hashFiles('poetry.lock') }}
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Restore Poetry cache
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: poetry|${{ runner.os }}|${{ steps.python-version.outputs.version }}|${{ hashFiles('poetry.lock') }}
 
       - name: Install dependencies
         run: poetry install
 
       - name: Run tests
-        run: poetry run pytest tests/ --cov=jekyllnb
-
-      - name: Generate coverage report
-        run: poetry run coverage xml
+        run: poetry run pytest tests --cov jekyllnb --cov-report xml:coverage.xml
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v4
         if: success()
         with:
+          file: coverage.xml
+          fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
 
       - name: Send Slack message on failure
         uses: lazy-actions/slatify@v3.0.0
