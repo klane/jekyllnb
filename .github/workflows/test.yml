@@ -65,9 +65,6 @@ jobs:
 
       - name: Install dependencies
         run: poetry install
-        env:
-          POETRY_VIRTUALENVS_CREATE: 1
-          POETRY_VIRTUALENVS_IN_PROJECT: 1
 
       - name: Run tests
         run: poetry run pytest tests --cov jekyllnb --cov-report xml:coverage.xml
