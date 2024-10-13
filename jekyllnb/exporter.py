@@ -57,11 +57,11 @@ class JekyllExporter(MarkdownExporter):
         site_dir = self.resources.get("site_dir")
         print("=" * 50)
         print("exporter")
-        if (_path := Path(path)).is_relative_to(site_dir):
+        print(f"path: {path}")
+        print(f"site_dir: {site_dir}")
+        if site_dir and (_path := Path(path)).is_relative_to(site_dir):
             relative_path = str(_path.relative_to(site_dir))
             url = path2url(relative_path)
-            print(f"path: {path}")
-            print(f"site_dir: {site_dir}")
             print(f"resolved path: {_path}")
             print(f"relative path: {relative_path}")
         else:
