@@ -1,5 +1,6 @@
 import os
 from collections.abc import Sequence
+from pathlib import Path
 from typing import Any, Literal, Optional
 
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases, nbconvert_flags
@@ -89,11 +90,10 @@ class JekyllNB(NbConvertApp):
                 - output_files_dir: directory where output files should be saved
 
         """
+        site_dir = Path.cwd() / self.site_dir
         resources = super().init_single_notebook_resources(notebook_filename)
-        resources["site_dir"] = os.path.join(os.getcwd(), self.site_dir)
+        resources["site_dir"] = str(site_dir)
         resources["image_dir"] = resources["output_files_dir"]
-        resources["output_files_dir"] = os.path.join(
-            resources["site_dir"], resources["output_files_dir"]
-        )
+        resources["output_files_dir"] = str(site_dir / resources["output_files_dir"])
 
         return resources

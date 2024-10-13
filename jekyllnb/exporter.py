@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from typing import Any, Callable, ClassVar, Literal, Optional
 
 from nbconvert.exporters import MarkdownExporter
@@ -12,7 +13,7 @@ class JekyllExporter(MarkdownExporter):
 
     # path to available template files
     extra_template_basedirs: ClassVar[list[str]] = [
-        os.path.join(os.path.dirname(__file__), "templates")
+        str(Path(__file__).parent / "templates")
     ]
 
     # enabled preprocessors
@@ -53,16 +54,16 @@ class JekyllExporter(MarkdownExporter):
         config.merge(super().default_config)
         return config
 
+    def _jekyll_path(self, path: str) -> str:
+        site_dir = self.resources.get("site_dir")
+        relative_path = os.path.relpath(Path(path).resolve(), site_dir)
+        url = path2url(relative_path)
+        return f"{{{{ site.baseurl }}}}/{url}"
+
     def default_filters(self) -> list[tuple[str, Callable]]:
         """Specify default filters."""
-        site_dir = self.resources.get("site_dir")
-
         # convert image path to one compatible with Jekyll
         return [
             *super().default_filters(),
-            (
-                "jekyllpath",
-                lambda path: "{{ site.baseurl }}/"
-                + path2url(os.path.relpath(path, site_dir)),
-            ),
+            ("jekyllpath", self._jekyll_path),
         ]
