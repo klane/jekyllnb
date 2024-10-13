@@ -54,6 +54,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install poetry
+        run: pipx install poetry
+
       - name: Set up Python ${{ matrix.python }}
         uses: actions/setup-python@v5
         with:
@@ -61,9 +64,7 @@ jobs:
           cache: poetry
 
       - name: Install dependencies
-        run: |
-          pipx install poetry
-          poetry install
+        run: poetry install
         env:
           POETRY_VIRTUALENVS_CREATE: 1
           POETRY_VIRTUALENVS_IN_PROJECT: 1
