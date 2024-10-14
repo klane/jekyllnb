@@ -36,7 +36,7 @@ jupyter-jekyllnb = "jekyllnb.jekyllnb:JekyllNB.launch_instance"
 jekyll = "jekyllnb:JekyllExporter"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.5.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
