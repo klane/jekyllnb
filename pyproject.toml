@@ -27,7 +27,7 @@ pre-commit = "^4.0"
 pytest = "^8.0"
 pytest-cov = "^5.0"
 pytest-sugar = "^1.0"
-pytest-xdist = "^3.6"
+pytest-xdist = { version = "^3.6", extras = ["psutil"] }
 
 [tool.poetry.scripts]
 jupyter-jekyllnb = "jekyllnb.jekyllnb:JekyllNB.launch_instance"
