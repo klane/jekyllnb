@@ -3,84 +3,70 @@ name: Tests
 on:
   push:
     branches:
-      - '*'
-    paths-ignore:
-      - 'docs/**'
-      - '**.md'
+      - main
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - '**.md'
 
 jobs:
   test:
-    name: '${{ matrix.os_name }}: Python ${{ matrix.python }}'
-    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os.name }} / ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os.image }}
+    defaults:
+      run:
+        shell: bash
 
     strategy:
-      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python: [3.6, 3.7, 3.8, 3.9]
-        include:
-          - os: ubuntu-latest
-            os_name: Linux
-            poetry_cache: ~/.cache/pypoetry
-
-          - os: macos-latest
-            os_name: macOS
-            poetry_cache: ~/Library/Caches/pypoetry
-
-          - os: windows-latest
-            os_name: Windows
-            poetry_cache: ~\AppData\Local\pypoetry\Cache
+        os:
+          - name: Ubuntu
+            image: ubuntu-latest
+          - name: macOS aarch64
+            image: macos-latest
+          - name: macOS x86_64
+            image: macos-13
+          - name: Windows
+            image: windows-latest
+        python-version:
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
+      fail-fast: false
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.3
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v2.2.2
+      - name: Install poetry
+        run: pipx install poetry
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python }}
-
-      - name: Install Poetry
-        uses: Gr1N/setup-poetry@v7
-
-      - name: Write environment information to a file
-        run: |
-          pwd > environment
-          python --version >> environment
-
-      - name: Restore cache
-        uses: actions/cache@v2.1.6
-        if: runner.os != 'Windows'
-        with:
-          path: ${{ matrix.poetry_cache }}
-          key: poetry|${{ hashFiles('environment') }}|${{ hashFiles('poetry.lock') }}
+          python-version: ${{ matrix.python-version }}
+          cache: poetry
 
       - name: Install dependencies
-        run: poetry install
+        run: |
+          poetry install
+          pip install pytest-github-actions-annotate-failures
 
       - name: Run tests
-        run: poetry run pytest tests/ --cov=jekyllnb
-
-      - name: Generate coverage report
-        run: poetry run coverage xml
+        run: poetry run pytest --cov-report xml:coverage.xml
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v4
         if: success()
         with:
+          file: coverage.xml
+          fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
 
       - name: Send Slack message on failure
         uses: lazy-actions/slatify@v3.0.0
         if: failure()
         with:
           type: ${{ job.status }}
-          job_name: '${{ runner.os }} :snake: ${{ matrix.python }} Tests'
+          job_name: '${{ runner.os }} :snake: ${{ matrix.python-version }} Tests'
           url: ${{ secrets.SLACK_WEBHOOK }}
           commit: true
           token: ${{ secrets.GITHUB_TOKEN }}

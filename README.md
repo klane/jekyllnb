@@ -1,20 +1,16 @@
 # JekyllNB: Jupyter Notebooks to Jekyll Markdown
 
 [![Test Status](https://github.com/klane/jekyllnb/workflows/Tests/badge.svg)](https://github.com/klane/jekyllnb/actions?query=workflow%3ATests)
-[![Quality Status](https://github.com/klane/jekyllnb/workflows/Quality/badge.svg)](https://github.com/klane/jekyllnb/actions?query=workflow%3AQuality)
+[![pre-commit.ci Status](https://results.pre-commit.ci/badge/github/klane/jekyllnb/main.svg)](https://results.pre-commit.ci/latest/github/klane/jekyllnb/main)
 [![Documentation Status](https://img.shields.io/readthedocs/jekyllnb?label=Docs&logo=read%20the%20docs&logoColor=white)](https://jekyllnb.readthedocs.io/en/latest)
 [![Coverage Status](https://img.shields.io/codecov/c/github/klane/jekyllnb?label=Coverage&logo=codecov)](https://codecov.io/gh/klane/jekyllnb)
-[![LGTM](https://img.shields.io/lgtm/alerts/github/klane/jekyllnb?label=Alerts&logo=lgtm)](https://lgtm.com/projects/g/klane/jekyllnb/alerts)
-[![DeepSource](https://deepsource.io/gh/klane/jekyllnb.svg/?label=active+issues)](https://deepsource.io/gh/klane/jekyllnb/?ref=repository-badge)
-[![PyPI Version](https://img.shields.io/pypi/v/jekyllnb?color=blue&label=Version&logo=python&logoColor=white)](https://pypi.org/project/jekyllnb)
-[![Downloads](https://static.pepy.tech/personalized-badge/jekyllnb?period=total&units=international_system&left_color=grey&right_color=blue&left_text=Downloads)](https://pepy.tech/project/jekyllnb)
+[![PyPI Version](https://img.shields.io/pypi/v/jekyllnb?color=blue&label=PyPI&logo=python&logoColor=white)](https://pypi.org/project/jekyllnb)
 [![License](https://img.shields.io/github/license/klane/jekyllnb?color=blue&label=License)](LICENSE)
-[![Code Style](https://img.shields.io/badge/Code%20Style-black-black)](https://github.com/psf/black)
 
 JekyllNB extends Jupyter's command line tool `nbconvert` to add the Jekyll front matter to Markdown files and save generated images to a desired location.
 This allows you to easily convert all your notebooks to the required format and immediately build your Jekyll site.
 It works great in a GitHub Actions workflow to convert your notebooks to Markdown and deploy to GitHub Pages.
-See JekyllNB in action [here](https://github.com/klane/databall/blob/master/.github/workflows/gh-pages.yml).
+See JekyllNB in action [here](https://github.com/klane/databall/blob/main/.github/workflows/gh-pages.yml).
 
 ## Installation
 

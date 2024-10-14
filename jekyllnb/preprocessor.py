@@ -1,11 +1,16 @@
+from typing import Any
+
 from nbconvert.preprocessors import Preprocessor
+from nbformat import NotebookNode
 
 
-class JekyllPreprocessor(Preprocessor):  # skipcq: PYL-W0223
-    """Preprocessor to add Jekyll metadata"""
+class JekyllPreprocessor(Preprocessor):
+    """Preprocessor to add Jekyll metadata."""
 
-    def preprocess(self, nb, resources):  # skipcq: PYL-R0201
-        """Preprocess notebook
+    def preprocess(
+        self, nb: NotebookNode, resources: dict[str, Any]
+    ) -> tuple[NotebookNode, dict[str, Any]]:
+        """Preprocess notebook.
 
         Add Jekyll metadata to notebook resources.
 
@@ -16,6 +21,7 @@ class JekyllPreprocessor(Preprocessor):  # skipcq: PYL-W0223
         Returns:
             NotebookNode: Modified notebook.
             dict: Modified resources dictionary.
+
         """
         name = resources["metadata"]["name"]
         metadata = {"layout": "page", "title": name, "permalink": "/" + name}

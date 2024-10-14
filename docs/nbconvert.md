@@ -19,7 +19,7 @@ site-dir
 
 Calling `jupyter nbconvert --to jekyll --output-dir docs/_pages
 --NbConvertApp.output_files_dir=assets/images/hello-world hello-word.ipynb`
-with the notebook located [here](https://github.com/klane/jekyllnb/blob/master/tests/assets/hello-world.ipynb)
+with the notebook located [here](https://github.com/klane/jekyllnb/blob/main/tests/assets/hello-world.ipynb)
 will result in the following site layout.
 
 ```text

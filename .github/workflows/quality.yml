@@ -2,10 +2,10 @@ name: Quality
 
 on:
   push:
-    branches: [master]
+    branches:
+      - main
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [master]
+  # every Sunday at midnight
   schedule:
     - cron: '0 0 * * 0'
 
@@ -16,68 +16,20 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
+        uses: github/codeql-action/init@v3
         with:
           languages: python
-          # If you wish to specify custom queries, you can do so here or in a config file.
-          # By default, queries listed here will override any specified in a config file.
-          # Prefix the list here with "+" to use these queries and those in the config file.
-          # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
       - name: Perform CodeQL analysis
-        uses: github/codeql-action/analyze@v1
-
-  linting:
-    name: Linting
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2.3.3
-
-      - name: Set up Python
-        uses: actions/setup-python@v2.2.2
-
-      - name: Hash Python version
-        id: hash
-        run: echo ::set-output name=hash::$(python --version | sha256sum | cut -d' ' -f1)
-
-      - name: Restore cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: ~/.cache/pre-commit
-          key: pre-commit|${{ steps.hash.outputs.hash }}|${{ hashFiles('.pre-commit-config.yaml') }}
-
-      - name: Run pre-commit
-        uses: pre-commit/action@v2.0.3
-
-  safety:
-    name: Safety
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2.3.3
-
-      - name: Set up Python
-        uses: actions/setup-python@v2.2.2
-
-      - name: Install Poetry
-        uses: Gr1N/setup-poetry@v7
-
-      - name: Install Safety
-        run: pip install safety
-
-      - name: Check dependencies
-        run: poetry export --dev --format requirements.txt | safety check --stdin --ignore=39462
+        uses: github/codeql-action/analyze@v3
 
   slack:
     name: Slack
     runs-on: ubuntu-latest
-    needs: [analyze, linting, safety]
+    needs: analyze
 
     steps:
       - name: Send Slack message

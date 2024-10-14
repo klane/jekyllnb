@@ -1,9 +1,12 @@
 import os
 import sys
 from contextlib import ExitStack as does_not_raise
+from pathlib import Path
 from subprocess import PIPE, CalledProcessError, Popen, check_output
+from typing import Callable, ContextManager
 
 import pytest
+from pytest import FixtureRequest
 
 from jekyllnb import __version__
 from jekyllnb.jekyllnb import JekyllNB
@@ -11,28 +14,28 @@ from tests import FILE_NAME, IMAGE_DIR, PAGE_DIR, SITE_DIR, Config
 
 
 @pytest.fixture
-def site_dir(tmpdir):
-    return tmpdir.join(SITE_DIR)
+def site_dir(tmp_path: Path) -> Path:
+    return tmp_path / SITE_DIR
 
 
 @pytest.fixture
-def image_dir(site_dir):
-    return site_dir.join(IMAGE_DIR, FILE_NAME)
+def image_dir(site_dir: Path) -> Path:
+    return site_dir / IMAGE_DIR / FILE_NAME
 
 
 @pytest.fixture
-def output_file(site_dir):
-    return site_dir.join(PAGE_DIR, FILE_NAME + ".md")
+def output_file(site_dir: Path) -> Path:
+    return site_dir / PAGE_DIR / (FILE_NAME + ".md")
 
 
 @pytest.fixture
-def default_args(site_dir, input_file):
+def default_args(site_dir: Path, input_file: Path) -> list[str]:
     return [
         "--site-dir",
-        site_dir.strpath,
+        str(site_dir),
         "--page-dir",
         PAGE_DIR,
-        input_file,
+        str(input_file),
     ]
 
 
@@ -44,8 +47,8 @@ def default_args(site_dir, input_file):
         ),
     ]
 )
-def image_args(request):
-    return ["--image-dir"] + request.param
+def image_args(request: FixtureRequest) -> list[str]:
+    return ["--image-dir", *request.param]
 
 
 class JekyllConfig:
@@ -59,9 +62,11 @@ class TestJekyllNB(JekyllConfig, Config):
             pytest.param([], id="empty"),
             pytest.param(["--to", "jekyll"], id="lower"),
             pytest.param(["--to", "Jekyll"], id="upper"),
-        ]  # skipcq: PYL-W0221
+        ]
     )
-    def args(self, default_args, image_args, request):  # skipcq: PYL-W0221
+    def args(
+        self, default_args: list[str], image_args: list[str], request: FixtureRequest
+    ) -> list[str]:
         return request.param + image_args + default_args
 
 
@@ -80,11 +85,11 @@ class TestException(JekyllConfig):
         [
             pytest.param(lambda self, args: self._app.launch_instance(args), id="app"),
             pytest.param(
-                lambda self, args: check_output(["jupyter", self._command] + args),
+                lambda self, args: check_output(["jupyter", self._command, *args]),
                 id="cmd",
             ),
             pytest.param(
-                lambda self, args: check_output(["python", "-m", self._command] + args),
+                lambda self, args: check_output(["python", "-m", self._command, *args]),
                 id="pkg",
                 marks=pytest.mark.skipif(
                     sys.platform.startswith("win"), reason="fails on windows"
@@ -92,12 +97,18 @@ class TestException(JekyllConfig):
             ),
         ],
     )
-    def test_exception(self, engine, args, expectation, default_args, image_args):
+    def test_exception(
+        self,
+        engine: Callable[[JekyllConfig, list[str]], None],
+        args: list[str],
+        expectation: ContextManager,
+        default_args: list[str],
+    ):
         with expectation:
-            engine(self, args + image_args + default_args)
+            engine(self, args + default_args)
 
     @pytest.fixture(autouse=True)
-    def cleanup(self):
+    def cleanup(self) -> None:
         self._app.clear_instance()
 
 
@@ -115,6 +126,10 @@ class TestVersion(JekyllConfig):
             ),
         ],
     )
-    def test_version(self, engine):
-        process = Popen(engine + [self._command, "--version"], stdout=PIPE)
-        assert process.stdout.readline().decode("UTF8").strip() == __version__
+    def test_version(self, engine: list[str]):
+        process = Popen([*engine, self._command, "--version"], stdout=PIPE)
+
+        if process.stdout:
+            assert process.stdout.readline().decode("UTF8").strip() == __version__
+        else:
+            pytest.fail("stdout has no output")

@@ -1,24 +1,19 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directory: "/"
+    directory: /
     schedule:
       interval: monthly
-      time: "00:00"
-      timezone: America/Los_Angeles
-    open-pull-requests-limit: 99
     assignees:
       - klane
     labels:
       - dependencies
       - actions
+
   - package-ecosystem: pip
-    directory: "/"
+    directory: /
     schedule:
       interval: monthly
-      time: "00:00"
-      timezone: America/Los_Angeles
-    open-pull-requests-limit: 99
     assignees:
       - klane
     labels:
