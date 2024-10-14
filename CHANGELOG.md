@@ -11,7 +11,7 @@
 
 - Dropped support for Python 3.6-3.8 ([#251](https://github.com/klane/jekyllnb/pull/251)).
 - Updated dependencies ([#251](https://github.com/klane/jekyllnb/pull/251)).
-- Removed `pytest-lazy-fixture` as a test dependency since it [does not support `pytest` 8](https://github.com/TvoroG/pytest-lazy-fixture/issues/65)  ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Removed `pytest-lazy-fixture` as a test dependency since it [does not support `pytest` 8](https://github.com/TvoroG/pytest-lazy-fixture/issues/65) ([#251](https://github.com/klane/jekyllnb/pull/251)).
 - Removed `tox` as a test dependency ([#251](https://github.com/klane/jekyllnb/pull/251)).
 - Migrated code formatting and linting to ruff ([#251](https://github.com/klane/jekyllnb/pull/251)).
 
