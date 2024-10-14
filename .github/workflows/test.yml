@@ -46,7 +46,9 @@ jobs:
           cache: poetry
 
       - name: Install dependencies
-        run: poetry install
+        run: |
+          poetry install
+          pip install pytest-github-actions-annotate-failures
 
       - name: Run tests
         run: poetry run pytest --cov-report xml:coverage.xml
