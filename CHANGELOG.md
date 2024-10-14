@@ -4,15 +4,15 @@
 
 ### Added
 
-- Added `mkdocs` as a dependency to build documentation locally ([#251](https://github.com/klane/jekyllnb/pull/251)).
-- Added `pytest-xdist` as a dependency to run tests in parallel ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Added `mkdocs` as a dev dependency to build documentation locally ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Added `pytest-xdist` as a dev dependency to run tests in parallel ([#251](https://github.com/klane/jekyllnb/pull/251)).
 
 ### Changed
 
 - Dropped support for Python 3.6-3.8 ([#251](https://github.com/klane/jekyllnb/pull/251)).
 - Updated dependencies ([#251](https://github.com/klane/jekyllnb/pull/251)).
-- Removed `pytest-lazy-fixture` as a test dependency since it [does not support `pytest` 8](https://github.com/TvoroG/pytest-lazy-fixture/issues/65) ([#251](https://github.com/klane/jekyllnb/pull/251)).
-- Removed `tox` as a test dependency ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Removed `pytest-lazy-fixture` as a dev dependency since it [does not support `pytest` 8](https://github.com/TvoroG/pytest-lazy-fixture/issues/65) ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Removed `tox` as a dev dependency ([#251](https://github.com/klane/jekyllnb/pull/251)).
 - Migrated code formatting and linting to ruff ([#251](https://github.com/klane/jekyllnb/pull/251)).
 
 ### Fixed
