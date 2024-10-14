@@ -8,24 +8,29 @@ on:
 
 jobs:
   test:
-    name: ${{ matrix.os }} / ${{ matrix.python-version }}
-    runs-on: ${{ matrix.os }}-latest
+    name: ${{ matrix.os.name }} / ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os.image }}
     defaults:
       run:
         shell: bash
 
     strategy:
-      fail-fast: false
       matrix:
         os:
-          - Ubuntu
-          - macOS
-          - Windows
+          - name: Ubuntu
+            image: ubuntu-latest
+          - name: macOS aarch64
+            image: macos-latest
+          - name: macOS x86_64
+            image: macos-13
+          - name: Windows
+            image: windows-latest
         python-version:
           - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
+      fail-fast: false
 
     steps:
       - name: Checkout
