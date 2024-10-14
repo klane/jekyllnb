@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: ${{ matrix.os }} / ${{ matrix.python }}
+    name: ${{ matrix.os }} / ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}-latest
     defaults:
       run:
@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [Ubuntu, macOS, Windows]
-        python: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - name: Checkout
@@ -27,10 +27,10 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
-      - name: Set up Python ${{ matrix.python }}
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python }}
+          python-version: ${{ matrix.python-version }}
           cache: poetry
 
       - name: Install dependencies
@@ -52,7 +52,7 @@ jobs:
         if: failure()
         with:
           type: ${{ job.status }}
-          job_name: '${{ runner.os }} :snake: ${{ matrix.python }} Tests'
+          job_name: '${{ runner.os }} :snake: ${{ matrix.python-version }} Tests'
           url: ${{ secrets.SLACK_WEBHOOK }}
           commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
