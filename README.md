@@ -47,15 +47,28 @@ title: Hello World!
 
 Since `jekyllnb` extends `nbconvert`, all existing options are supported. The following new options are available:
 
-- `--site-dir`: Root directory of your Jekyll site. Markdown (`page-dir`) and image (`image-dir`) folders will be created here if they do not exist.
-- `--page-dir`: Directory for generated Markdown files (e.g. _pages or _posts).
-- `--image-dir`: Directory for images. Images are organized into folders for each notebook by default.
-Alias for the `nbconvert` option `NbConvertApp.output_files_dir`.
-- `--no-auto-folder`: Flag to turn off the default behavior of organizing images by notebook name within `image-dir`. (default: `false`)
+`--site-dir`
+
+:   Root directory of your Jekyll site.
+    Markdown (`page-dir`) and image (`image-dir`) folders will be created here if they do not exist.
+
+`--page-dir`
+
+:   Directory for generated Markdown files (e.g. `_pages` or `_posts`).
+
+`--image-dir`
+
+:   Directory for images. Images are organized into folders for each notebook by default.
+    Alias for the `nbconvert` option `NbConvertApp.output_files_dir`.
+
+`--no-auto-folder` (default: `false`)
+
+:   Flag to turn off the default behavior of organizing images by notebook name within `image-dir`.
 
 ## nbconvert
 
 JekyllNB also supports `nbconvert` by registering an entry point for the exporter.
 You can use the Jekyll exporter with `nbconvert` by calling `jupyter nbconvert --to jekyll`.
 
-**Note**: The options above are not available with `nbconvert`.
+!!! warning
+    The options above are not available with `nbconvert`.
