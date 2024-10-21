@@ -1,11 +1,63 @@
 site_name: JekyllNB
 site_description: Convert Jupyter Notebooks to Jekyll-ready Markdown
-site_author: Kevin Lane
+site_url: https://klane.github.io/jekyllnb
 
+repo_name: klane/jekyllnb
 repo_url: https://github.com/klane/jekyllnb
 
-theme: readthedocs
-extra_css: [css/toc.css]
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/lightbulb-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to system preference
+
+  features:
+    - content.code.copy
+    - navigation.top
+    - navigation.footer
+    - navigation.sections
+    - navigation.tracking
+    - search.highlight
+    - search.suggest
+
+markdown_extensions:
+  - admonition
+  - def_list
+  - pymdownx.highlight:
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+      title: Page contents
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/klane
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/jekyllnb
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/kevinlane86
+    # - icon: fontawesome/solid/globe
+    #   link: https://klane.github.io
 
 nav:
   - Overview: index.md
