@@ -25,6 +25,7 @@ optional = true
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.6"
 mkdocs-material = "^9.5.41"
+mkdocstrings = { version = "^0.26.2", extras = ["python"] }
 
 [tool.poetry.group.test.dependencies]
 pre-commit = "^4.0"
