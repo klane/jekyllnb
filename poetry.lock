@@ -928,6 +928,20 @@ pytest = ">=4.6"
 testing = ["fields", "hunter", "process-tests", "pytest-xdist", "virtualenv"]
 
 [[package]]
+name = "pytest-lazy-fixtures"
+version = "1.1.1"
+description = "Allows you to use fixtures in @pytest.mark.parametrize."
+optional = false
+python-versions = "<4.0,>=3.8"
+files = [
+    {file = "pytest_lazy_fixtures-1.1.1-py3-none-any.whl", hash = "sha256:a4b396a361faf56c6305535fd0175ce82902ca7cf668c4d812a25ed2bcde8183"},
+    {file = "pytest_lazy_fixtures-1.1.1.tar.gz", hash = "sha256:0c561f0d29eea5b55cf29b9264a3241999ffdb74c6b6e8c4ccc0bd2c934d01ed"},
+]
+
+[package.dependencies]
+pytest = ">=7"
+
+[[package]]
 name = "pytest-sugar"
 version = "1.0.0"
 description = "pytest-sugar is a plugin for pytest that changes the default look and feel of pytest (e.g. progressbar, show tests that fail instantly)."
@@ -1527,4 +1541,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "82fcfadf13cf3ba72b2efeb2d6f48d17e033b9074f2b69b506b1d75655f8ce93"
+content-hash = "35d96a43b59fa31dba9aa0f02c23c101cffeb82d7e87d1489070c5a50be3765c"
