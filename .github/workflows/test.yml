@@ -54,7 +54,7 @@ jobs:
         run: poetry run pytest --cov-report xml:coverage.xml
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         if: success()
         with:
           file: coverage.xml
