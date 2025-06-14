@@ -1,9 +1,9 @@
 import os
 import sys
-from contextlib import ExitStack as does_not_raise
+from contextlib import AbstractContextManager, ExitStack
 from pathlib import Path
 from subprocess import PIPE, CalledProcessError, Popen, check_output
-from typing import Callable, ContextManager
+from typing import Callable
 
 import pytest
 from pytest import FixtureRequest
@@ -73,8 +73,8 @@ class TestJekyllNB(JekyllConfig, Config):
 @pytest.mark.parametrize(
     "args,expectation",
     [
-        ([], does_not_raise()),
-        (["--to", "jekyll"], does_not_raise()),
+        ([], ExitStack()),
+        (["--to", "jekyll"], ExitStack()),
         (["--to", "markdown"], pytest.raises((ValueError, CalledProcessError))),
     ],
     ids=["empty", "jekyll", "markdown"],
@@ -101,7 +101,7 @@ class TestException(JekyllConfig):
         self,
         engine: Callable[[JekyllConfig, list[str]], None],
         args: list[str],
-        expectation: ContextManager,
+        expectation: AbstractContextManager,
         default_args: list[str],
     ):
         with expectation:
