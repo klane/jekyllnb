@@ -7,8 +7,42 @@ on:
   pull_request:
 
 jobs:
+  linting:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: pyproject.toml
+
+      - name: Test lock
+        run: uv lock --check
+
+      - name: Install project
+        run: uv sync --locked --all-extras --dev
+
+      - name: Format
+        run: uv run ruff format --check
+
+      - name: Check
+        run: uv run ruff check
+
+      - name: Type check
+        run: uv run pyright jekyllnb
+
   test:
     name: ${{ matrix.os.name }} / ${{ matrix.python-version }}
+    needs: linting
     runs-on: ${{ matrix.os.image }}
     defaults:
       run:
@@ -36,28 +70,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install poetry
-        run: pipx install poetry
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: poetry
 
-      - name: Install dependencies
+      - name: Install project
         run: |
-          poetry install
-          pip install pytest-github-actions-annotate-failures
+          uv sync --locked --all-extras --dev
+          uv pip install pytest-github-actions-annotate-failures
 
       - name: Run tests
-        run: poetry run pytest --cov-report xml:coverage.xml
+        run: uv run pytest --cov-report xml:coverage.xml
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         if: success()
         with:
-          file: coverage.xml
+          files: coverage.xml
           fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
 
