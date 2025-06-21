@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 from pytest import FixtureRequest
+from pytest_lazy_fixtures import lf
 
 from tests import FILE_NAME, FileContents
 
@@ -19,10 +20,10 @@ def parse_file(file: Path) -> FileContents:
 @pytest.fixture(
     autouse=True,
     params=[
-        pytest.param("app", id="app"),
-        pytest.param("command", id="cmd"),
+        pytest.param(lf("app"), id="app"),
+        pytest.param(lf("command"), id="cmd"),
         pytest.param(
-            "package",
+            lf("package"),
             id="pkg",
             marks=pytest.mark.skipif(
                 sys.platform.startswith("win"), reason="fails on windows"
@@ -30,10 +31,9 @@ def parse_file(file: Path) -> FileContents:
         ),
     ],
 )
-def engine(args: list[str], request: FixtureRequest) -> None:
+def engine() -> None:
     # converts the notebook using the specified engine
-    # args is required to pick up the parametrized fixture in each engine
-    request.getfixturevalue(request.param)
+    ...
 
 
 @pytest.fixture(

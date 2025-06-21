@@ -1,46 +1,60 @@
-[tool.poetry]
+[project]
 name = "jekyllnb"
 version = "0.3.1"
 description = "Convert Jupyter Notebooks to Jekyll-ready Markdown files"
-authors = ["Kevin Lane <lane.kevin.a@gmail.com>"]
+requires-python = ">=3.9"
+dependencies = [
+    "nbconvert>=7.16.6",
+]
+authors = [{name = "Kevin Lane", email = "lane.kevin.a@gmail.com"}]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/klane/jekyllnb"
-documentation = "https://jekyllnb.readthedocs.io"
 keywords = ["jekyll", "jupyter", "nbconvert"]
 classifiers = [
+    "Environment :: Console",
     "Framework :: Jupyter",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Documentation",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Text Processing",
+    "Topic :: Text Processing :: Markup :: Markdown",
     "Topic :: Utilities",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-nbconvert = "^7.0"
+[project.urls]
+Repository = "https://github.com/klane/jekyllnb"
+Documentation = "https://jekyllnb.readthedocs.io"
+Changelog = "https://jekyllnb.readthedocs.io/en/latest/changelog/"
+Releases = "https://github.com/klane/jekyllnb/releases"
+Issues = "https://github.com/klane/jekyllnb/issues"
 
-[tool.poetry.group.docs.dependencies]
-mkdocs = "^1.6"
-
-[tool.poetry.group.test.dependencies]
-pre-commit = "^4.0"
-pytest = "^8.0"
-pytest-cov = "^5.0"
-pytest-sugar = "^1.0"
-pytest-xdist = { version = "^3.6", extras = ["psutil"] }
-
-[tool.poetry.scripts]
+[project.scripts]
 jupyter-jekyllnb = "jekyllnb.jekyllnb:JekyllNB.launch_instance"
 
-[tool.poetry.plugins."nbconvert.exporters"]
+[project.entry-points."nbconvert.exporters"]
 jekyll = "jekyllnb:JekyllExporter"
 
+[dependency-groups]
+dev = [
+    "pyright>=1.1.402",
+    "pytest>=8.4.0",
+    "pytest-cov>=6.2.1",
+    "pytest-lazy-fixtures>=1.1.4",
+    "pytest-sugar>=1.0.0",
+    "pytest-xdist[psutil]>=3.7.0",
+    "ruff>=0.11.13",
+]
+docs = [
+    "mkdocs>=1.6.1",
+]
+
 [build-system]
-requires = ["poetry-core>=1.5.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.ruff]
 line-length = 88
+extend-exclude = ["hello-world.ipynb"]
 
 [tool.ruff.format]
 docstring-code-format = true

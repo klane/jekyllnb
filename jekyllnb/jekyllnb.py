@@ -4,8 +4,10 @@ from pathlib import Path
 from typing import Any, Literal, Optional
 
 from nbconvert.nbconvertapp import NbConvertApp, nbconvert_aliases, nbconvert_flags
+from nbconvert.writers.files import FilesWriter
 from traitlets import Bool, Unicode, default, observe
 from traitlets.config import catch_config_error
+from typing_extensions import override
 
 from .__version__ import __version__
 
@@ -48,31 +50,34 @@ class JekyllNB(NbConvertApp):
     ).tag(config=True)
 
     @default("export_format")
-    def _export_format_default(self) -> Literal["jekyll"]:
+    def _default_export_format(self) -> Literal["jekyll"]:
         """Specify default export format."""
         return "jekyll"
 
     @observe("export_format")
     def _export_format_changed(self, change: dict[str, Any]) -> None:
         """Ensure export format is jekyll."""
-        default_format = self._export_format_default()
+        default_format = self._default_export_format()
 
         if change["new"].lower() != default_format:
             raise ValueError(
                 f"Invalid export format {change['new']}, value must be {default_format}"
             )
 
+    @override
     @catch_config_error
     def initialize(self, argv: Optional[Any] = None) -> None:
         """Initialize application, notebooks, writer, and postprocessor."""
         super().initialize(argv)
-        self.writer.build_directory = os.path.join(self.site_dir, self.page_dir)
+        if isinstance(self.writer, FilesWriter):
+            self.writer.build_directory = os.path.join(self.site_dir, self.page_dir)
 
         if self.auto_folder:
             self.output_files_dir = os.path.join(
                 super().output_files_dir, "{notebook_name}"
             )
 
+    @override
     def init_single_notebook_resources(self, notebook_filename: str) -> dict[str, Any]:
         """Initialize resources.
 

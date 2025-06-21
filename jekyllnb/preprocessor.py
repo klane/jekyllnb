@@ -2,11 +2,13 @@ from typing import Any
 
 from nbconvert.preprocessors import Preprocessor
 from nbformat import NotebookNode
+from typing_extensions import override
 
 
 class JekyllPreprocessor(Preprocessor):
     """Preprocessor to add Jekyll metadata."""
 
+    @override
     def preprocess(
         self, nb: NotebookNode, resources: dict[str, Any]
     ) -> tuple[NotebookNode, dict[str, Any]]:

@@ -5,7 +5,7 @@ from difflib import Differ
 from pathlib import Path
 from pprint import pprint
 from subprocess import call
-from typing import NamedTuple, Type
+from typing import NamedTuple
 
 import pytest
 from nbconvert.nbconvertapp import NbConvertApp
@@ -22,7 +22,7 @@ class FileContents(NamedTuple):
 
 
 class AbstractConfig(ABC):
-    _app: Type[NbConvertApp]
+    _app: type[NbConvertApp]
     _command: str
 
     @abstractmethod

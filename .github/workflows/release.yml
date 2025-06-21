@@ -15,23 +15,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install poetry
-        run: pipx install poetry
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version-file: pyproject.toml
 
-      - name: Install dependencies and build project
+      - name: Install and build project
         run: |
-          poetry install --without docs,test
-          poetry build
+          uv sync --locked --no-default-groups
+          uv build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: poetry-build
+          name: jekyllnb-build
           path: dist/
 
   github:
@@ -46,7 +49,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: poetry-build
+          name: jekyllnb-build
           path: dist
 
       - name: Get changes
@@ -75,6 +78,7 @@ jobs:
   pypi:
     name: PyPI
     runs-on: ubuntu-latest
+    environment: pypi
     needs: build
 
     steps:
@@ -84,26 +88,26 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: poetry-build
+          name: jekyllnb-build
           path: dist
 
-      - name: Install poetry
-        run: pipx install poetry
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version-file: pyproject.toml
 
       - name: Publish to PyPI
         if: success() && github.event_name == 'push'
-        run: poetry publish
-        env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+        run: uv publish
 
       - name: Publish to TestPyPI
         if: success() && github.event_name == 'workflow_dispatch'
-        run: poetry publish -r test-pypi
+        run: uv publish
         env:
-          POETRY_REPOSITORIES_TEST_PYPI_URL: https://test.pypi.org/legacy/
-          POETRY_PYPI_TOKEN_TEST_PYPI: ${{ secrets.TEST_PYPI_TOKEN }}
+          UV_PUBLISH_URL: https://test.pypi.org/legacy/
