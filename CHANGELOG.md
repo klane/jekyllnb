@@ -10,14 +10,17 @@
 ### Changed
 
 - Dropped support for Python 3.6-3.8 ([#251](https://github.com/klane/jekyllnb/pull/251)).
-- Updated dependencies ([#251](https://github.com/klane/jekyllnb/pull/251)).
-- Removed `pytest-lazy-fixture` as a dev dependency since it [does not support `pytest` 8](https://github.com/TvoroG/pytest-lazy-fixture/issues/65) ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Updated dependencies ([#251](https://github.com/klane/jekyllnb/pull/251), [#259](https://github.com/klane/jekyllnb/pull/259)).
 - Removed `tox` as a dev dependency ([#251](https://github.com/klane/jekyllnb/pull/251)).
-- Migrated code formatting and linting to ruff ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Migrated code formatting and linting to `ruff` ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Migrated type checking to `pyright` ([#259](https://github.com/klane/jekyllnb/pull/259)).
+- Migrated project management to `uv` ([#259](https://github.com/klane/jekyllnb/pull/259)).
+- Removed `pre-commit` as a dev dependency ([#259](https://github.com/klane/jekyllnb/pull/259)).
 
 ### Fixed
 
 - Fixed CI pipelines that were broken due to the [deprecated `set-output` command](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/) ([#251](https://github.com/klane/jekyllnb/pull/251)).
+- Replaced `pytest-lazy-fixture` with `pytest-lazy-fixtures` since `pytest-lazy-fixture` [does not support `pytest` 8](https://github.com/TvoroG/pytest-lazy-fixture/issues/65) ([#251](https://github.com/klane/jekyllnb/pull/251), [#259](https://github.com/klane/jekyllnb/pull/259)).
 
 ## [0.3.1]
 
