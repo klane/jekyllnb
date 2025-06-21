@@ -1,26 +1,21 @@
+from collections.abc import ItemsView
 from pathlib import Path
-from typing import Any, Callable, ClassVar, Literal, Optional
+from typing import Any, ClassVar, Literal, Optional
 
 from nbconvert.exporters import MarkdownExporter
 from nbconvert.filters.strings import path2url
 from traitlets import default
 from traitlets.config import Config
+from typing_extensions import override
 
 
 class JekyllExporter(MarkdownExporter):
     """Exporter to write Markdown with Jekyll metadata."""
 
-    # path to available template files
-    extra_template_basedirs: ClassVar[list[str]] = [
-        str(Path(__file__).parent / "templates")
-    ]
-
-    # enabled preprocessors
-    preprocessors: ClassVar[list[str]] = ["jekyllnb.JekyllPreprocessor"]
-
     # placeholder to store notebook resources
     resources: ClassVar[dict[str, Any]] = {}
 
+    @override
     def from_filename(
         self, filename: str, resources: Optional[dict[str, Any]] = None, **kwargs
     ) -> tuple[str, dict[str, Any]]:
@@ -41,12 +36,22 @@ class JekyllExporter(MarkdownExporter):
 
         return super().from_filename(filename, resources=resources, **kwargs)
 
+    @override
+    @default("extra_template_basedirs")
+    def _default_extra_template_basedirs(self) -> list[str]:
+        return [str(Path(__file__).parent / "templates")]
+
+    @default("preprocessors")
+    def _default_preprocessors(self) -> list[Any]:
+        return ["jekyllnb.JekyllPreprocessor"]
+
     @default("template_name")
-    def _template_name_default(self) -> Literal["jekyll"]:
+    def _default_template_name(self) -> Literal["jekyll"]:
         """Specify default template name."""
         return "jekyll"
 
     @property
+    @override
     def default_config(self) -> Config:
         """Specify default configuration."""
         config = Config({"JekyllPreprocessor": {"enabled": True}})
@@ -62,10 +67,10 @@ class JekyllExporter(MarkdownExporter):
 
         return f"{{{{ site.baseurl }}}}/{path2url(path)}"
 
-    def default_filters(self) -> list[tuple[str, Callable]]:
+    @override
+    def default_filters(self) -> ItemsView[str, Any]:  # type:ignore[override]
         """Specify default filters."""
         # convert image path to one compatible with Jekyll
-        return [
-            *super().default_filters(),
-            ("jekyllpath", self._jekyll_path),
-        ]
+        filters = dict(super().default_filters())
+        filters["jekyllpath"] = self._jekyll_path
+        return filters.items()
