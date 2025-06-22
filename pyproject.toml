@@ -1,6 +1,6 @@
 [project]
 name = "jekyllnb"
-version = "0.3.1"
+version = "0.3.2"
 description = "Convert Jupyter Notebooks to Jekyll-ready Markdown files"
 requires-python = ">=3.9"
 dependencies = [
