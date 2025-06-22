@@ -42,8 +42,8 @@ jobs:
 
   test:
     name: ${{ matrix.os.name }} / ${{ matrix.python-version }}
-    needs: linting
     runs-on: ${{ matrix.os.image }}
+    needs: linting
     defaults:
       run:
         shell: bash
