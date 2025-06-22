@@ -78,8 +78,11 @@ jobs:
   pypi:
     name: PyPI
     runs-on: ubuntu-latest
-    environment: pypi
     needs: build
+    environment: pypi
+    permissions:
+      # required for PyPI's trusted publishing
+      id-token: write
 
     steps:
       - name: Checkout
