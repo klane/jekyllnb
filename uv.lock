@@ -752,14 +752,14 @@ wheels = [
 
 [[package]]
 name = "pytest-lazy-fixtures"
-version = "1.1.4"
+version = "1.3.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pytest" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1b/30/97444293c3339adfb6fe04a28e2edbaff5d5926e789de40e9a69401f885c/pytest_lazy_fixtures-1.1.4.tar.gz", hash = "sha256:c494b52d798890033d64b28687a4d52807c8b0f606d56316e139df0cbe116c57", size = 7426, upload-time = "2025-05-27T11:05:46.448Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/95/17/ff51472404b5597c8e983ff16e61101d51e63d3e19d7d3d9ace4c404ff61/pytest_lazy_fixtures-1.3.2.tar.gz", hash = "sha256:76bac6772e97173828d49551695cc6e3927c7c86c65cd19d4cccb0c14a45f821", size = 34114, upload-time = "2025-07-17T22:44:47.086Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/39/c9/a9bcc96ceb1c15e985fcb3060b33120b8bfa1762f94499c014420f12e51e/pytest_lazy_fixtures-1.1.4-py3-none-any.whl", hash = "sha256:1504b6e267657d70d34829fce2580cedd4d3f8558491d6c03fab9b525ec77f2b", size = 7086, upload-time = "2025-05-27T11:05:45.19Z" },
+    { url = "https://files.pythonhosted.org/packages/63/17/24fb2218d850800dfad9c12fc31935900304f2bfefedfd060230a4a684f3/pytest_lazy_fixtures-1.3.2-py3-none-any.whl", hash = "sha256:a2a7096c6a4f71f0160eaa07fe03f93c006505dd7283df075cd26fcc2b654754", size = 8389, upload-time = "2025-07-17T22:44:46.053Z" },
 ]
 
 [[package]]
